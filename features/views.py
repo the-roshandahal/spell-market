@@ -11,6 +11,9 @@ from django.http import HttpResponseRedirect
 def home(request):
 	return render(request,'index.html')
 
+def dashboard(request):
+	return render(request,'admin/dashboard.html')
+
 def register(request):
     if request.method == 'POST':
         first_name = request.POST['first_name']
