@@ -1,0 +1,26 @@
+<h1>register</h1>
+<form action="{% url 'register' %}" method="post">
+    {% csrf_token %}
+    <div class="form-item">
+        <input type="text" name="first_name" required="true" placeholder="first_name" />
+    </div>
+    <div class="form-item">
+        <input type="text" name="last_name" required="true" placeholder="last_name" />
+    </div>
+    <div class="form-item">
+        <input type="email" name="email" required="true" placeholder="email" />
+    </div>
+    <div class="form-item">
+        <input type="text" name="username" required="true" placeholder="Username or email" />
+    </div>
+    <div class="form-item">
+        <input type="password" name="password" required="true" placeholder="Password" />
+    </div>
+    <div class="form-item">
+        <input type="password" name="password1" required="true" placeholder="Password" />
+    </div>
+    <div class="form-item">
+        <input type="submit" name="submit" value="Sign In"/>
+    </div>
+</form>
+<p>Not a member? <a href="{% url 'register' %}">Register</a></p>
