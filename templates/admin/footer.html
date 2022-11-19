@@ -1,16 +1,6 @@
 {% load static %}
-<footer class="footer">
-    <div class="container-fluid d-flex justify-content-between">
-        <span class="text-muted d-block text-center text-sm-start d-sm-inline-block">Copyright ©
-            Spell Innovation</span>
-    </div>
-</footer>
-<!-- partial -->
-</div>
-<!-- main-panel ends -->
-</div>
-<!-- page-body-wrapper ends -->
-</div>
+
+
 <!-- container-scroller -->
 <!-- plugins:js -->
 <script src="{% static 'admin/assets/vendors/js/vendor.bundle.base.js' %}"></script>
@@ -27,6 +17,18 @@
 <!-- Custom js for this page -->
 <script src="{% static 'admin/assets/js/dashboard.js' %}"></script>
 <script src="{% static 'admin/assets/js/todolist.js' %}"></script>
+
+<script>
+    $(document).ready(function(){
+      console.log('loaded');
+      $('.dropdoenment').on('click',function(){
+        var html=$('.dropdoenment').text();
+        // alert($.trim(html));
+        $('#textToBeFilled').val($.trim(html));
+      })
+    })
+  </script>
+  <script></script>
 <!-- End custom js for this page -->
 </body>
 

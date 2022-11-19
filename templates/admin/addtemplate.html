@@ -1,0 +1,76 @@
+{% load static %}
+{% include 'admin/nav.html' %}
+<div class="main-panel">
+    <div class="content-wrapper">
+      <div class="row">
+        <div class="col-md-6 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Add Templates</h4>
+              <p class="card-description"> Describe Templates</p>
+              <form class="forms-sample" ction="{% url 'add_template' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <!-- <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="text" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="categoryId">Select Category</button>
+                      <div class="dropdown-menu dropdoenment" >
+                        {% for cat in cat %}
+                        {{cat.category}}
+                        {% endfor %}
+                      </div>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Text input with dropdown button" id="textToBeFilled" name="category">
+                  </div>
+                </div> -->
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Template Name</label>
+                  <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Template Name" name="template_name">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Template Details</label>
+                  <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Template Details" name="template_details">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputConfirmPassword1">Template Features</label>
+                  <input type="text" class="form-control" id="exampleInputConfirmPassword1" placeholder="Template Features" name="template_features">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Template Layout</label>
+                  <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Template Layout" name="template_layout">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Template Price</label>
+                  <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Template Price" name="template_price">
+                </div>
+                
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Template Version</label>
+                  <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password" name="version">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Frameworks Used</label>
+                  <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Frameworks Used" name="framework">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Template URL</label>
+                  <input type="url" class="form-control" id="exampleInputPassword1" placeholder="Template URL" name="template_url">
+                </div>
+                <div class="form-group">
+                  <label>Template Image</label>
+                  <div class="input-group col-xs-12">
+                    <input type="file" class="form-control file-upload-info"  placeholder="Upload Image" name="template_image" required>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
+                <button class="btn btn-light">Cancel</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+{% include 'admin/footer.html' %}
