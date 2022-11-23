@@ -5,7 +5,11 @@ from .models import *
 
 
 def dashboard(request):
-    return render(request, 'admin/dashboard.html')
+    templates_ct=Template.objects.count()
+    context = {
+        'templates_ct': templates_ct
+    }
+    return render(request, 'admin/dashboard.html',context)
 
 
 def template(request):
@@ -18,6 +22,8 @@ def add_template(request):
 
     if request.method == "POST":
         cat_id = request.POST['category']
+        sub_cat_id = request.POST['sub_category']
+        child_cat_id = request.POST['child_category']
         template_name = request.POST['template_name']
         template_details = request.POST['template_details']
         template_features = request.POST['template_features']
@@ -29,8 +35,10 @@ def add_template(request):
         template_url = request.POST['template_url']
 
         category = Category.objects.get(id=cat_id)
+        sub_category = Category.objects.get(id=sub_cat_id)
+        child_category = Category.objects.get(id=child_cat_id)
 
-        Template.objects.create(category=category, template_name=template_name, template_details=template_details, template_features=template_features,
+        Template.objects.create(category=category, sub_category=sub_category,child_category=child_category,template_name=template_name, template_details=template_details, template_features=template_features,
                                 template_layout=template_layout, template_price=template_price, version=version, framework=framework,
                                 template_image=template_image, template_url=template_url)
 
@@ -130,3 +138,52 @@ def add_child_category(request):
         'sub_cat': sub_cat
     }
     return render(request, 'admin/add_child_category.html', context)
+
+
+def edit_template(request,id):
+    if request.method == 'POST':
+        cat_id = request.POST['category']
+        sub_cat_id = request.POST['sub_category']
+        child_cat_id = request.POST['child_category']
+        template_name = request.POST['template_name']
+        template_details = request.POST['template_details']
+        template_features = request.POST['template_features']
+        template_layout = request.POST['template_layout']
+        template_price = request.POST['template_price']
+        version = request.POST['version']
+        framework = request.POST['framework']
+        template_image = request.FILES['template_image']
+        template_url = request.POST['template_url']
+        category = Category.objects.get(id=cat_id)
+        sub_category = SubCategory.objects.get(id=cat_id)
+        child_category = ChildCategory.objects.get(id=cat_id)
+
+        template_data = Template.objects.filter(id=id)[0]
+
+        template_data.category=category
+        template_data.sub_category=sub_category
+        template_data.child_category=child_category
+        template_data.template_name=template_name
+        template_data.template_details=template_details
+        template_data.template_features=template_features
+        template_data.template_layout=template_layout
+
+        template_data.template_price=template_price
+        template_data.version=version
+        template_data.framework=framework
+        template_data.template_image=template_image
+        template_data.template_url=template_url
+
+        template_data.save()
+        return redirect('template')
+
+    else:
+        cat = Category.objects.all()
+        sub_cat = SubCategory.objects.all()
+        child_cat = ChildCategory.objects.all()
+        context = {
+            'cat': cat,
+            'sub_cat': sub_cat,
+            'child_cat': child_cat
+        }
+        return render(request,'admin/edit_template.html',context)
