@@ -11,9 +11,29 @@ class Category(models.Model):
 
     def __str__(self):
         return self.category
+    
+class SubCategory(models.Model):
+    category= models.ForeignKey(Category, on_delete=models.CASCADE)
+    sub_category = models.CharField(max_length=100)
+    order = models.IntegerField(null=True)
+    status = models.IntegerField(null=True, default='1')
+    created = models.DateTimeField(auto_now_add=True, null=True)
+    def __str__(self):
+        return self.sub_category
+    
+class ChildCategory(models.Model):
+    sub_category= models.ForeignKey(SubCategory, on_delete=models.CASCADE)
+    child_category = models.CharField(max_length=100)
+    order = models.IntegerField(null=True)
+    status = models.IntegerField(null=True, default='1')
+    created = models.DateTimeField(auto_now_add=True, null=True)
+    def __str__(self):
+        return self.child_category
 
 class Template(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    # sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
+    # child_category = models.ForeignKey(ChildCategory, on_delete=models.CASCADE)
     template_name = models.CharField(max_length=1000)
     template_details = models.TextField()
     template_features = models.TextField()

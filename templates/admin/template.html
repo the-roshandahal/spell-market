@@ -10,30 +10,24 @@
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th> Icon</th>
-                  <th> Category Name</th>
-                  <th> Status </th>
-                  <th> Order</th>
-                  <th>Date Added</th>
+                  <th> Category</th>
+                  <th> Template Name</th>
+                  <th> Price </th>
+                  <th> Frameworks</th>
+                  <th>Template Link</th>
+                  
                 </tr>
               </thead>
               <tbody>
-                {% for category in category %}
+                {% for template in template %}
                 <tr>
-                  <td class="py-1">
-                    <img src="{{category.category_image.url}}" alt="image" />
-
-                  </td>
-                  <td>{{category.category}} </td>
+                  <td>{{template.category}} </td>
+                  <td>{{template.template_name}} </td>
                   <td>
-                    {% if category.status == 0 %}
-                    inactive
-                    {% else %}
-                    active
-                    {% endif %}
+                    Rs.{{template.template_price}}
                   </td>
-                  <td> {{category.order}}</td>
-                  <td>{{category.created}}</td>
+                  <td> {{template.framework}}</td>
+                  <td><a href="{{template.template_url}}" target="_blank">Live Preview</a></td>
                 </tr>
                 {% endfor %}
               </tbody>

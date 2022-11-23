@@ -16,3 +16,5 @@ class BlogFields(Description, admin.ModelAdmin):
 
 admin.site.register(Category)
 admin.site.register(Template,Description)
+admin.site.register(SubCategory)
+admin.site.register(ChildCategory)
