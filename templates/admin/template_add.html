@@ -1,0 +1,38 @@
+{% load static %}
+{% include 'admin/nav.html' %}
+<div class="col-12">
+    <div class="card">
+        <div class="card-body">
+            <form class="form-sample">
+                <p class="card-description"> Select Template Category</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Category</label>
+                            {% for cat in cat %}
+                            
+                                <button class="btn btn-block btn-lg btn-gradient-primary mt-4"><a href="{% url 'add_template' id=cat.id %}">{{cat.category}}</a></button>
+                            
+                            {% endfor %}
+
+                          
+                                <div class="col-sm-4">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios1">
+                                                {{cat.category}} 
+                                        </label>
+                                    </div>
+                                </div>
+                           </a>
+                            
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% include 'admin/footer.html' %}
