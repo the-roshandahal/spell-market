@@ -2,19 +2,22 @@ from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
 from .models import *
-
+from django.contrib.auth.decorators import login_required
 
 def dashboard(request):
-    templates_ct=Template.objects.count()
-    context = {
-        'templates_ct': templates_ct
-    }
-    return render(request, 'admin/dashboard.html',context)
+    if request.user.is_authenticated:
+        templates_ct=Template.objects.count()
+        context = {
+            'templates_ct': templates_ct
+        }
+        return render(request, 'admin/dashboard.html',context)
+    else:
+        messages.info(request, 'You are not logged in. Please log in to continue')
+        return redirect('login')
 
-
+@login_required
 def template(request):
     template = Template.objects.all()
-
     return render(request, 'admin/template.html', {'template': template})
 
 
@@ -152,15 +155,17 @@ def edit_template(request,id):
         template_price = request.POST['template_price']
         version = request.POST['version']
         framework = request.POST['framework']
-        template_image = request.FILES['template_image']
         template_url = request.POST['template_url']
+
         category = Category.objects.get(id=cat_id)
-        sub_category = SubCategory.objects.get(id=cat_id)
-        child_category = ChildCategory.objects.get(id=cat_id)
+        sub_category = SubCategory.objects.get(id=sub_cat_id)
+        child_category = ChildCategory.objects.get(id=child_cat_id)
 
         template_data = Template.objects.filter(id=id)[0]
 
         template_data.category=category
+        template_data.sub_category=sub_category
+        template_data.child_category=child_category
         template_data.sub_category=sub_category
         template_data.child_category=child_category
         template_data.template_name=template_name
@@ -171,7 +176,6 @@ def edit_template(request,id):
         template_data.template_price=template_price
         template_data.version=version
         template_data.framework=framework
-        template_data.template_image=template_image
         template_data.template_url=template_url
 
         template_data.save()
@@ -181,9 +185,12 @@ def edit_template(request,id):
         cat = Category.objects.all()
         sub_cat = SubCategory.objects.all()
         child_cat = ChildCategory.objects.all()
+        template_data = Template.objects.filter(id=id)[0]
+
         context = {
             'cat': cat,
             'sub_cat': sub_cat,
-            'child_cat': child_cat
+            'child_cat': child_cat,
+            'template_data':template_data
         }
         return render(request,'admin/edit_template.html',context)

@@ -19,6 +19,11 @@ urlpatterns = [
     path('add_child_category/', views.add_child_category,name='add_child_category'),
 
     path('edit_template/<int:id>', views.edit_template, name='edit_template'),
+
+
+
+
+
 ]
 
 

@@ -17,14 +17,20 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.static import serve
+from django.conf.urls import include
+from django.urls import re_path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('features.urls')),
     path('adminpanel/', include('adminpanel.urls')),
 
-    path('summernote/', include('django_summernote.urls')), # using include('django_summernote.urls')
-    path('editor/', include('django_summernote.urls'))
+    path('summernote/', include('django_summernote.urls')),
+    path('editor/', include('django_summernote.urls')),
+
+    
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
+handler404 = "features.views.page_not_found_view"

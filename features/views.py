@@ -6,13 +6,15 @@ import uuid
 from django.conf import settings
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
+from django.contrib.auth import logout as django_logout
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def home(request):
 	return render(request,'index.html')
 
-def dashboard(request):
-	return render(request,'admin/dashboard.html')
+# def dashboard(request):
+# 	return render(request,'admin/dashboard.html')
 
 def register(request):
     if request.method == 'POST':
@@ -88,12 +90,9 @@ def login(request):
             messages.info(request, 'Invalid credentials')
             return redirect('login')
 
-
-
-        # superusers will be redirected into admin panel
         if user is not None and user.is_superuser:
             auth.login(request, user)
-            return HttpResponseRedirect('/admin/')
+            return redirect('dashboard')
 
         elif user is not None and not user.is_superuser:
             if profile_obj.is_verified :
@@ -105,3 +104,33 @@ def login(request):
     else:
         return render(request, 'login.html')
     return render(request, 'login.html')
+
+
+def logout(request):
+    django_logout(request)
+    return redirect('home')
+
+def theme(request):
+    template = Template.objects.all()
+    category = Category.objects.all()
+    
+    context = {
+        "template":template,
+        "category":category,
+    }
+    return render(request, 'theme.html',context )
+
+
+
+
+
+
+
+
+
+
+
+
+
+def page_not_found_view(request, exception):
+    return render(request, 'error404.html', status=404)

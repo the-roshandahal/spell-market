@@ -10,10 +10,11 @@
             <table class="table table-striped">
               <thead>
                 <tr>
+                  <th> Template Name</th>
                   <th> Category</th>
                   <th> Sub Category</th>
                   <th> Child Category</th>
-                  <th> Template Name</th>
+                  
                   <th> Price </th>
                   <th> Frameworks</th>
                   <th>Template Link</th>
@@ -23,8 +24,10 @@
                 </tr>
               </thead>
               <tbody>
+                
                 {% for template in template %}
                 <tr>
+                  <td>{{template.template_name}} </td>
                   <td>{{template.category}} </td>
                   {% if template.sub_category %}
                   <td>{{template.sub_category}} </td>
@@ -43,7 +46,7 @@
                 
 
 
-                  <td>{{template.template_name}} </td>
+                  
                   <td>
                     Rs.{{template.template_price}}
                   </td>
@@ -57,7 +60,14 @@
 
 
                   <td> {{template.created.date}}</td>
-                  <td><a href="{% url 'edit_template' id=template.id %}"> Edit</a></td>
+                  <td>
+                    
+                    <a href="{% url 'edit_template' id=template.id %}"> Edit Details</a>
+                    |
+                    <a href="{{template.template_image.url}}" target="_blank">View Image</a>
+                    |
+                    <a href="">Change Image</a>
+                  </td>
                 </tr>
                 {% endfor %}
               </tbody>

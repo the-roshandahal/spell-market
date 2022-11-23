@@ -47,7 +47,7 @@ class Template(models.Model):
     template_details = models.TextField()
     template_features = models.TextField()
     template_layout = models.TextField()
-    template_price = models.IntegerField(max_length=100)
+    template_price = models.IntegerField()
     version = models.CharField(max_length=100)
     framework = models.CharField(max_length=1000)
     template_image = models.ImageField(null=True, upload_to='template_images/')

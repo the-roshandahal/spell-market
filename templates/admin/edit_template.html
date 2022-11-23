@@ -61,7 +61,8 @@
                   type="text"
                   class="form-control"
                   id="exampleInputEmail1"
-                  placeholder="Template Name"
+                  placeholder="{{template_data.template_name}}"
+                  value="{{template_data.template_name}}"
                   required
                   name="template_name"
                 />
@@ -71,7 +72,8 @@
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="Template Details"
+                  placeholder="{{template_data.template_details}}"
+                  value="{{template_data.template_details}}"
                   required
                   name="template_details"
                 />
@@ -84,7 +86,8 @@
                   type="text"
                   class="form-control"
                   id="exampleInputConfirmPassword1"
-                  placeholder="Template Features"
+                  placeholder="{{template_data.template_features}}"
+                  value="{{template_data.template_features}}"
                   required
                   name="template_features"
                 />
@@ -94,7 +97,8 @@
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="Template Layout"
+                  placeholder="{{template_data.template_layout}}"
+                  value="{{template_data.template_layout}}"
                   required
                   name="template_layout"
                 />
@@ -104,7 +108,8 @@
                 <input
                   type="number"
                   class="form-control"
-                  placeholder="Template Price"
+                  placeholder="{{template_data.template_price}}"
+                  value="{{template_data.template_price}}"
                   required
                   name="template_price"
                 />
@@ -115,7 +120,8 @@
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="Template Version"
+                  placeholder="{{template_data.version}}"
+                  value="{{template_data.version}}"
                   required
                   name="version"
                 />
@@ -125,7 +131,8 @@
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="Frameworks Used"
+                  placeholder="{{template_data.framework}}"
+                  value="{{template_data.framework}}"
                   required
                   name="framework"
                 />
@@ -135,23 +142,11 @@
                 <input
                   type="url"
                   class="form-control"
-                  placeholder="Template URL"
+                  placeholder="{{template_data.template_url}}"
+                  value="{{template_data.template_url}}"
                   required
                   name="template_url"
                 />
-              </div>
-              <div class="form-group">
-                <label>Template Image</label>
-                <div class="input-group col-xs-12">
-                  <input
-                    type="file"
-                    class="form-control file-upload-info"
-                    placeholder="Upload Image"
-                    required
-                    name="template_image"
-                    required
-                  />
-                </div>
               </div>
               <button type="submit" class="btn btn-gradient-primary me-2">
                 Submit
