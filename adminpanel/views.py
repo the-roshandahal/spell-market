@@ -3,7 +3,8 @@ from django.contrib import messages, auth
 from django.contrib.auth.models import User
 from .models import *
 from django.contrib.auth.decorators import login_required
-
+import json
+from django.core.serializers.json import DjangoJSONEncoder
 def dashboard(request):
     if request.user.is_authenticated:
         templates_ct=Template.objects.count()
@@ -134,12 +135,18 @@ def add_child_category(request):
             sub_category=sub_category, order=order, status=status, child_category=child_category)
         return redirect('child_category')
 
-    cat = Category.objects.all()
-    sub_cat = SubCategory.objects.all()
-    context = {
-        'cat': cat,
-        'sub_cat': sub_cat
+    cat = list(Category.objects.all().values())
+    sub_cat = list(SubCategory.objects.all().values())
+    context ={
+        "cat": cat,
+        "sub_cat": sub_cat
     }
+    # , 
+    # sort_keys=True,
+    # indent=1,
+    # cls=DjangoJSONEncoder
+    # )
+    print(context)
     return render(request, 'admin/add_child_category.html', context)
 
 

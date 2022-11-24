@@ -5,10 +5,10 @@ from django.db import models
 
 
 class Category(models.Model):
-    category = models.CharField(max_length=100)
+    category = models.CharField(max_length=100,unique=True)
     category_image = models.ImageField(null=True, upload_to='category_images/')
     order = models.IntegerField(null=True)
-    status = models.IntegerField(null=True, default='1')
+    status = models.IntegerField(null=True, default='1') 
     created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
@@ -17,7 +17,7 @@ class Category(models.Model):
 
 class SubCategory(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    sub_category = models.CharField(max_length=100)
+    sub_category = models.CharField(max_length=100,unique=True)
     order = models.IntegerField(null=True)
     status = models.IntegerField(null=True, default='1')
     created = models.DateTimeField(auto_now_add=True, null=True)
