@@ -122,7 +122,18 @@ def theme(request):
 
 
 
-
+def contact(request):
+    if request.method == "POST":
+        name = request.POST['name']
+        email = request.POST['email']
+        subject = request.POST['subject']
+        contact = request.POST['contact']
+        message = request.POST['message']
+        Contact.objects.create(name=name,email=email,subject=subject,contact=contact,message=message)
+        return redirect('home')
+    else:
+        return render(request,'contact.html')
+	# return render(request,'contact.html')
 
 
 

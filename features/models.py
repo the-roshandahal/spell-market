@@ -27,3 +27,14 @@ class Token(models.Model):
     def __str__(self):
         return self.user.username
 
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=1000)
+    email = models.CharField(max_length=1000)
+    subject = models.CharField(max_length=1000)
+    contact = models.CharField(max_length=1000)
+    message = models.CharField(max_length=1000)
+
+    def __str__(self):
+        return self.user.name
