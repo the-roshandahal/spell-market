@@ -1,6 +1,44 @@
 {% load static %}
 {% include 'nav.html' %}
 <!-- header area start -->
+{% for message in messages %}
+<div class="popup-msg">
+  <p class="popup-msg-text">{{message}}</p>
+  <i class="fa fa-times popup-close"></i>
+</div>
+{% endfor %}
+<style>
+.popup-msg {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  transform: translateX(-50%);
+  top: 8%;
+  left: 50%;
+  width: calc(max-content + 50px);
+  padding: 1.3rem;
+  border-radius: 10px;
+  border: 1.3px solid gray;
+  color: rgb(0, 0, 0);
+  box-shadow: 3px 4px 12px 0px rgba(0, 0, 0, 0.3);
+}
+.popup-close {
+  margin-left: 10px;
+  color: #cc0000;
+  cursor: pointer;
+}
+</style>
+
+<script>
+   let popup = document.querySelector(".popup-msg-text");
+   let popupCloser = document.querySelector(".popup-close");
+   popupCloser.addEventListener("click", () => {
+   popup.parentNode.parentNode.removeChild(
+   popup.parentNode
+   );
+   });
+</script>
+
 <header>
     <div class="header__area white-bg" id="header-sticky">
        <div class="container">
@@ -28,7 +66,7 @@
                          
                          <li><a href="#">Blog</a></li>
 
-                         <li><a href="#">Contact</a></li>
+                         <li><a href="{% url 'contact' %}">Contact</a></li>
                       </ul>
                    </nav>
                 </div>
