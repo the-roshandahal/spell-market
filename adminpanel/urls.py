@@ -17,7 +17,9 @@ urlpatterns = [
 
     path('child_category/', views.child_category, name='child_category'),
     path('add_child_category/', views.add_child_category,name='add_child_category'),
-    path('load_child_category/', views.load_child_catageory,name='load_child_category'),
+    
+    path('load_sub_category/', views.load_sub_category, name='load_sub_category'),
+    path('load_child_category/', views.load_child_category, name='load_child_category'),
 
     path('edit_template/<int:id>', views.edit_template, name='edit_template'),
 

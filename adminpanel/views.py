@@ -144,12 +144,17 @@ def add_child_category(request):
   
     return render(request, 'admin/add_child_category.html', context)
 
-def load_child_catageory(request):
 
-    category_id=request.GET.get("cat")
-    sub_cat = SubCategory.objects.filter(category=category_id)
-    print(sub_cat)
-    return render(request, 'admin/load_child_category.html', {'sub_cat': sub_cat})
+def load_sub_category(request):
+    cat=request.GET.get("cat")
+    sub_cat = SubCategory.objects.filter(category=cat)
+    return render(request, 'admin/load_sub_category.html', {'sub_cat': sub_cat})
+
+
+def load_child_category(request):
+    sub_cat=request.GET.get("sub_cat")
+    child_cat = ChildCategory.objects.filter(sub_category=sub_cat)
+    return render(request, 'admin/load_child_category.html', {'child_cat': child_cat})
 
 
 def edit_template(request,id):

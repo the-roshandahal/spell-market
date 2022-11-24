@@ -21,7 +21,7 @@
                     class="form-control"
                     name="category"
                     id="catageory_select"
-                    data-sub-category-url="{% url "load_child_category"%}"
+                    data-sub-category-url="{% url 'load_sub_category' %}"
                   >
                   <option value="">--Select--</option>
 
@@ -37,16 +37,13 @@
                 $("#catageory_select").change(function () {
                   var url = $("#catageory_select").attr("data-sub-category-url"); 
                   var cat = $(this).val();
-
                   $.ajax({
-                    
                     url: url, 
                     data: {
                       cat: cat,
                     },
                     success: function (data) {
                       console.log(data)
-                     
                       $("#id_sub_category").html(data);
                     },
                   });
