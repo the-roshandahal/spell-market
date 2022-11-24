@@ -37,14 +37,15 @@ def add_template(request):
         framework = request.POST['framework']
         template_image = request.FILES['template_image']
         template_url = request.POST['template_url']
+        is_featured = request.POST['is_featured']
 
         category = Category.objects.get(id=cat_id)
-        sub_category = Category.objects.get(id=sub_cat_id)
-        child_category = Category.objects.get(id=child_cat_id)
+        sub_category = SubCategory.objects.get(id=sub_cat_id)
+        child_category = ChildCategory.objects.get(id=child_cat_id)
 
         Template.objects.create(category=category, sub_category=sub_category,child_category=child_category,template_name=template_name, template_details=template_details, template_features=template_features,
                                 template_layout=template_layout, template_price=template_price, version=version, framework=framework,
-                                template_image=template_image, template_url=template_url)
+                                template_image=template_image, template_url=template_url, is_featured=is_featured)
 
         return redirect('template')
     cat = Category.objects.all()
@@ -59,7 +60,7 @@ def add_template(request):
 
 
 def category(request):
-    category = Category.objects.all()
+    category = Category.objects.all().order_by('order')
     context = {
         'category': category
     }
@@ -82,7 +83,7 @@ def add_category(request):
 
 
 def sub_category(request):
-    sub_category = SubCategory.objects.all()
+    sub_category = SubCategory.objects.all().order_by('order')
     context = {
         'sub_category': sub_category
     }
@@ -112,7 +113,7 @@ def add_sub_category(request):
 
 
 def child_category(request):
-    child_category = ChildCategory.objects.all()
+    child_category = ChildCategory.objects.all().order_by('order')
     context = {
         'child_category': child_category
     }
@@ -169,6 +170,11 @@ def edit_template(request,id):
         template_price = request.POST['template_price']
         version = request.POST['version']
         framework = request.POST['framework']
+        if ( request.FILES and request.FILES['template_image']):
+            template_image = request.FILES['template_image']
+        else:
+            template_image=None
+
         template_url = request.POST['template_url']
 
         category = Category.objects.get(id=cat_id)
@@ -186,11 +192,14 @@ def edit_template(request,id):
         template_data.template_details=template_details
         template_data.template_features=template_features
         template_data.template_layout=template_layout
-
+        # template_data.template_image=template_image
         template_data.template_price=template_price
         template_data.version=version
         template_data.framework=framework
         template_data.template_url=template_url
+        if(template_image):
+            template_data.template_image=template_image
+        
 
         template_data.save()
         return redirect('template')

@@ -49,7 +49,7 @@
               <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Sub Category</label>
                 <div class="col-sm-9">
-                  <select class="form-control" name="category" id="id_sub_category" data-child-category-url = "{% url 'load_child_category' %}" >
+                  <select class="form-control" name="sub_category" id="id_sub_category" data-child-category-url = "{% url 'load_child_category' %}" >
                   <option value="">--Select--</option>
                     {% for sub_cat in sub_cat %}
                     <option value="{{sub_cat.id}}">
@@ -80,7 +80,7 @@
               <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Child Category</label>
                 <div class="col-sm-9">
-                  <select class="form-control" name="category" id ="id_child_category">
+                  <select class="form-control" name="child_category" id ="id_child_category">
                     <option value="">--Select--</option>
                     {% for child_cat in child_cat %}
                     <option value="{{child_cat.id}}">
@@ -189,6 +189,15 @@
                   />
                 </div>
               </div>
+              <div class="form-group">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" name="is_featured" value="1"> Is Featured </label>
+                </div>
+              </div>
+              
+
+
               <button type="submit" class="btn btn-gradient-primary me-2">
                 Submit
               </button>

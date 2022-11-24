@@ -8,7 +8,11 @@ class Category(models.Model):
     category = models.CharField(max_length=100,unique=True)
     category_image = models.ImageField(null=True, upload_to='category_images/')
     order = models.IntegerField(null=True)
-    status = models.IntegerField(null=True, default='1') 
+    STATUS_CHOICES = (
+        ('active', 'active'),
+        ('inactive', 'inactive')
+    )
+    status = models.CharField(max_length=100, null=True, choices=STATUS_CHOICES, default='active') 
     created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
@@ -19,7 +23,11 @@ class SubCategory(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     sub_category = models.CharField(max_length=100,unique=True)
     order = models.IntegerField(null=True)
-    status = models.IntegerField(null=True, default='1')
+    STATUS_CHOICES = (
+        ('active', 'active'),
+        ('inactive', 'inactive')
+    )
+    status = models.CharField(max_length=100, null=True, choices=STATUS_CHOICES, default='active') 
     created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
@@ -30,7 +38,11 @@ class ChildCategory(models.Model):
     sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
     child_category = models.CharField(max_length=100)
     order = models.IntegerField(null=True)
-    status = models.IntegerField(null=True, default='1')
+    STATUS_CHOICES = (
+        ('active', 'active'),
+        ('inactive', 'inactive')
+    )
+    status = models.CharField(max_length=100, null=True, choices=STATUS_CHOICES, default='active') 
     created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
@@ -50,8 +62,9 @@ class Template(models.Model):
     template_price = models.IntegerField()
     version = models.CharField(max_length=100)
     framework = models.CharField(max_length=1000)
-    template_image = models.ImageField(null=True, upload_to='template_images/')
+    template_image = models.ImageField(null=True, blank=True, upload_to='template_images/')
     template_url = models.URLField(null=True, blank=True)
+    is_featured = models.BooleanField(null=True, default=0)
     created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):

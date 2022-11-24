@@ -14,6 +14,8 @@ urlpatterns = [
 	path('logout/', views.logout, name='logout'),
     path('theme/', views.theme, name='theme'),
     path('contact/', views.contact, name='contact'),
+    path('theme_details/<int:id>', views.theme_details, name='theme_details'),
+    path('categories/', views.categories, name='categories'),
 
 
 

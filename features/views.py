@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
 from .models import *
+from adminpanel.models import *
 import uuid
 from django.conf import settings
 from django.core.mail import send_mail
@@ -11,15 +12,20 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def home(request):
-	return render(request,'index.html')
+    category=Category.objects.all().order_by('order')
+    # fet_temp=Template.objects.filter(featured='true')
+    context = {
+        "category":category,
+        # "fet_temp":fet_temp
+    }
+    return render(request,'index.html',context)
 
-# def dashboard(request):
-# 	return render(request,'admin/dashboard.html')
 
 def register(request):
     if request.method == 'POST':
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
+
         password1 = request.POST['password1']
         password = request.POST['password']
         email = request.POST['email']
@@ -113,14 +119,19 @@ def logout(request):
 def theme(request):
     template = Template.objects.all()
     category = Category.objects.all()
-    
+
     context = {
         "template":template,
         "category":category,
     }
     return render(request, 'theme.html',context )
 
-
+def theme_details(request,id):
+    theme_data = Template.objects.get(id=id)
+    context = {
+        'theme_data':theme_data
+    }
+    return render(request, 'theme_details.html',context)
 
 def contact(request):
     if request.method == "POST":
@@ -133,7 +144,15 @@ def contact(request):
         return redirect('home')
     else:
         return render(request,'contact.html')
-	# return render(request,'contact.html')
+
+def categories(request):
+    category = Category.objects.all()
+    templates_ct=Template.objects.count()
+    context = {
+        "templates_ct":templates_ct,
+        "category":category,
+    }
+    return render(request, 'categories.html',context )
 
 
 

@@ -44,7 +44,8 @@
              </div>
 
              <div class="col-xxl-8 col-xl-8 col-lg-8">
-                <div class="row">
+                <div class="row" id="tempelate">
+                  {% if template %}
                     {% for template in template %}
                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
                       <div class="product__item white-bg mb-30 wow fadeInUp" data-wow-delay=".3s">
@@ -55,8 +56,8 @@
                                </a>
                             </div>
                             <div class="product__thumb-btn transition-3">
-                               <a href="#" class="m-btn m-btn-6 mb-15">
-                                  Buy Now
+                               <a href="{% url 'theme_details' id=template.id %}" class="m-btn m-btn-6 mb-15">
+                                  Learn More
                                </a>
                                <a href="{{template.template_url}}" target="_blank" class="m-btn m-btn-7">
                                   Preview Project
@@ -80,6 +81,9 @@
                       </div>
                    </div>
                    {% endfor %}
+                   {% else %}
+                   <h1>No templates to show</h1>
+                   {%endif%}
                 </div>
                 <div class="row">
                    <div class="col-xxl-12">
