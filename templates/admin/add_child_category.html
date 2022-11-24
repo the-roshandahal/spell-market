@@ -11,13 +11,7 @@
               class="forms-sample"
               action="{% url 'add_child_category' %}"
               method="post"
-              {%
-              comment
-              %}
-              enctype="multipart/form-data"
-              {%
-              endcomment
-              %}
+            
             >
               {% csrf_token %}
               <div class="form-group row">
@@ -27,7 +21,10 @@
                     class="form-control"
                     name="category"
                     id="catageory_select"
+                    data-sub-category-url="{% url "load_child_category"%}"
                   >
+                  <option value="">--Select--</option>
+
                     {% for cat in cat %}
 
                     <option value="{{cat.id}}">{{cat.category}}</option>
@@ -35,11 +32,33 @@
                   </select>
                 </div>
               </div>
+              <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+              <script>
+                $("#catageory_select").change(function () {
+                  var url = $("#catageory_select").attr("data-sub-category-url"); 
+                  var cat = $(this).val();
 
-              <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Sub Category</label>
+                  $.ajax({
+                    
+                    url: url, 
+                    data: {
+                      cat: cat,
+                    },
+                    success: function (data) {
+                      console.log(data)
+                     
+                      $("#id_sub_category").html(data);
+                    },
+                  });
+                //https://simpleisbetterthancomplex.com/tutorial/2018/01/29/how-to-implement-dependent-or-chained-dropdown-list-with-django.html  
+                });
+              </script>
+              <div class="form-group row" >
+                <label class="col-sm-3 col-form-label" >Sub Category</label>
                 <div class="col-sm-9">
-                  <select class="form-control" name="category">
+                  <select class="form-control" name="category"  id="id_sub_category">
+                  <option value="">--Select--</option>
+
                     {% for sub_cat in sub_cat %}
                     <option value="{{sub_cat.id}}">
                       {{sub_cat.sub_category}}
@@ -91,5 +110,5 @@
       </div>
     </div>
   </div>
-  {% include 'admin/footer.html' %}s
 </div>
+  {% include 'admin/footer.html' %}

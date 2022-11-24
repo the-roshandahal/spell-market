@@ -135,19 +135,21 @@ def add_child_category(request):
             sub_category=sub_category, order=order, status=status, child_category=child_category)
         return redirect('child_category')
 
-    cat = list(Category.objects.all().values())
-    sub_cat = list(SubCategory.objects.all().values())
+    cat = Category.objects.all()
+    sub_cat = SubCategory.objects.all()
     context ={
         "cat": cat,
         "sub_cat": sub_cat
     }
-    # , 
-    # sort_keys=True,
-    # indent=1,
-    # cls=DjangoJSONEncoder
-    # )
-    print(context)
+  
     return render(request, 'admin/add_child_category.html', context)
+
+def load_child_catageory(request):
+
+    category_id=request.GET.get("cat")
+    sub_cat = SubCategory.objects.filter(category=category_id)
+    print(sub_cat)
+    return render(request, 'admin/load_child_category.html', {'sub_cat': sub_cat})
 
 
 def edit_template(request,id):
