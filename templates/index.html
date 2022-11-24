@@ -102,22 +102,22 @@
              <div class="col-xxl-6 col-xl-6 col-lg col-md-8">
                 <div class="section__title-wrapper mb-50">
                    <h2 class="section__title">Trending <br> Landmark Themes</h2>
-                   <p>Jeffrey pardon me jolly good.</p>
                 </div>
              </div>
              <div class="col-xxl-6 col-xl-6 col-lg col-md-4">
                 <div class="trending__more d-flex justify-content-md-end  mb-50">
-                   <a href="product.html" class="m-btn m-btn-border"><span></span>Explore Cloneables</a>
+                   <a href="{% url 'theme' %}" class="m-btn m-btn-border"><span></span>Explore Templates</a>
                 </div>
              </div>
           </div>
           <div class="row">
+            {% for fet_temp in fet_temp %}
              <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6">
                 <div class="trending__item d-sm-flex white-bg mb-30 wow fadeInUp" data-wow-delay=".3s">
                    <div class="trending__thumb mr-25">
                       <div class="trending__thumb-inner fix">
                          <a href="product-details.html">
-                            <img src="{% static 'assets/img/trending/tren-1.jpg' %}" alt="">
+                            <img src="{{fet_temp.template_image.url}}" alt="" height="100">
                          </a>
                       </div>
                    </div>
@@ -126,207 +126,23 @@
                       <p>Knees up arse blimey say happy days.</p>
                       <div class="trending__meta d-flex justify-content-between">
                          <div class="trending__tag">
-                            <a href="#">Business</a>
+                            <a href="#">{{fet_temp.category.category}}</a>
                          </div>
                          <div class="trending__price">
-                            <span>$39</span>
+                            <span>${{fet_temp.template_price}}</span>
                          </div>
                       </div>
                    </div>
                 </div>
              </div>
-             <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6">
-                <div class="trending__item d-sm-flex white-bg mb-30 wow fadeInUp" data-wow-delay=".5s">
-                   <div class="trending__thumb mr-25">
-                      <div class="trending__thumb-inner fix">
-                         <a href="product-details.html">
-                         <img src="{% static 'assets/img/trending/tren-2.jpg' %}" alt="">
-                         </a>
-                      </div>
-                   </div>
-                   <div class="trending__content">
-                      <h3 class="trending__title"><a href="product-details.html">React App Landing</a></h3>
-                      <p>Knees up arse blimey say happy days.</p>
-                      <div class="trending__meta d-flex justify-content-between">
-                         <div class="trending__tag">
-                            <a href="#">Technology</a>
-                         </div>
-                         <div class="trending__price">
-                            <span class="old-price">$29</span>
-                            <span>$25</span>
-                         </div>
-                      </div>
-                   </div>
-                </div>
-             </div>
-             <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6">
-                <div class="trending__item d-sm-flex white-bg mb-30 wow fadeInUp" data-wow-delay=".7s">
-                   <div class="trending__thumb mr-25">
-                      <div class="trending__thumb-inner fix">
-                         <a href="product-details.html">
-                         <img src="{% static 'assets/img/trending/tren-3.jpg' %}" alt="">
-                         </a>
-                      </div>
-                   </div>
-                   <div class="trending__content">
-                      <h3 class="trending__title"><a href="product-details.html">Digital Marketing</a></h3>
-                      <p>Knees up arse blimey say happy days.</p>
-                      <div class="trending__meta d-flex justify-content-between">
-                         <div class="trending__tag">
-                            <a href="#">marketing</a>
-                         </div>
-                         <div class="trending__price">
-                            <span>$16</span>
-                         </div>
-                      </div>
-                   </div>
-                </div>
-             </div>
-             <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6">
-                <div class="trending__item d-sm-flex white-bg mb-30 wow fadeInUp" data-wow-delay=".3s">
-                   <div class="trending__thumb mr-25">
-                      <div class="trending__thumb-inner fix">
-                         <a href="product-details.html">
-                         <img src="{% static 'assets/img/trending/tren-4.jpg' %}" alt="">
-                         </a>
-                      </div>
-                   </div>
-                   <div class="trending__content">
-                      <h3 class="trending__title"><a href="product-details.html">Ad Manager Admin</a></h3>
-                      <p>Knees up arse blimey say happy days.</p>
-                      <div class="trending__meta d-flex justify-content-between">
-                         <div class="trending__tag">
-                            <a href="#">software</a>
-                         </div>
-                         <div class="trending__price">
-                            <span>$29</span>
-                         </div>
-                      </div>
-                   </div>
-                </div>
-             </div>
-             <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6">
-                <div class="trending__item d-sm-flex white-bg mb-30 wow fadeInUp" data-wow-delay=".5s">
-                   <div class="trending__thumb mr-25">
-                      <div class="trending__thumb-inner fix">
-                         <a href="product-details.html">
-                         <img src="{% static 'assets/img/trending/tren-5.jpg' %}" alt="">
-                         </a>
-                      </div>
-                   </div>
-                   <div class="trending__content">
-                      <h3 class="trending__title"><a href="product-details.html">UI Template</a></h3>
-                      <p>Knees up arse blimey say happy days.</p>
-                      <div class="trending__meta d-flex justify-content-between">
-                         <div class="trending__tag">
-                            <a href="#">UI kit</a>
-                         </div>
-                         <div class="trending__price">
-                            <span>$44</span>
-                         </div>
-                      </div>
-                   </div>
-                </div>
-             </div>
-             <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6">
-                <div class="trending__item d-sm-flex white-bg mb-30 wow fadeInUp" data-wow-delay=".7s">
-                   <div class="trending__thumb mr-25">
-                      <div class="trending__thumb-inner fix">
-                         <a href="product-details.html">
-                         <img src="{% static 'assets/img/trending/tren-6.jpg' %}" alt="">
-                         </a>
-                      </div>
-                   </div>
-                   <div class="trending__content">
-                      <h3 class="trending__title"><a href="product-details.html">Email Template</a></h3>
-                      <p>Knees up arse blimey say happy days.</p>
-                      <div class="trending__meta d-flex justify-content-between">
-                         <div class="trending__tag">
-                            <a href="#">manager</a>
-                         </div>
-                         <div class="trending__price">
-                            <span>$14</span>
-                         </div>
-                      </div>
-                   </div>
-                </div>
-             </div>
-             <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6">
-                <div class="trending__item d-sm-flex white-bg mb-30 wow fadeInUp" data-wow-delay=".3s">
-                   <div class="trending__thumb mr-25">
-                      <div class="trending__thumb-inner fix">
-                         <a href="product-details.html">
-                         <img src="{% static 'assets/img/trending/tren-7.jpg' %}" alt="">
-                         </a>
-                      </div>
-                   </div>
-                   <div class="trending__content">
-                      <h3 class="trending__title"><a href="product-details.html">Multipurpose Store</a></h3>
-                      <p>Knees up arse blimey say happy days.</p>
-                      <div class="trending__meta d-flex justify-content-between">
-                         <div class="trending__tag">
-                            <a href="#">marketing</a>
-                         </div>
-                         <div class="trending__price">
-                            <span>$55</span>
-                         </div>
-                      </div>
-                   </div>
-                </div>
-             </div>
-             <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6">
-                <div class="trending__item d-sm-flex white-bg mb-30 wow fadeInUp" data-wow-delay=".5s">
-                   <div class="trending__thumb mr-25">
-                      <div class="trending__thumb-inner fix">
-                         <a href="product-details.html">
-                         <img src="{% static 'assets/img/trending/tren-8.jpg' %}" alt="">
-                         </a>
-                      </div>
-                   </div>
-                   <div class="trending__content">
-                      <h3 class="trending__title"><a href="product-details.html">Responsive Agency</a></h3>
-                      <p>Knees up arse blimey say happy days.</p>
-                      <div class="trending__meta d-flex justify-content-between">
-                         <div class="trending__tag">
-                            <a href="#">agency</a>
-                         </div>
-                         <div class="trending__price">
-                            <span>$22</span>
-                         </div>
-                      </div>
-                   </div>
-                </div>
-             </div>
-             <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6">
-                <div class="trending__item d-sm-flex white-bg mb-30 wow fadeInUp" data-wow-delay=".7s">
-                   <div class="trending__thumb mr-25">
-                      <div class="trending__thumb-inner fix">
-                         <a href="product-details.html">
-                         <img src="{% static 'assets/img/trending/tren-9.jpg' %}" alt="">
-                         </a>
-                      </div>
-                   </div>
-                   <div class="trending__content">
-                      <h3 class="trending__title"><a href="product-details.html">Admin Dashboard</a></h3>
-                      <p>Knees up arse blimey say happy days.</p>
-                      <div class="trending__meta d-flex justify-content-between">
-                         <div class="trending__tag">
-                            <a href="#">application</a>
-                         </div>
-                         <div class="trending__price">
-                            <span>$49</span>
-                         </div>
-                      </div>
-                   </div>
-                </div>
-             </div>
+             {% endfor %}
           </div>
        </div>
     </section>
     <!-- trending area end -->
 
     <!-- subscribe area start -->
-    <section class="subscribe__area p-relative pt-100 pb-110" data-background="assets/img/bg/subscribe-bg.jpg">
+    <section class="subscribe__area p-relative pt-100 pb-110" data-background="{% static 'assets/img/bg/subscribe-bg.jpg' %}">
        <div class="subscribe__icon">
           <img class="ps" src="{% static 'assets/img/icon/subscribe/ps.png' %}" alt="">
           <img class="wp" src="{% static 'assets/img/icon/subscribe/wp.png' %}" alt="">
@@ -353,228 +169,6 @@
        </div>
     </section>
     <!-- subscribe area end -->
-
-    <!-- product area start -->
-    <section class="product__area pt-105 pb-110 grey-bg-2">
-       <div class="container">
-          <div class="row">
-             <div class="col-xxl-12">
-                <div class="section__title-wrapper text-center mb-60">
-                   <h2 class="section__title">Latest <br>  Premium Products</h2>
-                   <p>From multipurpose themes to niche templates</p>
-                </div>
-             </div>
-          </div>
-          <div class="row">
-             <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
-                <div class="product__item white-bg mb-30 wow fadeInUp" data-wow-delay=".3s">
-                   <div class="product__thumb">
-                      <div class="product__thumb-inner fix w-img">
-                         <a href="product-details.html">
-                         <img src="{% static 'assets/img/product/product-1.jpg' %}" alt="">
-                         </a>
-                      </div>
-                      <div class="product__thumb-btn transition-3">
-                         <a href="#" class="m-btn m-btn-6 mb-15">
-                            Buy Now
-                         </a>
-                         <a href="https://themeforest.net/item/zibber-business-consulting-wordpress-theme/30120392" target="_blank" class="m-btn m-btn-7">
-                            Preview Project
-                         </a>
-                      </div>
-                   </div>
-                   <div class="product__content">
-                      <div class="product__meta mb-10 d-flex justify-content-between align-items-center">
-                         <div class="product__tag">
-                            <a href="#">Business</a>
-                         </div>
-                         <div class="product__price">
-                            <span>$49</span>
-                         </div>
-                      </div>
-                      <h3 class="product__title">
-                         <a href="product-details.html">Zibber - Business Consulting...</a>
-                      </h3>
-                      <p class="product__author">by <a href="#">Theme Pure</a> in <a href="#">Templates</a></p>
-                   </div>
-                </div>
-             </div>
-             <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
-                <div class="product__item white-bg mb-30 wow fadeInUp" data-wow-delay=".5s">
-                   <div class="product__thumb">
-                      <div class="product__thumb-inner fix w-img">
-                         <a href="product-details.html">
-                         <img src="{% static 'assets/img/product/product-2.jpg' %}" alt="">
-                         </a>
-                      </div>
-                      <div class="product__thumb-btn transition-3">
-                         <a href="#" class="m-btn m-btn-6 mb-15">
-                            Buy Now
-                         </a>
-                         <a href="https://themeforest.net/item/zibber-business-consulting-wordpress-theme/30120392" target="_blank" class="m-btn m-btn-7">
-                            Preview Project
-                         </a>
-                      </div>
-                   </div>
-                   <div class="product__content">
-                      <div class="product__meta mb-10 d-flex justify-content-between align-items-center">
-                         <div class="product__tag">
-                            <a href="product-details.html">corporate</a>
-                         </div>
-                         <div class="product__price">
-                            <span>$23</span>
-                         </div>
-                      </div>
-                      <h3 class="product__title">
-                         <a href="product-details.html">Pixen - Printing Services Company..</a>
-                      </h3>
-                      <p class="product__author">by <a href="#">Theme Pure</a> in <a href="#">Templates</a></p>
-                   </div>
-                </div>
-             </div>
-             <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
-                <div class="product__item white-bg mb-30 wow fadeInUp" data-wow-delay=".7s">
-                   <div class="product__thumb">
-                      <div class="product__thumb-inner fix w-img">
-                         <a href="product-details.html">
-                         <img src="{% static 'assets/img/product/product-3.jpg' %}" alt="">
-                         </a>
-                      </div>
-                      <div class="product__thumb-btn transition-3">
-                         <a href="#" class="m-btn m-btn-6 mb-15">
-                            Buy Now
-                         </a>
-                         <a href="https://themeforest.net/item/zibber-business-consulting-wordpress-theme/30120392" target="_blank" class="m-btn m-btn-7">
-                            Preview Project
-                         </a>
-                      </div>
-                   </div>
-                   <div class="product__content">
-                      <div class="product__meta mb-10 d-flex justify-content-between align-items-center">
-                         <div class="product__tag">
-                            <a href="#">listing</a>
-                         </div>
-                         <div class="product__price">
-                            <span>$12</span>
-                         </div>
-                      </div>
-                      <h3 class="product__title">
-                         <a href="product-details.html">Findup - Directory & Listing PSD...</a>
-                      </h3>
-                      <p class="product__author">by <a href="#">Theme Pure</a> in <a href="#">Templates</a></p>
-                   </div>
-                </div>
-             </div>
-             <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
-                <div class="product__item white-bg mb-30 wow fadeInUp" data-wow-delay=".9s">
-                   <div class="product__thumb">
-                      <div class="product__thumb-inner fix w-img">
-                         <a href="product-details.html">
-                         <img src="{% static 'assets/img/product/product-4.jpg' %}" alt="">
-                         </a>
-                      </div>
-                      <div class="product__thumb-btn transition-3">
-                         <a href="#" class="m-btn m-btn-6 mb-15">
-                            Buy Now
-                         </a>
-                         <a href="https://themeforest.net/item/zibber-business-consulting-wordpress-theme/30120392" target="_blank" class="m-btn m-btn-7">
-                            Preview Project
-                         </a>
-                      </div>
-                   </div>
-                   <div class="product__content">
-                      <div class="product__meta mb-10 d-flex justify-content-between align-items-center">
-                         <div class="product__tag">
-                            <a href="#">e-commerce</a>
-                         </div>
-                         <div class="product__price">
-                            <span>$59</span>
-                         </div>
-                      </div>
-                      <h3 class="product__title">
-                         <a href="product-details.html">Agota - Clean Minimal eCommerce.</a>
-                      </h3>
-                      <p class="product__author">by <a href="#">Theme Pure</a> in <a href="#">Templates</a></p>
-                   </div>
-                </div>
-             </div>
-             <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
-                <div class="product__item white-bg mb-30 wow fadeInUp" data-wow-delay="1.2s">
-                   <div class="product__thumb">
-                      <div class="product__thumb-inner fix w-img">
-                         <a href="product-details.html">
-                         <img src="{% static 'assets/img/product/product-5.jpg' %}" alt="">
-                         </a>
-                      </div>
-                      <div class="product__thumb-btn transition-3">
-                         <a href="#" class="m-btn m-btn-6 mb-15">
-                            Buy Now
-                         </a>
-                         <a href="https://themeforest.net/item/zibber-business-consulting-wordpress-theme/30120392" target="_blank" class="m-btn m-btn-7">
-                            Preview Project
-                         </a>
-                      </div>
-                   </div>
-                   <div class="product__content">
-                      <div class="product__meta mb-10 d-flex justify-content-between align-items-center">
-                         <div class="product__tag">
-                            <a href="#">Business</a>
-                         </div>
-                         <div class="product__price">
-                            <span>$49</span>
-                         </div>
-                      </div>
-                      <h3 class="product__title">
-                         <a href="product-details.html">BngTech - IT Solutions WordPress...</a>
-                      </h3>
-                      <p class="product__author">by <a href="#">Theme Pure</a> in <a href="#">Templates</a></p>
-                   </div>
-                </div>
-             </div>
-             <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
-                <div class="product__item white-bg mb-30 wow fadeInUp" data-wow-delay="1.5s">
-                   <div class="product__thumb">
-                      <div class="product__thumb-inner fix w-img">
-                         <a href="product-details.html">
-                         <img src="{% static 'assets/img/product/product-6.jpg' %}" alt="">
-                         </a>
-                      </div>
-                      <div class="product__thumb-btn transition-3">
-                         <a href="#" class="m-btn m-btn-6 mb-15">
-                            Buy Now
-                         </a>
-                         <a href="https://themeforest.net/item/zibber-business-consulting-wordpress-theme/30120392" target="_blank" class="m-btn m-btn-7">
-                            Preview Project
-                         </a>
-                      </div>
-                   </div>
-                   <div class="product__content">
-                      <div class="product__meta mb-10 d-flex justify-content-between align-items-center">
-                         <div class="product__tag">
-                            <a href="#">Construction</a>
-                         </div>
-                         <div class="product__price">
-                            <span>$49</span>
-                         </div>
-                      </div>
-                      <h3 class="product__title">
-                         <a href="product-details.html">BildPress - Construction WordPres.</a>
-                      </h3>
-                      <p class="product__author">by <a href="#">Theme Pure</a> in <a href="#">Templates</a></p>
-                   </div>
-                </div>
-             </div>
-          </div>
-          <div class="row">
-             <div class="col-xxl-12">
-                <div class="product__more text-center mt-30">
-                   <a href="product.html" class="m-btn m-btn-2"> <span></span> Explore Premium</a>
-                </div>
-             </div>
-          </div>
-       </div>
-    </section>
-    <!-- product area end -->
 
     <!-- cta area start -->
     <section class="cta__area pt-100 pb-60">
@@ -777,14 +371,14 @@
        <div class="container">
           <div class="row">
              <div class="col-xxl-6 col-xl-6 col-md-6">
-                <div class="banner__item mb-30 wow fadeInUp" data-wow-delay=".3s" data-background="assets/img/banner/banner-1.jpg">
+                <div class="banner__item mb-30 wow fadeInUp" data-wow-delay=".3s" data-background="{% static 'assets/img/banner/banner-1.jpg' %}">
                    <h3 class="banner__title">Designers who changed the web with Markit</h3>
                    <p>He lost his bottle that zonked spend a penny young delinquent bugger.</p>
                    <a href="about.html" class="m-btn m-btn-white banner__more"> <span></span> Learn More</a>
                 </div>
              </div>
              <div class="col-xxl-6 col-xl-6 col-md-6">
-                <div class="banner__item mb-30 wow fadeInUp" data-wow-delay=".7s" data-background="assets/img/banner/banner-2.jpg">
+                <div class="banner__item mb-30 wow fadeInUp" data-wow-delay=".7s" data-background="{% static 'assets/img/banner/banner-2.jpg' %}">
                    <h3 class="banner__title">Professional Websites are made by Markit</h3>
                    <p>He lost his bottle that zonked spend a penny young delinquent bugger.</p>
                    <a href="about.html" class="m-btn m-btn-white banner__more"> <span></span> Learn More</a>

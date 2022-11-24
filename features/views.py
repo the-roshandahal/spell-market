@@ -13,10 +13,10 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 def home(request):
     category=Category.objects.all().order_by('order')
-    # fet_temp=Template.objects.filter(featured='true')
+    fet_temp=Template.objects.filter(is_featured=1)
     context = {
         "category":category,
-        # "fet_temp":fet_temp
+        "fet_temp":fet_temp
     }
     return render(request,'index.html',context)
 

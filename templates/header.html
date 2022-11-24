@@ -67,14 +67,11 @@ if (popup){
             </nav>
           </div>
         </div>
+        {% if user.isauthenticated %}
         <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-8 col-6">
-          <div
-            class="header__action d-flex align-items-center justify-content-end"
-          >
+          <div class="header__action d-flex align-items-center justify-content-end">
             <div class="header__login d-none d-sm-block">
-              <a href="{% url 'login' %}"
-                ><i class="far fa-unlock"></i> Log In</a
-              >
+              <a href="{% url 'logout' %}"><i class="far fa-unlock"></i> Logout</a>
             </div>
             <div class="header__cart d-none d-sm-block">
               <a href="javascript:void(0);" class="cart-toggle-btn">
@@ -91,6 +88,15 @@ if (popup){
             </div>
           </div>
         </div>
+        {% else %}
+        <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-8 col-6">
+          <div class="header__action d-flex align-items-center justify-content-end">
+            <div class="header__login d-none d-sm-block">
+              <a href="{% url 'login' %}"><i class="far fa-unlock"></i> Log In</a>
+            </div>
+          </div>
+        </div>
+        {% endif %}
       </div>
     </div>
   </div>
