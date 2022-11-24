@@ -23,6 +23,8 @@ urlpatterns = [
 
     path('edit_template/<int:id>', views.edit_template, name='edit_template'),
 
+    path('change_status/<int:id>', views.change_status, name='change_status'),
+
 
 
 

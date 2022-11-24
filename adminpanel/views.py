@@ -174,7 +174,6 @@ def edit_template(request,id):
             template_image = request.FILES['template_image']
         else:
             template_image=None
-
         template_url = request.POST['template_url']
 
         category = Category.objects.get(id=cat_id)
@@ -192,7 +191,6 @@ def edit_template(request,id):
         template_data.template_details=template_details
         template_data.template_features=template_features
         template_data.template_layout=template_layout
-        # template_data.template_image=template_image
         template_data.template_price=template_price
         template_data.version=version
         template_data.framework=framework
@@ -217,3 +215,17 @@ def edit_template(request,id):
             'template_data':template_data
         }
         return render(request,'admin/edit_template.html',context)
+
+def change_status(request, id):
+    status = Template.objects.get(id=id)
+    print(status.is_featured)
+    if (status.is_featured == True):
+        status_update = Template.objects.filter(id=id)[0]
+        status_update.is_featured = 'False'
+        status_update.save()
+        return redirect(template)
+    else:
+        status_update = Template.objects.filter(id=id)[0]
+        status_update.is_featured = 'True'
+        status_update.save()
+        return redirect(template)
