@@ -16,6 +16,9 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('theme_details/<int:id>', views.theme_details, name='theme_details'),
     path('categories/', views.categories, name='categories'),
+    path('add_to_cart/<int:id>', views.add_to_cart, name='add_to_cart'),
+    path('cart/', views.cart, name='cart'),
+    path('remove_from_cart/<int:id>', views.remove_from_cart, name='remove_from_cart'),
 
 
 

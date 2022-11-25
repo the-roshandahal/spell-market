@@ -6,13 +6,12 @@ from adminpanel.models import *
 import uuid
 from django.conf import settings
 from django.core.mail import send_mail
-from django.http import HttpResponseRedirect
 from django.contrib.auth import logout as django_logout
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def home(request):
-    category=Category.objects.all().order_by('order')
+    category=Category.objects.all().order_by('order')[:4]
     fet_temp=Template.objects.filter(is_featured=1)
     context = {
         "category":category,
@@ -98,12 +97,15 @@ def login(request):
 
         if user is not None and user.is_superuser:
             auth.login(request, user)
+            messages.info(request, 'Logged in successfully.')
+
             return redirect('dashboard')
 
         elif user is not None and not user.is_superuser:
             if profile_obj.is_verified :
                 auth.login(request, user)
-                return redirect('dashboard')
+                messages.info(request, 'Logged in successfully.')
+                return redirect('home')
             else:
                 messages.info(request, 'Your are not verified')
                 return redirect('login')
@@ -111,15 +113,15 @@ def login(request):
         return render(request, 'login.html')
     return render(request, 'login.html')
 
-
+@login_required
 def logout(request):
     django_logout(request)
+    messages.info(request, 'Logged out successfully.')
     return redirect('home')
 
 def theme(request):
     template = Template.objects.all()
     category = Category.objects.all()
-
     context = {
         "template":template,
         "category":category,
@@ -141,6 +143,8 @@ def contact(request):
         contact = request.POST['contact']
         message = request.POST['message']
         Contact.objects.create(name=name,email=email,subject=subject,contact=contact,message=message)
+        messages.info(request, 'Thank you for your response.')
+
         return redirect('home')
     else:
         return render(request,'contact.html')
@@ -153,6 +157,50 @@ def categories(request):
         "category":category,
     }
     return render(request, 'categories.html',context )
+
+@login_required
+def add_to_cart(request,id):
+    if Cart.objects.filter(template=id, user=request.user).exists():
+        messages.info(request, 'This product is already in your cart')
+        return redirect('cart')
+    else:
+        template=Template.objects.get(id=id)
+        user=User.objects.get(username=request.user)
+        cart=Cart(template=template,user=user)
+        cart.save()
+        messages.info(request, 'Added to cart')
+        return redirect('cart')
+    
+
+@login_required
+def cart(request):
+    carts = Cart.objects.filter(user=request.user)
+    total = 0 
+    for cart in carts:
+        template = Template.objects.get(template_name=cart.template)    
+        total += template.template_price 
+
+    # if(carts):
+    #     cart=carts[0]
+    # else:
+    #     messages.info(request, 'Your cart is empty.')
+    fet_temp=Template.objects.filter(is_featured=1)
+    context= {
+        'carts':carts,
+        'total':total,
+        'fet_temp':fet_temp
+    }
+    return render (request, 'cart.html',context)
+
+def remove_from_cart(request,id):
+    item = Cart.objects.get(template=id,user=request.user)
+    item.delete()
+    messages.info(request, 'Removed from cart')
+    return redirect(cart)
+
+
+
+
 
 
 

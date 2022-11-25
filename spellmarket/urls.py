@@ -24,7 +24,7 @@ from django.urls import re_path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('features.urls')),
-    path('adminpanel/', include('adminpanel.urls')),
+    path('', include('adminpanel.urls')),
 
     path('summernote/', include('django_summernote.urls')),
     path('editor/', include('django_summernote.urls')),

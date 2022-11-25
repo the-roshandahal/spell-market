@@ -8,4 +8,4 @@ admin.site.site_header = "Spell Market Admin panel"
 admin.site.register(Cart)
 admin.site.register(Downloads)
 admin.site.register(Token)
-
+admin.site.register(Contact)

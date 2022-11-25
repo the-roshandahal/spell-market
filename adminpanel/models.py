@@ -1,9 +1,5 @@
 from django.db import models
 
-# Create your models here.
-# Create your models here.
-
-
 class Category(models.Model):
     category = models.CharField(max_length=100,unique=True)
     category_image = models.ImageField(null=True, upload_to='category_images/')
@@ -69,3 +65,37 @@ class Template(models.Model):
 
     def __str__(self):
         return self.template_name
+
+class CompanySetup(models.Model):
+    logo = models.ImageField(upload_to='company_images/')
+    email = models.EmailField()
+    contact = models.IntegerField(max_length=100)
+    address = models.CharField(max_length=1000)
+    facebook_url = models.URLField(null=True, blank=True)
+    instagram_url = models.URLField(null=True, blank=True)
+    linkedin_url = models.URLField(null=True, blank=True)
+
+
+class Blogs(models.Model):
+    title = models.CharField(max_length=1000)
+    blog = models.TextField()
+    created = models.DateTimeField(auto_now_add=True, null=True)
+
+    def __str__(self):
+        return self.title
+
+class Partner(models.Model):
+    name = models.CharField(max_length=100)
+    link = models.URLField()
+    logo = models.ImageField(upload_to='blog_images/')
+
+    def __str__(self):
+        return self.name
+    
+class Testimonial(models.Model):
+    name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='testimonial_images/')
+    company_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name

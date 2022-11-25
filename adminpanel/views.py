@@ -5,25 +5,23 @@ from .models import *
 from django.contrib.auth.decorators import login_required
 import json
 from django.core.serializers.json import DjangoJSONEncoder
+
+@login_required
 def dashboard(request):
-    if request.user.is_authenticated:
-        templates_ct=Template.objects.count()
-        context = {
-            'templates_ct': templates_ct
-        }
-        return render(request, 'admin/dashboard.html',context)
-    else:
-        messages.info(request, 'You are not logged in. Please log in to continue')
-        return redirect('login')
+    templates_ct=Template.objects.count()
+    context = {
+        'templates_ct': templates_ct
+    }
+    return render(request, 'admin/dashboard.html',context)
+    
 
 @login_required
 def template(request):
     template = Template.objects.all()
     return render(request, 'admin/template.html', {'template': template})
 
-
+@login_required
 def add_template(request):
-
     if request.method == "POST":
         cat_id = request.POST['category']
         sub_cat_id = request.POST['sub_category']
@@ -58,7 +56,7 @@ def add_template(request):
     }
     return render(request, 'admin/add_template.html', context)
 
-
+@login_required
 def category(request):
     category = Category.objects.all().order_by('order')
     context = {
@@ -66,7 +64,7 @@ def category(request):
     }
     return render(request, 'admin/category.html', context)
 
-
+@login_required
 def add_category(request):
     if request.method == "POST":
         category = request.POST['category']
@@ -78,10 +76,12 @@ def add_category(request):
             return redirect('add_category')
         Category.objects.create(
             category=category, order=order, status=status, category_image=category_image)
+        messages.info(request, 'Category added successfully.')
         return redirect('category')
+    
     return render(request, 'admin/add_category.html')
 
-
+@login_required
 def sub_category(request):
     sub_category = SubCategory.objects.all().order_by('order')
     context = {
@@ -89,7 +89,7 @@ def sub_category(request):
     }
     return render(request, 'admin/sub_category.html', context)
 
-
+@login_required
 def add_sub_category(request):
     if request.method == "POST":
         cat_id = request.POST['category']
@@ -104,6 +104,8 @@ def add_sub_category(request):
         category = Category.objects.get(id=cat_id)
         SubCategory.objects.create(
             category=category, order=order, status=status, sub_category=sub_category)
+        messages.info(request, 'Sub category added successfully.')
+
         return redirect('sub_category')
     cat = Category.objects.all()
     context = {
@@ -119,7 +121,7 @@ def child_category(request):
     }
     return render(request, 'admin/child_category.html', context)
 
-
+@login_required
 def add_child_category(request):
     if request.method == "POST":
         sub_cat_id = request.POST['category']
@@ -134,6 +136,7 @@ def add_child_category(request):
         sub_category = SubCategory.objects.get(id=sub_cat_id)
         ChildCategory.objects.create(
             sub_category=sub_category, order=order, status=status, child_category=child_category)
+        messages.info(request, 'Child category added successfully.')
         return redirect('child_category')
 
     cat = Category.objects.all()
@@ -145,19 +148,19 @@ def add_child_category(request):
   
     return render(request, 'admin/add_child_category.html', context)
 
-
+@login_required
 def load_sub_category(request):
     cat=request.GET.get("cat")
     sub_cat = SubCategory.objects.filter(category=cat)
     return render(request, 'admin/load_sub_category.html', {'sub_cat': sub_cat})
 
-
+@login_required
 def load_child_category(request):
     sub_cat=request.GET.get("sub_cat")
     child_cat = ChildCategory.objects.filter(sub_category=sub_cat)
     return render(request, 'admin/load_child_category.html', {'child_cat': child_cat})
 
-
+@login_required
 def edit_template(request,id):
     if request.method == 'POST':
         cat_id = request.POST['category']
@@ -200,6 +203,8 @@ def edit_template(request,id):
         
 
         template_data.save()
+        messages.info(request, 'Template added successfully.')
+
         return redirect('template')
 
     else:
@@ -215,7 +220,7 @@ def edit_template(request,id):
             'template_data':template_data
         }
         return render(request,'admin/edit_template.html',context)
-
+@login_required
 def change_status(request, id):
     status = Template.objects.get(id=id)
     print(status.is_featured)
@@ -223,9 +228,11 @@ def change_status(request, id):
         status_update = Template.objects.filter(id=id)[0]
         status_update.is_featured = 'False'
         status_update.save()
+        messages.info(request, 'Status Changed')
         return redirect(template)
     else:
         status_update = Template.objects.filter(id=id)[0]
         status_update.is_featured = 'True'
         status_update.save()
+        messages.info(request, 'Status Changed')
         return redirect(template)

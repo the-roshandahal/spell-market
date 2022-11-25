@@ -1,0 +1,113 @@
+{% include 'header.html' %} {{carts.template.template_name}}
+
+<div class="container">
+  {% if carts %}
+  <div class="row">
+    <div class="col-xxl-6 offset-xxl-3 col-xl-6 offset-xl-3">
+      <div class="page__title-wrapper text-center mb-60">
+        <h2 class="page__title-2">Your cart looks good!</h2>
+        <p>Add more product to make it look even better.</p>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="row">
+    <div class="cartmini__widget">
+      <div class="cartmini__inner">
+        <ul>
+          {% for carts in carts %}
+          <li>
+            <div class="cartmini__thumb">
+              <a href="{% url 'theme_details' id=carts.template.id %}">
+                <img src="{{carts.template.template_image.url}}" alt="" />
+              </a>
+            </div>
+            <div class="cartmini__content">
+              <h5>{{carts.template}}</h5>
+              <h5>Category: {{carts.template.category}}</h5>
+              <h5>Version: {{carts.template.version}}</h5>
+              <div class="product__sm-price-wrapper">
+                <!-- <span class="product__sm-price">Rs.{{carts.template.template_price}}</span> -->
+              </div>
+            </div>
+            <a
+              href="{% url 'remove_from_cart' id=carts.template.id %}"
+              class="cartmini__del"
+              ><i class="fal fa-times"></i
+            ></a>
+            <p
+              class="cartmini__del mt-20"
+              style="font-size: 15px; margin-right: 15px"
+            >
+              Rs.{{carts.template.template_price}}
+            </p>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="cartmini__checkout">
+        <div class="cartmini__checkout-title mb-30">
+          <h4>Subtotal:</h4>
+          <span>Rs.{{total}}</span>
+        </div>
+        <div class="col-xxl-12">
+          <div class="category__more mt-30 text-center">
+            <a href="" class="m-btn m-btn-2"> <span></span> Checkout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% else %}
+
+
+
+
+  <div class="row">
+    <div class="col-xxl-6 offset-xxl-3 col-xl-6 offset-xl-3">
+      <div class="page__title-wrapper text-center mb-60">
+        <h2 class="page__title-2">Your cart looks is empty.</h2>
+        <p>Browse our popular themes.</p>
+      </div>
+    </div>
+  </div>
+  <section class="trending__area pt-110 pb-110">
+    <div class="container">
+       <div class="row">
+         {% for fet_temp in fet_temp %}
+          <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6">
+             <div class="trending__item d-sm-flex white-bg mb-30 wow fadeInUp" data-wow-delay=".3s">
+                <div class="trending__thumb mr-25">
+                   <div class="trending__thumb-inner fix">
+                      <a href="{% url 'theme_details' id=fet_temp.id %}">
+                         <img src="{{fet_temp.template_image.url}}" alt="" height="100">
+                      </a>
+                   </div>
+                </div>
+                <div class="trending__content">
+                   <h3 class="trending__title"><a href="{% url 'theme_details' id=fet_temp.id %}">Zibber WP Theme</a></h3>
+                   <p>Knees up arse blimey say happy days.</p>
+                   <div class="trending__meta d-flex justify-content-between">
+                      <div class="trending__tag">
+                         <a href="#">{{fet_temp.category.category}}</a>
+                      </div>
+                      <div class="trending__price">
+                         <span>${{fet_temp.template_price}}</span>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          
+          {% endfor %}
+          <div class="trending__more d-flex justify-content-md-end  mb-50">
+            <a href="{% url 'theme' %}" class="m-btn m-btn-border"><span></span>Explore Templates</a>
+         </div>
+       </div>
+    </div>
+ </section>
+  {% endif %}
+</div>
+
+{% include 'footer.html' %}
