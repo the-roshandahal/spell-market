@@ -77,6 +77,9 @@
                           <div class="dropdown-divider"></div>
                           <a class="dropdown-item" href="{% url 'change_status' id=template.id %}">
                               <i class="mdi mdi-logout me-2 text-primary"></i> Change F. Status</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="{% url 'delete_template' id=template.id %}">
+                              <i class="mdi mdi-logout me-2 text-primary"></i> Delete</a>
                       </div>
                     </div>
                   </td>

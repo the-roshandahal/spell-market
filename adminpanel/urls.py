@@ -25,10 +25,13 @@ urlpatterns = [
 
     path('change_status/<int:id>', views.change_status, name='change_status'),
 
+    path('delete_category/<int:id>',views.delete_category,name='delete_category'),
+    
+    path('delete_sub_category/<int:id>',views.delete_sub_category,name='delete_sub_category'),
 
+    path('delete_child_category/<int:id>',views.delete_child_category,name='delete_child_category'),
 
-
-
+    path('delete_template/<int:id>',views.delete_template,name='delete_template'),
 ]
 
 

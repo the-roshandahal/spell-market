@@ -34,7 +34,7 @@
                   </td>
                   <td> {{category.order}}</td>
                   <td>{{category.created.date}}</td>
-                  <td><a href=""> Edit</a></td>
+                  <td><a href=""> Edit</a> | <a href="{% url 'delete_category' id=category.id %}"> Delete</a></td>
                 </tr>
                 {% endfor %}
               </tbody>

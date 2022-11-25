@@ -236,3 +236,32 @@ def change_status(request, id):
         status_update.save()
         messages.info(request, 'Status Changed')
         return redirect(template)
+
+
+
+
+@login_required
+def delete_category(request,id):
+    del_category = Category.objects.get(id=id)
+    del_category.delete()
+    messages.info(request, 'Deleted')
+    return redirect(category)
+
+
+def delete_sub_category(request,id):
+    del_sub_category = SubCategory.objects.get(id=id)
+    del_sub_category.delete()
+    messages.info(request, 'Deleted')
+    return redirect(sub_category)
+
+def delete_child_category(request,id):
+    del_child_category = ChildCategory.objects.get(id=id)
+    del_child_category.delete()
+    messages.info(request, 'Deleted')
+    return redirect(child_category)
+
+def delete_template(request,id):
+    del_template = Template.objects.get(id=id)
+    del_template.delete()
+    messages.info(request, 'Deleted')
+    return redirect(template)
