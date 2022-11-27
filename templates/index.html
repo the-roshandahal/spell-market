@@ -117,13 +117,13 @@
                 <div class="trending__item d-sm-flex white-bg mb-30 wow fadeInUp" data-wow-delay=".3s">
                    <div class="trending__thumb mr-25">
                       <div class="trending__thumb-inner fix">
-                         <a href="product-details.html">
+                         <a href="{% url 'theme_details' id=fet_temp.id %}">
                             <img src="{{fet_temp.template_image.url}}" alt="" height="100">
                          </a>
                       </div>
                    </div>
                    <div class="trending__content">
-                      <h3 class="trending__title"><a href="product-details.html">Zibber WP Theme</a></h3>
+                      <h3 class="trending__title"><a href="{% url 'theme_details' id=fet_temp.id %}">Zibber WP Theme</a></h3>
                       <p>Knees up arse blimey say happy days.</p>
                       <div class="trending__meta d-flex justify-content-between">
                          <div class="trending__tag">

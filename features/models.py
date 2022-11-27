@@ -9,6 +9,22 @@ class Cart(models.Model):
     def __str__(self):
         return self.user.username
 
+class PurchaseSummary(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    template = models.ForeignKey(Template,  on_delete=models.CASCADE)
+    discount = models.ForeignKey(PromoCode, on_delete=models.CASCADE, null=True)
+    total_amount = models.IntegerField(max_length=100)
+
+    def __str__(self):
+        return self.user.username
+
+class PurchasedTemplate(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    template = models.ForeignKey(Template, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username
+
 
 class Downloads(models.Model):
     user= models.OneToOneField(User,on_delete=models.CASCADE)
@@ -25,8 +41,6 @@ class Token(models.Model):
 
     def __str__(self):
         return self.user.username
-
-
 
 class Contact(models.Model):
     name = models.CharField(max_length=1000)

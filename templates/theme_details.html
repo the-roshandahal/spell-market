@@ -48,14 +48,14 @@
                             <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
                                <div class="product__overview">
                                   <h3 class="product__overview-title">Template Details</h3>
-                                  <p>{{theme_data.template_details}}</p>
+                                  <p>{{theme_data.template_details|safe}}</p>
                                   <div class="product__features mt-40">
                                      <h3 class="product__overview-title">Template Features:</h3>
-                                     <p>{{theme_data.template_features}}</p>
+                                     <p>{{theme_data.template_features|safe}}</p>
                                   </div>
                                   <div class="product__features">
                                      <h3 class="product__overview-title">Design Layout</h3>
-                                     <p>{{theme_data.template_layout}}</p>
+                                     <p>{{theme_data.template_layout|safe}}</p>
                                   </div>
                                   <div class="product__social m-social grey-bg-2">
                                      <h4 class="product__social-title">Follow us</h4>

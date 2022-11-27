@@ -65,7 +65,20 @@ class Template(models.Model):
 
     def __str__(self):
         return self.template_name
+    
 
+class PromoCode(models.Model):
+    promo_code = models.CharField(max_length=10)
+    TYPE_CHOICES = (
+        ('percentage', 'percentage'),
+        ('amount', 'amount')
+    )
+    discount_type = models.CharField(max_length=100, null=True, choices=TYPE_CHOICES, default='percentage')
+    expiry_date = models.DateTimeField(null=True)
+
+    def __str__(self):
+        return self.promo_code
+    
 class CompanySetup(models.Model):
     logo = models.ImageField(upload_to='company_images/')
     email = models.EmailField()
@@ -74,9 +87,9 @@ class CompanySetup(models.Model):
     facebook_url = models.URLField(null=True, blank=True)
     instagram_url = models.URLField(null=True, blank=True)
     linkedin_url = models.URLField(null=True, blank=True)
+    
 
-
-class Blogs(models.Model):
+class Blog(models.Model):
     title = models.CharField(max_length=1000)
     blog = models.TextField()
     created = models.DateTimeField(auto_now_add=True, null=True)
@@ -96,6 +109,7 @@ class Testimonial(models.Model):
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='testimonial_images/')
     company_name = models.CharField(max_length=100)
+    testimonial = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name

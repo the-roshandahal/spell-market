@@ -122,9 +122,13 @@ def logout(request):
 def theme(request):
     template = Template.objects.all()
     category = Category.objects.all()
+    sub_category = SubCategory.objects.all()
+    child_category = ChildCategory.objects.all()
     context = {
         "template":template,
         "category":category,
+        "sub_category":sub_category,
+        "child_category":child_category
     }
     return render(request, 'theme.html',context )
 
@@ -179,11 +183,6 @@ def cart(request):
     for cart in carts:
         template = Template.objects.get(template_name=cart.template)    
         total += template.template_price 
-
-    # if(carts):
-    #     cart=carts[0]
-    # else:
-    #     messages.info(request, 'Your cart is empty.')
     fet_temp=Template.objects.filter(is_featured=1)
     context= {
         'carts':carts,
