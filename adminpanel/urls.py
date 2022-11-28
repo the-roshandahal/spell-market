@@ -26,10 +26,17 @@ urlpatterns = [
     path('change_status/<int:id>', views.change_status, name='change_status'),
 
     path('delete_category/<int:id>',views.delete_category,name='delete_category'),
+    path('change_cat_status/<int:id>', views.change_cat_status, name='change_cat_status'),
+     path('edit_category/<int:id>', views.edit_category, name='edit_category'),
     
     path('delete_sub_category/<int:id>',views.delete_sub_category,name='delete_sub_category'),
+    path('change_sub_cat_status/<int:id>', views.change_sub_cat_status, name='change_sub_cat_status'),
+    path('edit_sub_category/<int:id>', views.edit_sub_category, name='edit_sub_category'),
 
     path('delete_child_category/<int:id>',views.delete_child_category,name='delete_child_category'),
+    path('change_child_cat_status/<int:id>', views.change_child_cat_status, name='change_child_cat_status'),
+    path('edit_child_category/<int:id>', views.edit_child_category, name='edit_child_category'),
+
 
     path('delete_template/<int:id>',views.delete_template,name='delete_template'),
 ]

@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def home(request):
-    category=Category.objects.all().order_by('order')[:4]
+    category=Category.objects.filter(status ='active').order_by('order')[:4]
     fet_temp=Template.objects.filter(is_featured=1)
     context = {
         "category":category,

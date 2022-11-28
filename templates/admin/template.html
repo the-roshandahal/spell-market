@@ -50,7 +50,17 @@
                   <td>
                     Rs.{{template.template_price}}
                   </td>
-                  <td> {{template.is_featured}}</td>
+           
+
+                  <td>
+                    {% if template.is_featured == 'true' %}
+                    <label class="badge badge-gradient-success">Yes</label>
+                    {% else %}
+                    <label class="badge badge-gradient-danger">No</label>
+                    {% endif %}
+                  </td>
+
+
 
                   {% if template.template_url %}
                   <td><a href="{{template.template_url}}" target="_blank">Live Preview</a></td>

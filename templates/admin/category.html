@@ -26,15 +26,37 @@
                   </td>
                   <td>{{category.category}} </td>
                   <td>
-                    {% if category.status == 0 %}
-                    inactive
+                    {% if category.status == 'active' %}
+                    <label class="badge badge-gradient-success">Active</label>
                     {% else %}
-                    active
+                    <label class="badge badge-gradient-danger">Inactive</label>
                     {% endif %}
                   </td>
                   <td> {{category.order}}</td>
                   <td>{{category.created.date}}</td>
-                  <td><a href=""> Edit</a> | <a href="{% url 'delete_category' id=category.id %}"> Delete</a></td>
+
+
+
+
+
+                  <td>
+                    <div class="nav-item nav-profile dropdown">
+                      <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown"
+                          aria-expanded="false">
+                          <i class="mdi mdi-table-edit"></i>
+                      </a>
+                      <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                          <a class="dropdown-item" href="{% url 'edit_category' id=category.id %}">
+                              <i class="mdi mdi-table-edit me-2 text-success"></i> Edit Details </a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="{% url 'change_cat_status' id=category.id %}">
+                            <i class="mdi mdi-table-edit me-2 text-success"></i> Change Status </a>
+                        <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="{% url 'delete_category' id=category.id %}">
+                              <i class="mdi mdi-logout me-2 text-primary"></i> Delete</a>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
                 {% endfor %}
               </tbody>

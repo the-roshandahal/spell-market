@@ -8,7 +8,7 @@ class Category(models.Model):
         ('active', 'active'),
         ('inactive', 'inactive')
     )
-    status = models.CharField(max_length=100, null=True, choices=STATUS_CHOICES, default='active') 
+    status = models.CharField(max_length=100, choices=STATUS_CHOICES, default='active') 
     created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
@@ -23,7 +23,7 @@ class SubCategory(models.Model):
         ('active', 'active'),
         ('inactive', 'inactive')
     )
-    status = models.CharField(max_length=100, null=True, choices=STATUS_CHOICES, default='active') 
+    status = models.CharField(max_length=100, choices=STATUS_CHOICES, default='active') 
     created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
@@ -38,7 +38,7 @@ class ChildCategory(models.Model):
         ('active', 'active'),
         ('inactive', 'inactive')
     )
-    status = models.CharField(max_length=100, null=True, choices=STATUS_CHOICES, default='active') 
+    status = models.CharField(max_length=100, choices=STATUS_CHOICES, default='active') 
     created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
@@ -82,7 +82,7 @@ class PromoCode(models.Model):
 class CompanySetup(models.Model):
     logo = models.ImageField(upload_to='company_images/')
     email = models.EmailField()
-    contact = models.IntegerField(max_length=100)
+    contact = models.IntegerField()
     address = models.CharField(max_length=1000)
     facebook_url = models.URLField(null=True, blank=True)
     instagram_url = models.URLField(null=True, blank=True)

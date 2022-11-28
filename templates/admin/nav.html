@@ -77,24 +77,41 @@
                             <i class="mdi mdi-home menu-icon"></i>
                         </a>
                     </li>
+
+
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'category' %}">
-                            <span class="menu-title">Category</span>
-                            <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+                        <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                          <span class="menu-title">Category Setup</span>
+                          <i class="menu-arrow"></i>
+                          <i class="mdi mdi-settings"></i>
                         </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'sub_category' %}">
-                            <span class="menu-title">Sub Category</span>
-                            <i class="mdi mdi-format-list-bulleted menu-icon"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'child_category' %}">
-                            <span class="menu-title">Child Category</span>
-                            <i class="mdi mdi-format-list-bulleted menu-icon"></i>
-                        </a>
-                    </li>
+                        <div class="collapse" id="ui-basic">
+                          <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'category' %}">
+                                    <span class="menu-title">Category</span>
+                                    <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'sub_category' %}">
+                                    <span class="menu-title">Sub Category</span>
+                                    <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'child_category' %}">
+                                    <span class="menu-title">Child Category</span>
+                                    <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+                                </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+
+
+
+                    
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'template' %}">
                             <span class="menu-title">Templates</span>

@@ -1,0 +1,35 @@
+{% load static %}
+{% include 'admin/nav.html' %}
+<div class="main-panel">
+    <div class="content-wrapper">
+      <div class="row">
+        <div class="col-md-6 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Edit Category - {{ cat_data.category }}</h4>
+              
+              <form class="forms-sample" action="{% url 'edit_category' id=cat_data.id %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                  <label for="exampleInputUsername1">Category</label>
+                  <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Category" value="{{cat_data.category}}" name="category" required>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Order</label>
+                  <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Order" value="{{cat_data.order}}" name="order" required>
+                </div>
+                <div class="form-group">
+                  <label>Category Image</label>
+                  <div class="input-group col-xs-12">
+                    <input type="file" class="form-control file-upload-info"  placeholder="Upload Image" name="category_image">
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
+              </form>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% include 'admin/footer.html' %}
