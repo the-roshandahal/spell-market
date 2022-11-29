@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "khalti-checkout-web": "^2.2.0"
+  },
+  "devDependencies": {
+    "webpack": "^5.75.0",
+    "webpack-bundle-tracker": "^1.7.0",
+    "webpack-cli": "^5.0.0"
+  },
+  "scripts": {
+    "build":"webpack"
+  }
+}

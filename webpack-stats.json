@@ -1,0 +1,14 @@
+{
+  "status": "done",
+  "assets": {
+    "main-ecd90b53fce71b4a589a.js": {
+      "name": "main-ecd90b53fce71b4a589a.js",
+      "path": "D:\\New folder\\saurav\\spell-market\\staticfiles\\khalti\\webpack_bundles\\main-ecd90b53fce71b4a589a.js"
+    }
+  },
+  "chunks": {
+    "main": [
+      "main-ecd90b53fce71b4a589a.js"
+    ]
+  }
+}
