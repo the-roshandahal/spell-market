@@ -1,14 +1,34 @@
 {
   "status": "done",
   "assets": {
-    "main-ecd90b53fce71b4a589a.js": {
-      "name": "main-ecd90b53fce71b4a589a.js",
-      "path": "D:\\New folder\\saurav\\spell-market\\staticfiles\\khalti\\webpack_bundles\\main-ecd90b53fce71b4a589a.js"
+    "main-65a5ad774c798fe1cd5d.js": {
+      "name": "main-65a5ad774c798fe1cd5d.js",
+      "path": "D:\\naya folder\\staticfiles\\khalti\\webpack_bundles\\main-65a5ad774c798fe1cd5d.js"
+    },
+    "main-ba0120e26846c56a85d6.js": {
+      "name": "main-ba0120e26846c56a85d6.js",
+      "path": "D:\\naya folder\\staticfiles\\khalti\\webpack_bundles\\main-ba0120e26846c56a85d6.js"
+    },
+    "main-bc9c98f883b19eced90c.js": {
+      "name": "main-bc9c98f883b19eced90c.js",
+      "path": "D:\\naya folder\\staticfiles\\khalti\\webpack_bundles\\main-bc9c98f883b19eced90c.js"
+    },
+    "main-e7acd702d4eafd51bd74.js": {
+      "name": "main-e7acd702d4eafd51bd74.js",
+      "path": "D:\\naya folder\\staticfiles\\khalti\\webpack_bundles\\main-e7acd702d4eafd51bd74.js"
+    },
+    "main-f6ba2b50867d877bb917.js": {
+      "name": "main-f6ba2b50867d877bb917.js",
+      "path": "D:\\naya folder\\staticfiles\\khalti\\webpack_bundles\\main-f6ba2b50867d877bb917.js"
+    },
+    "main-fb666f4e89c6dbdd2c0a.js": {
+      "name": "main-fb666f4e89c6dbdd2c0a.js",
+      "path": "D:\\naya folder\\staticfiles\\khalti\\webpack_bundles\\main-fb666f4e89c6dbdd2c0a.js"
     }
   },
   "chunks": {
     "main": [
-      "main-ecd90b53fce71b4a589a.js"
+      "main-f6ba2b50867d877bb917.js"
     ]
   }
 }

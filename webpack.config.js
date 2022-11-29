@@ -5,6 +5,7 @@ var BundleTracker = require("webpack-bundle-tracker");
 module.exports = {
   context: __dirname,
   entry: "./staticfiles/khalti/index.js",
+  watch: true,
   output: {
     path: path.resolve("./staticfiles/khalti/webpack_bundles/"),
     filename: "[name]-[hash].js",

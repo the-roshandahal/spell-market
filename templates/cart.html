@@ -1,4 +1,6 @@
 {% load static %} {% include 'header.html' %} {{carts.template.template_name}}
+{% load static %}
+{% load static %} {% load render_bundle from webpack_loader %}
 <div class="container">
   {% if carts %}
   <div class="row">
@@ -47,11 +49,11 @@
       <div class="cartmini__checkout">
         <div class="cartmini__checkout-title mb-30">
           <h4>Subtotal:</h4>
-          <span>Rs.{{total}}</span>
+          <span >Rs.<span id="grand_total_9860">{{total}}</span> </span>
         </div>
         <div class="col-xxl-12">
           <div class="category__more mt-30 text-center">
-            <button id="btn" class="m-btn m-btn-2">
+            <button id="payment-button" class="m-btn m-btn-2">
               <span></span> Checkout
             </button>
           </div>
@@ -120,4 +122,4 @@
   {% endif %}
 </div>
 {% include 'footer.html' %}
-<script src="{% static 'khalti/app.js' %}"></script>
+{% render_bundle 'main' 'js' 'DEFAULT' %}

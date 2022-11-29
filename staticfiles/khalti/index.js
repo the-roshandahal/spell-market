@@ -1,7 +1,7 @@
 import KhaltiCheckout from "khalti-checkout-web";
 
 let config = {
-  publicKey: "test_public_key_c3f2aeb09373408e8510688a7af3ae5e",
+  publicKey: "live_public_key_813c5bbe896d4cae9716d7ca4bb1e118",
   productIdentity: "54s5af45",
   productName: "Fool would buy",
   productUrl: "http://Xina.com.np",
@@ -28,4 +28,6 @@ let config = {
 
 let checkout = new KhaltiCheckout(config);
 let btn = document.getElementById("payment-button");
-btn.addEventListener("click", () => checkout.show({ amount: 1000 }));
+let total = +document.getElementById("grand_total_9860")?.innerText
+console.log(total);
+btn.addEventListener("click", () => checkout.show({ amount: total*100 }));
