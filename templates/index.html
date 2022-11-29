@@ -186,9 +186,8 @@
           <div class="row">
              <div class="col-xxl-6 offset-xxl-3">
                 <div class="cta__content text-center wow fadeInUp" data-wow-delay=".7s">
-                   <a href="pricing.html" class="m-btn m-btn-border-2 cta__btn active"> <span></span> Start 14 Day Free Trial</a>
-                   <a href="pricing.html" class="m-btn m-btn-border-2 cta__btn"> <span></span> Claim Free Demo</a>
-                   <p>Start Sending Texts - No Credit Card Necessary</p>
+                   <a href="{% url 'contact' %}" class="m-btn m-btn-border-2 cta__btn active"> <span></span>About Us</a>
+                   <a href="{% url 'contact' %}" class="m-btn m-btn-border-2 cta__btn"> <span></span>Contact Us</a>
                 </div>
              </div>
           </div>
@@ -201,22 +200,14 @@
        <div class="container">
           <div class="row">
              <div class="col-xxl-12">
+               
                 <div class="brand__slider owl-carousel wow fadeInUp" data-wow-delay=".5s">
+                  {% for partner in partner %}
                    <div class="brand__thumb">
-                      <img src="{% static 'assets/img/brand/brand-1.png' %}" alt="">
+                      <img src="{{partner.logo.url}}" alt="" height= 60>
                    </div>
-                   <div class="brand__thumb">
-                      <img src="{% static 'assets/img/brand/brand-2.png' %}" alt="">
-                   </div>
-                   <div class="brand__thumb">
-                      <img src="{% static 'assets/img/brand/brand-3.png' %}" alt="">
-                   </div>
-                   <div class="brand__thumb">
-                      <img src="{% static 'assets/img/brand/brand-4.png' %}" alt="">
-                   </div>
-                   <div class="brand__thumb">
-                      <img src="{% static 'assets/img/brand/brand-5.png' %}" alt="">
-                   </div>
+                   {% endfor %}
+
                 </div>
              </div>
           </div>
@@ -234,132 +225,22 @@
              <div class="row">
                 <div class="col-xxl-12">
                    <div class="testimonial__slider owl-carousel wow fadeInUp" data-wow-delay=".5s">
+                     {% for testimonial in testimonial %}
                       <div class="testimonial__item white-bg">
                          <div class="testimonial__person d-flex mb-20">
                             <div class="testimonial__avater">
-                               <img src="{% static 'assets/img/testimonial/testi-1.jpg' %}" alt="">
+                               <img src="{{testimonial.image.url}}" alt="">
                             </div>
                             <div class="testimonial__info ml-15">
-                               <h5>Justin Case</h5>
-                               <span>@justin</span>
+                               <h5>{{testimonial.name}}</h5>
+                               <span>{{testimonial.company_name}}</span>
                             </div>
                          </div>
                          <div class="testimonial__text">
-                            <p>Tomfoolery chimney pot loo easy peasy twit he lost his bottle lavatory excuse my French up the duff cup of char bender fantastic arse.!</p>
+                            <p>{{testimonial.testimonial}}</p>
                          </div>
                       </div>
-                      <div class="testimonial__item white-bg">
-                         <div class="testimonial__person d-flex mb-20">
-                            <div class="testimonial__avater">
-                               <img src="{% static 'assets/img/testimonial/testi-2.jpg' %}" alt="">
-                            </div>
-                            <div class="testimonial__info ml-15">
-                               <h5>Gunther Beard</h5>
-                               <span>@beard</span>
-                            </div>
-                         </div>
-                         <div class="testimonial__text">
-                            <p>Loo crikey bubble and sque wind up zonked arg bargy pukka nancy boy grub bog no biggie he nicked it what a load of rubbish pear shaped.!</p>
-                         </div>
-                      </div>
-                      <div class="testimonial__item white-bg">
-                         <div class="testimonial__person d-flex mb-20">
-                            <div class="testimonial__avater">
-                               <img src="{% static 'assets/img/testimonial/testi-3.jpg' %}" alt="">
-                            </div>
-                            <div class="testimonial__info ml-15">
-                               <h5>Joss Sticks</h5>
-                               <span>@sticks</span>
-                            </div>
-                         </div>
-                         <div class="testimonial__text">
-                            <p>Tomfoolery chimney pot loo easy peasy twit he lost his bottle lavatory excuse my French up the duff cup of char bender fantastic  arse.!</p>
-                         </div>
-                      </div>
-                      <div class="testimonial__item white-bg">
-                         <div class="testimonial__person d-flex mb-20">
-                            <div class="testimonial__avater">
-                               <img src="{% static 'assets/img/testimonial/testi-4.jpg' %}" alt="">
-                            </div>
-                            <div class="testimonial__info ml-15">
-                               <h5>Samuel Serif</h5>
-                               <span>@justin</span>
-                            </div>
-                         </div>
-                         <div class="testimonial__text">
-                            <p>Loo crikey bubble and sque wind up zonked arg bargy pukka nancy boy grub bog no biggie he nicked it what a load of rubbish pear shaped.!</p>
-                         </div>
-                      </div>
-                      <div class="testimonial__item white-bg">
-                         <div class="testimonial__person d-flex mb-20">
-                            <div class="testimonial__avater">
-                               <img src="{% static 'assets/img/testimonial/testi-2.jpg' %}" alt="">
-                            </div>
-                            <div class="testimonial__info ml-15">
-                               <h5>Shahnewaz Sakil</h5>
-                               <span>@Shahnewaz</span>
-                            </div>
-                         </div>
-                         <div class="testimonial__text">
-                            <p>Loo crikey bubble and sque wind up zonked arg bargy pukka nancy boy grub bog no biggie he nicked it what a load of rubbish pear shaped.!</p>
-                         </div>
-                      </div>
-                      <div class="testimonial__item white-bg">
-                         <div class="testimonial__person d-flex mb-20">
-                            <div class="testimonial__avater">
-                               <img src="{% static 'assets/img/testimonial/testi-3.jpg' %}" alt="">
-                            </div>
-                            <div class="testimonial__info ml-15">
-                               <h5>Joss Sticks</h5>
-                               <span>@sticks</span>
-                            </div>
-                         </div>
-                         <div class="testimonial__text">
-                            <p>Tomfoolery chimney pot loo easy peasy twit he lost his bottle lavatory excuse my French up the duff cup of char bender fantastic  arse.!</p>
-                         </div>
-                      </div>
-                      <div class="testimonial__item white-bg">
-                         <div class="testimonial__person d-flex mb-20">
-                            <div class="testimonial__avater">
-                               <img src="{% static 'assets/img/testimonial/testi-2.jpg' %}" alt="">
-                            </div>
-                            <div class="testimonial__info ml-15">
-                               <h5>Gunther Beard</h5>
-                               <span>@beard</span>
-                            </div>
-                         </div>
-                         <div class="testimonial__text">
-                            <p>Loo crikey bubble and sque wind up zonked arg bargy pukka nancy boy grub bog no biggie he nicked it what a load of rubbish pear shaped.!</p>
-                         </div>
-                      </div>
-                      <div class="testimonial__item white-bg">
-                         <div class="testimonial__person d-flex mb-20">
-                            <div class="testimonial__avater">
-                               <img src="{% static 'assets/img/testimonial/testi-4.jpg' %}" alt="">
-                            </div>
-                            <div class="testimonial__info ml-15">
-                               <h5>Samuel Serif</h5>
-                               <span>@justin</span>
-                            </div>
-                         </div>
-                         <div class="testimonial__text">
-                            <p>Loo crikey bubble and sque wind up zonked arg bargy pukka nancy boy grub bog no biggie he nicked it what a load of rubbish pear shaped.!</p>
-                         </div>
-                      </div>
-                      <div class="testimonial__item white-bg">
-                         <div class="testimonial__person d-flex mb-20">
-                            <div class="testimonial__avater">
-                               <img src="{% static 'assets/img/testimonial/testi-1.jpg' %}" alt="">
-                            </div>
-                            <div class="testimonial__info ml-15">
-                               <h5>Samuel Serif</h5>
-                               <span>@justin</span>
-                            </div>
-                         </div>
-                         <div class="testimonial__text">
-                            <p>Loo crikey bubble and sque wind up zonked arg bargy pukka nancy boy grub bog no biggie he nicked it what a load of rubbish pear shaped.!</p>
-                         </div>
-                      </div>
+                      {% endfor %}
                    </div>
                 </div>
              </div>
@@ -372,20 +253,15 @@
     <section class="banner__area pb-90">
        <div class="container">
           <div class="row">
+            {% for blogs in blogs %}
              <div class="col-xxl-6 col-xl-6 col-md-6">
-                <div class="banner__item mb-30 wow fadeInUp" data-wow-delay=".3s" data-background="{% static 'assets/img/banner/banner-1.jpg' %}">
-                   <h3 class="banner__title">Designers who changed the web with Markit</h3>
-                   <p>He lost his bottle that zonked spend a penny young delinquent bugger.</p>
-                   <a href="about.html" class="m-btn m-btn-white banner__more"> <span></span> Learn More</a>
+                <div class="banner__item mb-30 wow fadeInUp" data-wow-delay=".3s" data-background="{{blogs.image.url}}">
+                   <h3 class="banner__title">{{blogs.title}}</h3>
+                   <p>{{blogs.blog|truncatechars:40|safe}}</p>
+                   <a href="{% url 'blog_single' id=blogs.id %}" class="m-btn m-btn-white banner__more"> <span></span> Read More</a>
                 </div>
              </div>
-             <div class="col-xxl-6 col-xl-6 col-md-6">
-                <div class="banner__item mb-30 wow fadeInUp" data-wow-delay=".7s" data-background="{% static 'assets/img/banner/banner-2.jpg' %}">
-                   <h3 class="banner__title">Professional Websites are made by Markit</h3>
-                   <p>He lost his bottle that zonked spend a penny young delinquent bugger.</p>
-                   <a href="about.html" class="m-btn m-btn-white banner__more"> <span></span> Learn More</a>
-                </div>
-             </div>
+             {% endfor %}
           </div>
        </div>
     </section>

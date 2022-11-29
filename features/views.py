@@ -8,14 +8,25 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.auth import logout as django_logout
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
 # Create your views here.
 def home(request):
     category=Category.objects.filter(status ='active').order_by('order')[:4]
     fet_temp=Template.objects.filter(is_featured=1)
+
+    partner = Partner.objects.all()
+    testimonial = Testimonial.objects.all()
+    blogs = Blog.objects.all()
+    paginator = Paginator(blogs, 2)
+    page = request.GET.get('page')
+    blogs = paginator.get_page(page)
     context = {
         "category":category,
-        "fet_temp":fet_temp
+        "fet_temp":fet_temp,
+        "partner":partner,
+        "testimonial":testimonial,
+        "blogs":blogs
     }
     return render(request,'index.html',context)
 
@@ -153,6 +164,11 @@ def contact(request):
     else:
         return render(request,'contact.html')
 
+def about(request):
+
+    return render(request,'about.html')
+
+
 def categories(request):
     category = Category.objects.all()
     templates_ct=Template.objects.count()
@@ -197,9 +213,34 @@ def remove_from_cart(request,id):
     messages.info(request, 'Removed from cart')
     return redirect(cart)
 
+def checkout(request):
+    carts = Cart.objects.filter(user=request.user)
+    total = 0 
+    for cart in carts:
+        template = Template.objects.get(template_name=cart.template)    
+        total += template.template_price 
+    context= {
+        'carts':carts,
+        'total':total,
+    }
 
+    return render(request,'checkout.html',context)
 
+def blog(request):
+    blog_data = Blog.objects.all()
+    context = {
+        'blog_data':blog_data,
+    }
+    return render(request,'blogs.html',context)
 
+def blog_single(request, id):
+    blogs = Blog.objects.all()
+    blog_data = Blog.objects.get(id=id)
+    context = {
+        'blogs':blogs,
+        'blog_data':blog_data
+    }
+    return render (request, 'blog_single.html',context)
 
 
 

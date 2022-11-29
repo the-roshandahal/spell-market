@@ -20,8 +20,11 @@ urlpatterns = [
     path('cart/', views.cart, name='cart'),
     path('remove_from_cart/<int:id>', views.remove_from_cart, name='remove_from_cart'),
 
+    path('blog/', views.blog, name='blog'),
+    path('blog_single/<int:id>', views.blog_single, name='blog_single'),
 
-
+    path('about/', views.about, name='about'),
+    path('checkout/', views.checkout, name='checkout'),
 	re_path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
 ]

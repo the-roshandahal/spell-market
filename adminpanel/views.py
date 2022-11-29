@@ -7,7 +7,9 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def dashboard(request):
     templates_ct = Template.objects.count()
-    context = {"templates_ct": templates_ct}
+    context = {
+        "templates_ct": templates_ct
+        }
     return render(request, "admin/dashboard.html", context)
 
 
@@ -414,18 +416,3 @@ def delete_template(request, id):
 #     return render (redirect,'post_blog.html')
 
 
-def blog(request):
-    blog_data = Blog.objects.all()
-    context = {
-        'blog_data':blog_data,
-    }
-    return render(request,'blogs.html',context)
-
-
-
-def blog_single(request, id):
-    blog_data = Blog.objects.get(id=id)
-    context = {
-        'blog_data':blog_data
-    }
-    return render (request, 'blog_single.html',context)

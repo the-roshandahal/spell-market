@@ -15,15 +15,6 @@
           <div class="row">
              <div class="col-xxl-12">
                 <div class="page__title-content mb-50">
-                   <div class="postbox__meta d-flex">
-                      <div class="postbox__tag-2">
-                         <a href="#">Digital,</a>
-                         <a href="#">Marketing. </a>
-                      </div>
-                      <div class="postbox__time">
-                         <span>4 min read</span>
-                      </div>
-                   </div>
                    <h2 class="page__title">{{blog_data.title}}</h2>
                    <div class="postbox__author-2 mt-20">
                       <ul class="d-flex align-items-center">
@@ -72,179 +63,34 @@
                          <li><a href="#" class="link"><i class="fab fa-linkedin-in"></i></a></li>
                       </ul>
                    </div>
-                   <div class="postbox__author-3 d-sm-flex grey-bg-2 mb-85">
-                      <div class="postbox__author-thumb-3 mr-20">
-                         <img src="{% static 'assets/img/blog/author/blog-author-5.jpg' %}" alt="">
-                      </div>
-                      <div class="postbox__author-content">
-                         <h4>Justin Case</h4>
-                         <p>James Bond cheers barney the little rotter I don't want no agro gutted mate
-                            smashing cheeky pear shaped, mufty super.</p>
-                      </div>
-                   </div>
-                   <div class="comment__wrapper p-relative white-bg">
-                      <div class="comment__shape">
-                         <img class="circle" src="{% static 'assets/img/icon/sign/circle.png' %}" alt="">
-                         <img class="zigzag" src="{% static 'assets/img/icon/sign/zigzag.png' %}" alt="">
-                         <img class="dot" src="{% static 'assets/img/icon/sign/dot.png' %}" alt="">
-                      </div>
-                      <h3>Post a comment</h3>
-                      <p>Jolly good bevvy butty it's all gone to pot that quaint so I said cheers.</p>
-                      <div class="comment__form mt-35">
-                         <form action="#">
-                            <div class="row">
-                               <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
-                                  <div class="comment__input-wrapper mb-25">
-                                     <h5>Full Name</h5>
-                                     <div class="comment__input">
-                                        <input type="text" placeholder="Full name">
-                                        <i class="fal fa-user"></i>
-                                     </div>
-                                  </div>
-                               </div>
-                               <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
-                                  <div class="comment__input-wrapper mb-25">
-                                     <h5>Work email</h5>
-                                     <div class="comment__input">
-                                        <input type="text" placeholder="e-mail address">
-                                        <i class="fal fa-envelope"></i>
-                                     </div>
-                                  </div>
-                               </div>
-                            </div>
-                            <div class="row">
-                               <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
-                                  <div class="comment__input-wrapper mb-25">
-                                     <h5>Company Name</h5>
-                                     <div class="comment__input">
-                                        <input type="text" placeholder="Company Name">
-                                        <i class="fal fa-smile"></i>
-                                     </div>
-                                  </div>
-                               </div>
-                               <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
-                                  <div class="comment__input-wrapper mb-25">
-                                     <h5>Website</h5>
-                                     <div class="comment__input">
-                                        <input type="text" placeholder="Website">
-                                        <i class="fal fa-globe"></i>
-                                     </div>
-                                  </div>
-                               </div>
-                            </div>
-                            <div class="row">
-                               <div class="col-xxl-12">
-                                  <div class="comment__input-wrapper mb-25">
-                                     <h5>Message</h5>
-                                     <div class="comment__input textarea">
-                                        <textarea placeholder="Tell us a bil about your project"></textarea>
-                                        <i class="fal fa-comment"></i>
-                                     </div>
-                                  </div>
-                               </div>
-                            </div>
-                            <div class="row">
-                               <div class="col-xxl-12">
-                                  <button type="submit" class="m-btn m-btn-4"> <span></span> submit </button>
-                               </div>
-                            </div>
-                         </form>
-                      </div>
-                   </div>
                 </div>
              </div>
              <div class="col-xxl-4 col-xl-4 col-lg-4">
                 <div class="blog__sidebar-wrapper  ml-30">
                    <div class="blog__sidebar mb-30">
-                      <div class="sidebar__widget mb-30">
-                         <div class="sidebar__widget-content">
-                            <div class="sidebar__search-wrapper">
-                               <form action="#">
-                                  <input type="text" placeholder="Search ...">
-                                  <button type="submit"><i class="fal fa-search"></i></button>
-                               </form>
-                            </div>
-                         </div>
-                      </div>
+                      
                       <div class="sidebar__widget mb-30">
                          <div class="sidebar__widget-title">
-                            <h3>Recent News</h3>
+                            <h3>Recent Blogs</h3>
                          </div>
                          <div class="sidebar__widget-content">
                             <div class="rc__post-wrapper">
+                              {% for blogs in blogs %}
                                <div class="rc__post d-flex align-items-center">
                                   <div class="rc__thumb mr-15">
-                                     <a href="blog-details.html"><img src="{% static 'assets/img/blog/sm/blog-sm-1.jpg' %}" alt=""></a>
+                                     <a href="blog-details.html"><img src="{{blogs.image.url}}" alt="" height = 80></a>
                                   </div>
                                   <div class="rc__content">
                                      <div class="rc__meta">
-                                        <span>October 15, 2021</span>
+                                        <span>{{blogs.added.date}}</span>
                                      </div>
-                                     <h6 class="rc__title"><a href="blog-details.html">Communication Between Departments</a></h6>
+                                     <h6 class="rc__title"><a href="blog-details.html">{{blogs.title}}</a></h6>
                                   </div>
                                </div>
-                               <div class="rc__post d-flex align-items-center">
-                                  <div class="rc__thumb mr-15">
-                                     <a href="blog-details.html"><img src="{% static 'assets/img/blog/sm/blog-sm-2.jpg' %}" alt=""></a>
-                                  </div>
-                                  <div class="rc__content">
-                                     <div class="rc__meta">
-                                        <span>March 26, 2021</span>
-                                     </div>
-                                     <h6 class="rc__title"><a href="blog-details.html">How to build outside links for your shop SEO</a></h6>
-                                  </div>
-                               </div>
-                               <div class="rc__post d-flex align-items-center">
-                                  <div class="rc__thumb mr-15">
-                                     <a href="blog-details.html"><img src="{% static 'assets/img/blog/sm/blog-sm-3.jpg' %}" alt=""></a>
-                                  </div>
-                                  <div class="rc__content">
-                                     <div class="rc__meta">
-                                        <span>October 15, 2021</span>
-                                     </div>
-                                     <h6 class="rc__title"><a href="blog-details.html">20 creative content ideas to post on Instagram</a></h6>
-                                  </div>
-                               </div>
+                               {% endfor %}
                             </div>
                          </div>
                       </div>
-                      <div class="sidebar__widget mb-30">
-                         <div class="sidebar__widget-title">
-                            <h3>Categories</h3>
-                         </div>
-                         <div class="sidebar__widget-content">
-                            <div class="sidebar__catagory">
-                               <ul>
-                                  <li><a href="blog.html">Web Design (6)</a></li>
-                                  <li><a href="blog.html"> Web Development (14)</a></li>
-                                  <li><a href="blog.html">Graphics (12)</a></li>
-                                  <li><a href="blog.html">IOS/Android Design (10)</a></li>
-                                  <li><a href="blog.html">App & Saas (4)</a></li>
-                               </ul>
-                            </div>
-                         </div>
-                      </div>
-                      <div class="sidebar__widget">
-                         <div class="sidebar__widget-title">
-                            <h3>Popular Tags</h3>
-                         </div>
-                         <div class="sidebar__widget-content">
-                            <div class="tags">
-                               <a href="#">Business</a>
-                               <a href="#">Landing</a>
-                               <a href="#">Design</a>
-                               <a href="#">Digital</a>
-                               <a href="#">Technology</a>
-                               <a href="#">UI/UX</a>
-                               <a href="#">Features</a>
-                               <a href="#">Pix Saas Blog</a>
-                            </div>
-                         </div>
-                      </div>
-                   </div>
-                   <div class="sidebar__banner" data-background="assets/img/banner/sidebar-banner.jpg">
-                      <h4 class="sidebar__banner-title">Check Out <br>Our free Templates</h4>
-                      <a href="product.html" class="m-btn m-btn-white"> <span></span> free template</a>
                    </div>
                 </div>
              </div>
