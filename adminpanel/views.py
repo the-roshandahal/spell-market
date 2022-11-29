@@ -395,9 +395,17 @@ def change_status(request, id):
         return redirect(template)
 
 
-@login_required
+@login_required(login_url='login')
 def delete_template(request, id):
     del_template = Template.objects.get(id=id)
     del_template.delete()
     messages.info(request, "Deleted")
     return redirect(template)
+
+
+def blog(request):
+    return render(request,'blogs.html')
+
+
+def blog_single(request,id):
+    return render (request, 'blog_single.html')

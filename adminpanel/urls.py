@@ -22,6 +22,7 @@ urlpatterns = [
     path('load_child_category/', views.load_child_category, name='load_child_category'),
 
     path('edit_template/<int:id>', views.edit_template, name='edit_template'),
+    path('delete_template/<int:id>',views.delete_template,name='delete_template'),
 
     path('change_status/<int:id>', views.change_status, name='change_status'),
 
@@ -36,9 +37,10 @@ urlpatterns = [
     path('delete_child_category/<int:id>',views.delete_child_category,name='delete_child_category'),
     path('change_child_cat_status/<int:id>', views.change_child_cat_status, name='change_child_cat_status'),
     path('edit_child_category/<int:id>', views.edit_child_category, name='edit_child_category'),
+    
+    path('blog/', views.blog, name='blog'),
+    path('blog_single/<int:id>', views.blog_single, name='blog_single')
 
-
-    path('delete_template/<int:id>',views.delete_template,name='delete_template'),
 ]
 
 
