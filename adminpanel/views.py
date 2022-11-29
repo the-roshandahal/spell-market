@@ -403,9 +403,29 @@ def delete_template(request, id):
     return redirect(template)
 
 
+# def post_blog(request):
+#     if request.method == "POST":
+#         title = request.POST["title"]
+#         blog = request.POST["blog"]
+#         image = request.FILE["image"]
+#         Blog.objects.create(title=title,blog=blog,image=image)
+#         messages.info(request, "Blog added")
+#         return redirect(post_blog)
+#     return render (redirect,'post_blog.html')
+
+
 def blog(request):
-    return render(request,'blogs.html')
+    blog_data = Blog.objects.all()
+    context = {
+        'blog_data':blog_data,
+    }
+    return render(request,'blogs.html',context)
 
 
-def blog_single(request,id):
-    return render (request, 'blog_single.html')
+
+def blog_single(request, id):
+    blog_data = Blog.objects.get(id=id)
+    context = {
+        'blog_data':blog_data
+    }
+    return render (request, 'blog_single.html',context)

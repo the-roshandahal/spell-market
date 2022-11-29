@@ -39,7 +39,7 @@ urlpatterns = [
     path('edit_child_category/<int:id>', views.edit_child_category, name='edit_child_category'),
     
     path('blog/', views.blog, name='blog'),
-    path('blog_single/<int:id>', views.blog_single, name='blog_single')
+    path('blog_single/<int:id>', views.blog_single, name='blog_single'),
 
 ]
 

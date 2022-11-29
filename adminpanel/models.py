@@ -93,6 +93,7 @@ class CompanySetup(models.Model):
 class Blog(models.Model):
     title = models.CharField(max_length=1000)
     blog = models.TextField()
+    image = models.ImageField(upload_to='blogs_images/')
     created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
@@ -101,7 +102,7 @@ class Blog(models.Model):
 class Partner(models.Model):
     name = models.CharField(max_length=100)
     link = models.URLField()
-    logo = models.ImageField(upload_to='blog_images/')
+    logo = models.ImageField(upload_to='partner_images/')
 
     def __str__(self):
         return self.name
