@@ -57,6 +57,13 @@ class Template(models.Model):
     template_features = models.TextField()
     template_layout = models.TextField()
     template_price = models.IntegerField()
+    TAX_CHOICES = (
+        ('yes','yes'),
+        ('no','no')
+
+    )
+    is_taxable= models.CharField(max_length=
+    20, choices = TAX_CHOICES, default = 'yes')
     version = models.CharField(max_length=100)
     framework = models.CharField(max_length=1000)
     template_image = models.ImageField(null=True, blank=True, upload_to='template_images/')
@@ -69,13 +76,14 @@ class Template(models.Model):
     
 
 class PromoCode(models.Model):
-    promo_code = models.CharField(max_length=10)
+    promo_code = models.CharField(max_length=10,unique=True)
     TYPE_CHOICES = (
         ('percentage', 'percentage'),
         ('amount', 'amount')
     )
     discount_type = models.CharField(max_length=100, null=True, choices=TYPE_CHOICES, default='percentage')
-    expiry_date = models.DateTimeField(null=True)
+    discount = models.IntegerField(null=True)
+    expiry_date = models.DateField(null=True)
 
     def __str__(self):
         return self.promo_code

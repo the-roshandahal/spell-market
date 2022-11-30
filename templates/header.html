@@ -98,7 +98,9 @@
             <div class="header__cart d-none d-sm-block">
               <a href="{% url 'cart' %}">
                 <i class="far fa-shopping-cart"></i>
-                <span>3</span>
+                {% if cart_num %}
+                <span>{{cart_num}}</span>
+                {% endif %}
               </a>
             </div>
             <div class="sidebar__menu d-lg-none">

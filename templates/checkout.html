@@ -1,119 +1,98 @@
 {% include 'header.html' %}
 <section class="category__area pt-105 pb-135">
-    <div class="container">
+  <div class="container">
     <section>
-        <!--for demo wrap-->
-        <h1>Verify your templates</h1>
-        <div class="tbl-header">
-          <table cellpadding="0" cellspacing="0">
-            <thead>
-              <tr>
-                <th>Template Code</th>
-                <th>Template Name</th>
-                <th>Template Category</th>
-                <th>Price</th>
-              </tr>
-            </thead>
-          </table>
+      <!--for demo wrap-->
+      <h1>Verify your templates</h1>
+      <div class="tbl-header">
+        <table cellpadding="0" cellspacing="0">
+          <thead>
+            <tr>
+              <th>Template Code</th>
+              <th>Template Name</th>
+              <th>Template Category</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="tbl-content">
+        <table cellpadding="0" cellspacing="0">
+          <tbody>
+            {% for carts in carts %}
+            <tr>
+              <td>{{carts.template.id}}</td>
+              <td>{{carts.template}}</td>
+              <td>{{carts.template.category}}</td>
+              <td>{{carts.template.template_price}}</td>
+            </tr>
+            <tr></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <p>Sub total : {{sub_total}}</p>
+      <form method="POST" action="">
+        {% csrf_token %}
+        <label for="">Promo Code</label>
+        <input type="text" name="promo_code" value="{{promo_code}}" />
+        <button type="submit">APPLY</button>
+      </form>
+      <p>Discount Amount:{{discount_amt}}</p>
+      <p>Total:{{total}}</p>
+      <p>Tax amount: {{tax_amt}}</p>
+      <p>Grand total:{{grand_total}}</p>
+
+      <div class="col-xxl-12">
+        <div class="category__more mt-30 text-center">
+          <a href="" class="m-btn m-btn-2"> <span></span> Checkout</a>
         </div>
-        <div class="tbl-content">
-          <table cellpadding="0" cellspacing="0">
-            <tbody>
-                {% for carts in carts %}
-              <tr>
-                <td>{{carts.template.id}}</td>
-                <td>{{carts.template}}</td>
-                <td>{{carts.template.category}}</td>
-                <td>{{carts.template.template_price}}</td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+        <div class="category__more mt-30 text-center">
+          <a href="{% url 'cart' %}" class="m-btn m-btn-2">
+            <span></span> Back to Cart</a
+          >
         </div>
-        <div class="col-xxl-12">
-            <div class="category__more mt-30 text-center">
-              <a href="" class="m-btn m-btn-2"> <span></span> Checkout</a>
-            </div>
-          </div>
-      </section>
-      <style>
-
-        
-h1{
-  font-size: 30px;
-  color: #fff;
-  text-transform: uppercase;
-  font-weight: 300;
-  text-align: center;
-  margin-bottom: 15px;
-}
-table{
-  width:100%;
-  table-layout: fixed;
-}
-.tbl-header{
-  background-color: rgba(255,255,255,0.3);
- }
-.tbl-content{
-
-  overflow-x:auto;
-  margin-top: 0px;
-  border: 1px solid rgba(255,255,255,0.3);
-}
-th{
-  padding: 20px 15px;
-  text-align: left;
-  font-weight: 500;
-  font-size: 12px;
-  color: #fff;
-  text-transform: uppercase;
-}
-td{
-  padding: 15px;
-  text-align: left;
-  vertical-align:middle;
-  font-weight: 300;
-  font-size: 12px;
-  color: #fff;
-  border-bottom: solid 1px rgba(255,255,255,0.1);
-}
-
-
-/* demo styles */
-
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
-body{
-  /* background: -webkit-linear-gradient(left, #25c481, #25b7c4); */
-  background: linear-gradient(to right, #6E36FB, #A429F6);
-  font-family: 'Roboto', sans-serif;
-}
-
-
-.made-with-love {
-  margin-top: 40px;
-  padding: 10px;
-  clear: left;
-  text-align: center;
-  font-size: 10px;
-  font-family: arial;
-  color: #fff;
-}
-.made-with-love i {
-  font-style: normal;
-  color: #F50057;
-  font-size: 14px;
-  position: relative;
-  top: 2px;
-}
-.made-with-love a {
-  color: #fff;
-  text-decoration: none;
-}
-.made-with-love a:hover {
-  text-decoration: underline;
-}
-
-</style>
-</div>
+      </div>
+    </section>
+    <style>
+      h1 {
+        font-size: 30px;
+        color: rgb(0, 0, 0);
+        text-transform: uppercase;
+        font-weight: 300;
+        text-align: center;
+        margin-bottom: 15px;
+      }
+      table {
+        width: 100%;
+        table-layout: fixed;
+      }
+      .tbl-header {
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+      .tbl-content {
+        overflow-x: auto;
+        margin-top: 0px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+      th {
+        padding: 20px 15px;
+        text-align: left;
+        font-weight: 500;
+        font-size: 12px;
+        color: rgb(0, 0, 0);
+        text-transform: uppercase;
+      }
+      td {
+        padding: 15px;
+        text-align: left;
+        vertical-align: middle;
+        font-weight: 300;
+        font-size: 12px;
+        color: rgb(0, 0, 0);
+        border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+      }
+    </style>
+  </div>
 </section>
 {% include 'footer.html' %}
