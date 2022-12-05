@@ -22,16 +22,26 @@ def home(request):
     paginator = Paginator(blogs, 2)
     page = request.GET.get("page")
     blogs = paginator.get_page(page)
-    cart_num = Cart.objects.filter(user=request.user).count()
-    context = {
-        "category": category,
-        "fet_temp": fet_temp,
-        "partner": partner,
-        "testimonial": testimonial,
-        "blogs": blogs,
-        "cart_num": cart_num,
-    }
-    return render(request, "index.html", context)
+    if request.user.is_authenticated:
+        cart_num = Cart.objects.filter(user=request.user).count()
+        context = {
+            "category": category,
+            "fet_temp": fet_temp,
+            "partner": partner,
+            "testimonial": testimonial,
+            "blogs": blogs,
+            "cart_num": cart_num,
+        }
+        return render(request, "index.html", context)
+    else:
+        context = {
+            "category": category,
+            "fet_temp": fet_temp,
+            "partner": partner,
+            "testimonial": testimonial,
+            "blogs": blogs,
+        }
+        return render(request, "index.html", context)
 
 
 def register(request):
