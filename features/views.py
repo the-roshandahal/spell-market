@@ -265,8 +265,10 @@ def checkout(request):
         if promo.discount_type == "percentage":
             discount_amt = (promo.discount * sub_total) / 100
         else:
-            discount_amt = promo.discount
-
+            if promo.discount > sub_total:
+                discount_amt = sub_total
+            else:
+                discount_amt = promo.discount
     total = sub_total - discount_amt
     tax_amt = 0.13 * total
 
