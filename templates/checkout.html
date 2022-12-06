@@ -62,7 +62,7 @@
         var config = {
           // replace the publicKey with yours
           publicKey: "test_public_key_c3f2aeb09373408e8510688a7af3ae5e",
-          productIdentity: "{{carts}}",
+          productIdentity: "order_{% for cart in carts %}{{cart.id}}{% endfor %}",
           productName: "Tempelates",
           productUrl: "http://gameofthrones.wikia.com/wiki/Dragons",
           paymentPreference: [
@@ -77,12 +77,19 @@
               // hit merchant api for initiating verfication
               console.log(payload)
 
-              axios.get("{% url 'khaltiverify' %}",{params:{...payload,order_id:"{{carts}}"},}).then(function(resp){
+              axios.get("{% url 'khaltiverify' %}" , {params:{
+                  "token": payload.token,
+                  "amount": payload.amount,
+                  order_id:"{% for cart in carts %}{{cart.id}}{% endfor %}--{{request.user.id}}",
+                  discount:"{{discount_amt}}",
+                  user:"{{request.user.id}}"
+              }
+              }).then(function(resp){
                 if (resp.data.success == true){
                     alert("Thanks. Payment Completed Successfully")
-                    location.href = "/"
+                    location.href = "{% url 'purchase_summary' %}"
                 }else{
-                    alert("Sorry. Error occurred")
+                    alert("Payment not sucessfull")
                     location.href = "{{request.build_absolute_uri}}"
                 }
             })

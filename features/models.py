@@ -36,25 +36,29 @@ class Cart(models.Model):
         return self.user.username
 
 
-class PurchaseSummary(models.Model):
+class PurchasedTemplate(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     template = models.ForeignKey(Template, on_delete=models.CASCADE)
-    discount = models.ForeignKey(PromoCode, on_delete=models.CASCADE, null=True)
-    total_amount = models.IntegerField(
-        validators=[MaxValueValidator(10000000), MinValueValidator(10)]
-    )
-
-    payment_method = models.CharField(
-        max_length=100, choices=PAYMENT_CHOICES, default="khalti"
-    )
+    order_id = models.CharField(max_length=100)
+    download_count = models.IntegerField()
 
     def __str__(self):
         return self.user.username
 
 
-class PurchasedTemplate(models.Model):
+class PurchaseSummary(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    template = models.ForeignKey(Template, on_delete=models.CASCADE)
+    order_id = models.CharField(max_length=100, unique=True)
+    discount = models.IntegerField(
+        validators=[MaxValueValidator(10000000), MinValueValidator(10)]
+    )
+    total_amount = models.IntegerField(
+        validators=[MaxValueValidator(10000000), MinValueValidator(10)]
+    )
+
+    payment_method = models.CharField(
+        max_length=100, choices=PAYMENT_CHOICES, default="khalti", blank=True, null=True
+    )
 
     def __str__(self):
         return self.user.username

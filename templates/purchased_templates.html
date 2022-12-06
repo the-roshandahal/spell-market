@@ -1,0 +1,5 @@
+{% include 'header.html' %}
+<h1>purchased templates</h1>
+{% for purchased_templates in purchased_templates %}
+<li>{{purchased_templates.template}}</li>
+{%endfor%} {% include 'footer.html' %}

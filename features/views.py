@@ -20,6 +20,7 @@ from django.views.generic import (
 )
 from django.http import JsonResponse
 import requests
+import json
 
 # Create your views here.
 def home(request):
@@ -167,7 +168,10 @@ def theme(request):
     category = Category.objects.all()
     sub_category = SubCategory.objects.all()
     child_category = ChildCategory.objects.all()
-    cart_num = Cart.objects.filter(user=request.user).count()
+    cart_num = 0
+    if request.user.is_authenticated:
+
+        cart_num = Cart.objects.filter(user=request.user).count()
     context = {
         "template": template,
         "category": category,
@@ -180,7 +184,10 @@ def theme(request):
 
 def theme_details(request, id):
     theme_data = Template.objects.get(id=id)
-    cart_num = Cart.objects.filter(user=request.user).count()
+    cart_num = 0
+    if request.user.is_authenticated:
+
+        cart_num = Cart.objects.filter(user=request.user).count()
     context = {"theme_data": theme_data, "cart_num": cart_num}
     return render(request, "theme_details.html", context)
 
@@ -217,7 +224,7 @@ def categories(request):
     return render(request, "categories.html", context)
 
 
-@login_required
+@login_required(login_url="login")
 def add_to_cart(request, id):
     if Cart.objects.filter(template=id, user=request.user).exists():
         messages.info(request, "This product is already in your cart")
@@ -310,38 +317,115 @@ def blog_single(request, id):
     return render(request, "blog_single.html", context)
 
 
+def purchase_summary(request):
+    purchase_summary = PurchaseSummary.objects.filter(user=request.user)
+    context = {
+        "purchase_summary": purchase_summary,
+    }
+    return render(request, "purchase_summary.html", context)
+
+
+def purchase_details(request, id):
+    purchase_summary = PurchaseSummary.objects.get(id=id)
+
+    purchased_templates = PurchasedTemplate.objects.filter(
+        order_id=purchase_summary.order_id
+    )
+
+    context = {
+        "di": id,
+        "purchase_summary": purchase_summary,
+        "purchased_templates": purchased_templates,
+    }
+    return render(request, "purchase_details.html", context)
+
+
+def purchased_templates(request):
+    purchased_templates = PurchasedTemplate.objects.filter(user=request.user)
+    if purchased_templates.download_count >= 10:
+        return
+    context = {"purchased_templates": purchased_templates}
+    return render(request, "purchased_templates.html", context)
+
+
+from django.http import HttpResponseRedirect
+
+
+def download_count(request, id, di):
+    ddd = PurchasedTemplate.objects.get(id=id)
+    if ddd.download_count == 0:
+        try:
+            template = PurchasedTemplate.objects.get(id=id)
+            # url = template.temlate_url
+            template.download_count += 1
+            print(template.download_count)
+            template.save()
+        except:
+            return
+        return redirect("/media/{url}".format(url=template.template.template_file))
+    else:
+        messages.info(request, "already exceeded limit")
+        return redirect("purchase_details", di)
+
+
 def page_not_found_view(request, exception):
     return render(request, "error404.html", status=404)
 
 
-# def KhaltiRequestView(self, request, *args, **kwargs):
-#     print(request.params)
-#     o_id = request.GET.get("o_id")
-#     order = Cart.objects.get(id=o_id)
-#     context = {"order": order, "order_id": o_id}
-#     return JsonResponse(context)
+class KhaltiVerifyView(View):
+    def get(self, request):
+        token = request.GET.get("token")
+        amount = request.GET.get("amount")
+        discount = request.GET.get("discount")
+        order = request.GET.get("order_id")
+        cart = Cart.objects.filter(user=request.user)
+        url = "https://khalti.com/api/v2/payment/verify/"
 
+        headers = {
+            "Authorization": "Key test_secret_key_a21980b8b60e4c37b018fdcbfa66e171",
+            "Content-Type": "application/json",
+        }
+        payload = json.dumps(
+            {
+                "token": token,
+                "amount": amount,
+            }
+        )
+        try:
+            response = requests.request(
+                "POST",
+                url,
+                headers=headers,
+                data=payload,
+            )
 
-def KhaltiVerifyView(self, request, *args, **kwargs):
-    print(request.GET)
-    token = request.GET.get("token")
-    amount = request.GET.get("amount")
-    o_id = request.GET.get("order_id")
-    print(token, amount, o_id)
+        except:
+            print("exception occurred")
+            return
+        # PurchaseSummary
+        resp_dict = response.json()
+        if resp_dict.get("idx"):
+            success = True
+            temp = PurchaseSummary(
+                user=request.user,
+                order_id=order,
+                discount=discount,
+                total_amount=amount / 100,
+            )
+            temp.save()
 
-    url = "https://khalti.com/api/v2/payment/verify/"
-    payload = {"token": token, "amount": amount}
-    headers = {"Authorization": "Key test_secret_key_a21980b8b60e4c37b018fdcbfa66e171"}
+            for cart in cart:
+                temp = PurchasedTemplate(
+                    user=request.user, template=cart.template, order_id=order
+                )
+                temp.save()
 
-    order_obj = Cart.objects.get(id=o_id)
+            print("before delete")
+            cart.delete()
 
-    response = requests.post(url, payload, headers=headers)
-    resp_dict = response.json()
-    if resp_dict.get("idx"):
-        success = True
-        order_obj.payment_completed = True
-        order_obj.save()
-    else:
-        success = False
-    data = {"success": success}
-    return JsonResponse(data)
+        else:
+            success = False
+        print("before send")
+
+        data = {"success": success}
+        return JsonResponse(data)

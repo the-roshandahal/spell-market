@@ -20,11 +20,21 @@ urlpatterns = [
     path("cart/", views.cart, name="cart"),
     path("remove_from_cart/<int:id>", views.remove_from_cart, name="remove_from_cart"),
     # path("khalti-request/", views.KhaltiRequestView, name="khaltirequest"),
-    path("khalti-verify/", views.KhaltiVerifyView, name="khaltiverify"),
+    path("khalti-verify/", views.KhaltiVerifyView.as_view(), name="khaltiverify"),
     path("blog/", views.blog, name="blog"),
     path("blog_single/<int:id>", views.blog_single, name="blog_single"),
     path("about/", views.about, name="about"),
     path("checkout/", views.checkout, name="checkout"),
+    path("purchase_summary/", views.purchase_summary, name="purchase_summary"),
+    path(
+        "purchase_details/<int:id>",
+        views.purchase_details,
+        name="purchase_details",
+    ),
+    path("purchased_templates/", views.purchased_templates, name="purchased_templates"),
+    path(
+        "download_count/<int:id>/<int:di>", views.download_count, name="download_count"
+    ),
     re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
     re_path(r"^static/(?P<path>.*)$", serve, {"document_root": settings.STATIC_ROOT}),
 ]
