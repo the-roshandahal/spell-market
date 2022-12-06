@@ -1,14 +1,7 @@
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.contrib.auth.models import User
 from adminpanel.models import *
-
-
-class Cart(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    template = models.ForeignKey(Template, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.user.username
 
 
 class Token(models.Model):
@@ -32,12 +25,25 @@ class Contact(models.Model):
         return self.user.name
 
 
+PAYMENT_CHOICES = (("khalti", "khalti"), ("other", "other"))
+
+
+class Cart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    template = models.ForeignKey(Template, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username
+
+
 class PurchaseSummary(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     template = models.ForeignKey(Template, on_delete=models.CASCADE)
     discount = models.ForeignKey(PromoCode, on_delete=models.CASCADE, null=True)
-    total_amount = models.IntegerField(max_length=1000)
-    PAYMENT_CHOICES = (("khalti", "khalti"), ("other", "other"))
+    total_amount = models.IntegerField(
+        validators=[MaxValueValidator(10000000), MinValueValidator(10)]
+    )
+
     payment_method = models.CharField(
         max_length=100, choices=PAYMENT_CHOICES, default="khalti"
     )

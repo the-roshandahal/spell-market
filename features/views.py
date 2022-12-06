@@ -10,6 +10,16 @@ from django.contrib.auth import logout as django_logout
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.utils import timezone
+from django.views.generic import (
+    View,
+    TemplateView,
+    CreateView,
+    FormView,
+    DetailView,
+    ListView,
+)
+from django.http import JsonResponse
+import requests
 
 # Create your views here.
 def home(request):
@@ -243,14 +253,14 @@ def remove_from_cart(request, id):
 def checkout(request):
     carts = Cart.objects.filter(user=request.user)
     promo = None
-    ghghgy = ""
+    promo = ""
     if request.method == "POST":
         code = request.POST["promo_code"]
         try:
             promo = PromoCode.objects.get(
                 promo_code=code, expiry_date__gt=timezone.now()
             )
-            ghghgy = promo.promo_code
+            promo = promo.promo_code
         except:
             messages.info(request, "Invalid/Expired promo code")
 
@@ -279,7 +289,7 @@ def checkout(request):
         "grand_total": total + tax_amt,
         "total": total,
         "discount_amt": discount_amt,
-        "promo_code": ghghgy,
+        "promo_code": promo,
     }
 
     return render(request, "checkout.html", context)
@@ -302,3 +312,36 @@ def blog_single(request, id):
 
 def page_not_found_view(request, exception):
     return render(request, "error404.html", status=404)
+
+
+# def KhaltiRequestView(self, request, *args, **kwargs):
+#     print(request.params)
+#     o_id = request.GET.get("o_id")
+#     order = Cart.objects.get(id=o_id)
+#     context = {"order": order, "order_id": o_id}
+#     return JsonResponse(context)
+
+
+def KhaltiVerifyView(self, request, *args, **kwargs):
+    print(request.GET)
+    token = request.GET.get("token")
+    amount = request.GET.get("amount")
+    o_id = request.GET.get("order_id")
+    print(token, amount, o_id)
+
+    url = "https://khalti.com/api/v2/payment/verify/"
+    payload = {"token": token, "amount": amount}
+    headers = {"Authorization": "Key test_secret_key_a21980b8b60e4c37b018fdcbfa66e171"}
+
+    order_obj = Cart.objects.get(id=o_id)
+
+    response = requests.post(url, payload, headers=headers)
+    resp_dict = response.json()
+    if resp_dict.get("idx"):
+        success = True
+        order_obj.payment_completed = True
+        order_obj.save()
+    else:
+        success = False
+    data = {"success": success}
+    return JsonResponse(data)
