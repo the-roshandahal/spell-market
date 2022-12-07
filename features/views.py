@@ -1,3 +1,4 @@
+from django.db.models import Count
 from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
@@ -10,17 +11,12 @@ from django.contrib.auth import logout as django_logout
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.utils import timezone
-from django.views.generic import (
-    View,
-    TemplateView,
-    CreateView,
-    FormView,
-    DetailView,
-    ListView,
-)
+from django.views.generic import View
+
 from django.http import JsonResponse
 import requests
 import json
+from django.db.models import Q
 
 # Create your views here.
 def home(request):
@@ -164,22 +160,48 @@ def logout(request):
 
 
 def theme(request):
-    template = Template.objects.all()
-    category = Category.objects.all()
-    sub_category = SubCategory.objects.all()
-    child_category = ChildCategory.objects.all()
+    templateAll = Template.objects.all()
+    template=""
+    query = request.GET.get("query","")
+    catagory_selected = ""
+    if(query != ''):
+        template = templateAll.filter( Q(template_name__icontains=query)|Q(framework__icontains=query))
+    if (not template):
+        messages.error(request,"Tempelate not found.")
+    if request.method == "POST":
+        catagory_selected = int(request.POST["catageory"])
+        template = templateAll.filter(category=catagory_selected)
+    if (not template):
+        template = templateAll
+    categorys = Category.objects.all().order_by("order")
+    catagory = []
+    for categorySingle in categorys:
+        catagory.append(
+            {
+                "count": templateAll.filter(category=categorySingle).count(),
+                "name": categorySingle.category,
+                "id": int(categorySingle.id),
+            }
+        )
     cart_num = 0
+
     if request.user.is_authenticated:
 
         cart_num = Cart.objects.filter(user=request.user).count()
+    
+
+    paginator = Paginator(template, 1)
+    page = request.GET.get('page')
+    template = paginator.get_page(page)
     context = {
+        "catagory_selected": catagory_selected,
         "template": template,
-        "category": category,
-        "sub_category": sub_category,
-        "child_category": child_category,
+        "category": catagory,
         "cart_num": cart_num,
     }
     return render(request, "theme.html", context)
+
+    
 
 
 def theme_details(request, id):

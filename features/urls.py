@@ -25,6 +25,8 @@ urlpatterns = [
     path("blog_single/<int:id>", views.blog_single, name="blog_single"),
     path("about/", views.about, name="about"),
     path("checkout/", views.checkout, name="checkout"),
+
+    # path("search/", views.search, name="search"),
     path("purchase_summary/", views.purchase_summary, name="purchase_summary"),
     path(
         "purchase_details/<int:id>",

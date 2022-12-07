@@ -23,11 +23,11 @@
                    </h2>
                    <p>The bee's knees pardon you plastered it's all gone to pot cheeky bugger wind up down.</p>
                    <div class="hero__search">
-                      <form action="#">
+                      <form action="{% url 'theme' %}" method="GET">
                          <div class="hero__search-inner d-xl-flex">
                             <div class="hero__search-input">
                                <span><i class="far fa-search"></i></span>
-                               <input type="text" placeholder="Search for templates">
+                               <input type="text" placeholder="Search for templates" name= "query">
                             </div>
                             <button type="submit" class="m-btn ml-20"> <span></span> search</button>
                          </div>

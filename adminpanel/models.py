@@ -38,6 +38,13 @@ class ChildCategory(models.Model):
         return self.child_category
 
 
+class Tag(models.Model):
+    tag = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.tag
+
+
 class Template(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     sub_category = models.ForeignKey(
@@ -46,6 +53,7 @@ class Template(models.Model):
     child_category = models.ForeignKey(
         ChildCategory, on_delete=models.CASCADE, null=True, blank=True
     )
+    tag = models.ManyToManyField(Tag, null=True, blank=True)
     template_name = models.CharField(max_length=1000)
     template_details = models.TextField()
     template_features = models.TextField()
