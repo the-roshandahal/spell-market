@@ -23,9 +23,9 @@ def category(request):
 @login_required
 def add_category(request):
     if request.method == "POST":
-        category = request.POST["category"]
-        order = request.POST["order"]
-        status = request.POST["status"]
+        category = request.POST.get("category")
+        order = request.POST.get("order")
+        status = request.POST.get("status")
         category_image = request.FILES["category_image"]
         if Category.objects.filter(category=category).exists():
             messages.info(request, "the category is already taken")
@@ -36,11 +36,11 @@ def add_category(request):
         messages.info(request, "Category added successfully.")
         return redirect("category")
     return render(request, "admin/add_category.html")
-
+@login_required
 def edit_category(request,id):
     if request.method == "POST":
-        cat_category = request.POST["category"]
-        order = request.POST["order"]
+        cat_category = request.POST.get("category")
+        order = request.POST.get("order")
         if request.FILES and request.FILES["category_image"]:
             category_image = request.FILES["category_image"]
         else:
@@ -94,10 +94,10 @@ def sub_category(request):
 @login_required
 def add_sub_category(request):
     if request.method == "POST":
-        cat_id = request.POST["category"]
-        sub_category = request.POST["sub_category"]
-        order = request.POST["order"]
-        status = request.POST["status"]
+        cat_id = request.POST.get("category")
+        sub_category = request.POST.get("sub_category")
+        order = request.POST.get("order")
+        status = request.POST.get("status")
 
         if SubCategory.objects.filter(sub_category=sub_category).exists():
             messages.info(request, "the category is already taken")
@@ -113,12 +113,12 @@ def add_sub_category(request):
     cat = Category.objects.all()
     context = {"cat": cat}
     return render(request, "admin/add_sub_category.html", context)
-
+@login_required
 def edit_sub_category(request,id):
     if request.method == "POST":
-        cat_id = request.POST["category"]
-        sub_sub_category = request.POST["sub_category"]
-        order = request.POST["order"]
+        cat_id = request.POST.get("category")
+        sub_sub_category = request.POST.get("sub_category")
+        order = request.POST.get("order")
 
         category = Category.objects.get(id=cat_id)
         new_sub_category = SubCategory.objects.get(id=id)
@@ -162,7 +162,7 @@ def change_sub_cat_status(request, id):
         messages.info(request, "Status Changed")
         return redirect(sub_category)
 
-
+@login_required
 def child_category(request):
     child_category = ChildCategory.objects.all().order_by("order")
     context = {"child_category": child_category}
@@ -172,10 +172,10 @@ def child_category(request):
 @login_required
 def add_child_category(request):
     if request.method == "POST":
-        sub_cat_id = request.POST["category"]
-        child_category = request.POST["child_category"]
-        order = request.POST["order"]
-        status = request.POST["status"]
+        sub_cat_id = request.POST.get("category")
+        child_category = request.POST.get("child_category")
+        order = request.POST.get("order")
+        status = request.POST.get("status")
 
         if ChildCategory.objects.filter(child_category=child_category).exists():
             messages.info(request, "the category is already taken")
@@ -197,12 +197,12 @@ def add_child_category(request):
 
     return render(request, "admin/add_child_category.html", context)
 
-
+@login_required
 def edit_child_category(request,id):
     if request.method == "POST":
-        sub_cat_id = request.POST["category"]
-        child_child_category = request.POST["child_category"]
-        order = request.POST["order"]
+        sub_cat_id = request.POST.get("category")
+        child_child_category = request.POST.get("child_category")
+        order = request.POST.get("order")
 
         sub_category = SubCategory.objects.get(id=sub_cat_id)
         new_child_category = ChildCategory.objects.get(id=id)
@@ -259,28 +259,31 @@ def template(request):
 @login_required
 def add_template(request):
     if request.method == "POST":
-        cat_id = request.POST["category"]
-        sub_cat_id = request.POST["sub_category"]
-        child_cat_id = request.POST["child_category"]
-        template_name = request.POST["template_name"]
-        template_details = request.POST["template_details"]
-        template_features = request.POST["template_features"]
-        template_layout = request.POST["template_layout"]
-        template_price = request.POST["template_price"]
-        version = request.POST["version"]
-        framework = request.POST["framework"]
+        cat_id = request.POST.get("category")
+        sub_cat_id = request.POST.get("sub_category")
+        child_cat_id = request.POST.get("child_category")
+        tag = request.POST.getlist("tag")
+        template_name = request.POST.get("template_name")
+        template_details = request.POST.get("template_details")
+        template_features = request.POST.get("template_features")
+        template_layout = request.POST.get("template_layout")
+        template_price = request.POST.get("template_price")
+        version = request.POST.get("version")
+        framework = request.POST.get("framework")
         template_image = request.FILES["template_image"]
-        template_url = request.POST["template_url"]
-        is_featured = request.POST["is_featured"]
+        template_url = request.POST.get("template_url")
+        is_featured = request.POST.get("is_featured")
 
         category = Category.objects.get(id=cat_id)
         sub_category = SubCategory.objects.get(id=sub_cat_id)
         child_category = ChildCategory.objects.get(id=child_cat_id)
-
-        Template.objects.create(
+      
+        
+        temporary=Template.objects.create(
             category=category,
             sub_category=sub_category,
             child_category=child_category,
+            
             template_name=template_name,
             template_details=template_details,
             template_features=template_features,
@@ -292,12 +295,14 @@ def add_template(request):
             template_url=template_url,
             is_featured=is_featured,
         )
-
+        temporary.tag.set(tag)
+        print(temporary)
         return redirect("template")
     cat = Category.objects.all()
     sub_cat = SubCategory.objects.all()
     child_cat = ChildCategory.objects.all()
-    context = {"cat": cat, "sub_cat": sub_cat, "child_cat": child_cat}
+    tag = Tag.objects.all()
+    context = {"cat": cat, "sub_cat": sub_cat, "child_cat": child_cat,"tag":tag}
     return render(request, "admin/add_template.html", context)
 
 
@@ -310,21 +315,21 @@ def add_template(request):
 @login_required
 def edit_template(request, id):
     if request.method == "POST":
-        cat_id = request.POST["category"]
-        sub_cat_id = request.POST["sub_category"]
-        child_cat_id = request.POST["child_category"]
-        template_name = request.POST["template_name"]
-        template_details = request.POST["template_details"]
-        template_features = request.POST["template_features"]
-        template_layout = request.POST["template_layout"]
-        template_price = request.POST["template_price"]
-        version = request.POST["version"]
-        framework = request.POST["framework"]
+        cat_id = request.POST.get("category")
+        sub_cat_id = request.POST.get("sub_category")
+        child_cat_id = request.POST.get("child_category")
+        template_name = request.POST.get("template_name")
+        template_details = request.POST.get("template_details")
+        template_features = request.POST.get("template_features")
+        template_layout = request.POST.get("template_layout")
+        template_price = request.POST.get("template_price")
+        version = request.POST.get("version")
+        framework = request.POST.get("framework")
         if request.FILES and request.FILES["template_image"]:
             template_image = request.FILES["template_image"]
         else:
             template_image = None
-        template_url = request.POST["template_url"]
+        template_url = request.POST.get("template_url")
 
         category = Category.objects.get(id=cat_id)
         sub_category = SubCategory.objects.get(id=sub_cat_id)
@@ -407,8 +412,8 @@ def delete_template(request, id):
 
 # def post_blog(request):
 #     if request.method == "POST":
-#         title = request.POST["title"]
-#         blog = request.POST["blog"]
+#         title = request.POST.get("title")
+#         blog = request.POST.get("blog")
 #         image = request.FILE["image"]
 #         Blog.objects.create(title=title,blog=blog,image=image)
 #         messages.info(request, "Blog added")

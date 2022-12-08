@@ -165,7 +165,7 @@ def theme(request):
     query = request.GET.get("query","")
     catagory_selected = ""
     if(query != ''):
-        template = templateAll.filter( Q(template_name__icontains=query)|Q(framework__icontains=query))
+        template = templateAll.filter( Q(template_name__icontains=query)|Q(framework__icontains=query)|Q(template_details__icontains=query))
     if (not template):
         messages.error(request,"Tempelate not found.")
     if request.method == "POST":
@@ -281,23 +281,29 @@ def remove_from_cart(request, id):
 
 def checkout(request):
     carts = Cart.objects.filter(user=request.user)
+    
     promo = None
-    promo = ""
     if request.method == "POST":
         code = request.POST["promo_code"]
         try:
             promo = PromoCode.objects.get(
                 promo_code=code, expiry_date__gt=timezone.now()
             )
-            promo = promo.promo_code
+            promo = promo
         except:
             messages.info(request, "Invalid/Expired promo code")
 
     sub_total = 0
+    tax_amt=0
     for cart in carts:
-
         template = Template.objects.get(template_name=cart.template)
+        if template.is_taxable=="yes":
+            tax_amt+=template.template_price*0.13
         sub_total += template.template_price
+
+
+    sub_total+=tax_amt
+
 
     discount_amt = 0
     if promo:
@@ -309,13 +315,14 @@ def checkout(request):
             else:
                 discount_amt = promo.discount
     total = sub_total - discount_amt
-    tax_amt = 0.13 * total
+    
+
 
     context = {
         "carts": carts,
-        "sub_total": sub_total,
+        "sub_total": sub_total-tax_amt,
         "tax_amt": tax_amt,
-        "grand_total": total + tax_amt,
+        "grand_total": total ,
         "total": total,
         "discount_amt": discount_amt,
         "promo_code": promo,

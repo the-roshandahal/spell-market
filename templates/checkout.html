@@ -35,15 +35,18 @@
         </table>
       </div>
       <p>Sub total : {{sub_total}}</p>
+      
+      <p>Tax amount: {{tax_amt}}</p>
+      <p>Total:{{total}}</p>
       <form method="POST" action="">
         {% csrf_token %}
         <label for="">Promo Code</label>
-        <input type="text" name="promo_code" value="{{promo_code}}" />
+        <input type="text" name="promo_code" value="{{promo_code.promo_code}}" />
         <button type="submit">APPLY</button>
       </form>
       <p>Discount Amount:{{discount_amt}}</p>
-      <p>Total:{{total}}</p>
-      <p>Tax amount: {{tax_amt}}</p>
+      
+      
       <p>Grand total:{{grand_total}}</p>
 
       <div class="col-xxl-12">
