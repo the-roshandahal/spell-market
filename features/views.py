@@ -171,8 +171,6 @@ def theme(request):
             | Q(template_details__icontains=query)
         )
 
-    if not templateAll:
-        messages.error(request, "Tempelate not found.")
     if request.method == "POST":
         catagory_selected = int(request.POST.get("catageory"))
         template = templateAll.filter(category=catagory_selected)
@@ -180,6 +178,7 @@ def theme(request):
         template = templateAll
 
     if not template:
+        messages.error(request, "Template not found.")
         template = tempelates_do_not_change
     categorys = Category.objects.all().order_by("order")
     catagory = []
