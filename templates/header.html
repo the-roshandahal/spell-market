@@ -62,6 +62,15 @@
                 <li><a href="{% url 'blog' %}">Blog</a></li>
 
                 <li><a href="{% url 'contact' %}">Contact</a></li>
+                {% if user.is_authenticated %}
+                {% if user.is_staff %}
+                 <li class="hidden d-lg-none">
+                  <a href="{% url 'dashboard' %}">Dashboard</a>
+                </li>
+                 <li class="hidden d-lg-none">
+                  <a href="{% url 'logout' %}">Logout</a>
+                </li>
+                {% else %}
                 <li class="hidden d-lg-none">
                   <a href="profile__url">View Profile</a>
                 </li>
@@ -81,22 +90,25 @@
                 <li class="hidden d-lg-none">
                   <a href="{% url 'logout' %}">Logout</a>
                 </li>
+                {% endif %}
+                {% else %}
+                <li class="hidden d-lg-none">
+                  <a href="{% url 'login' %}">Login</a>
+                </li>
+                {% endif %}
               </ul>
             </nav>
           </div>
         </div>
-        {% if user.is_authenticated %} {% if user.is_staff %}
+        {% if user.is_authenticated %} 
+        {% if user.is_staff %}
         <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-8 col-6">
-          <div
-            class="header__action d-flex align-items-center justify-content-end"
-          >
-            <div class="header__login d-none d-sm-block">
-              <a href="{% url 'logout' %}"
-                ><i class="far fa-unlock"></i> Logout</a
-              >
+          <div class="header__action d-flex align-items-center justify-content-end" >
+            <div class="header__login d-none d-lg-block">
+              <a href="{% url 'logout' %}"><i class="far fa-unlock d-sm-none d-none d-xl-inline"></i> Logout</a>
             </div>
-            <div class="header__cart d-none d-sm-block">
-              <a href="{% url 'dashboard' %}" class="cart-toggle-btn">
+            <div class="header__cart d-none d-lg-block">
+              <a href="{% url 'dashboard' %}" >
                 <i class="far fa-home"></i>
               </a>
             </div>
@@ -138,6 +150,13 @@
               <a href="{% url 'login' %}"
                 ><i class="far fa-unlock"></i> Log In</a
               >
+            </div>
+            <div class="sidebar__menu d-lg-none">
+              <div class="sidebar-toggle-btn" id="sidebar-toggle">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+              </div>
             </div>
           </div>
         </div>
@@ -247,13 +266,7 @@
         </nav>
       </div>
 
-      {% comment %}
-      <div class="sidebar__action mt-330">
-        <div class="sidebar__login mt-15">
-          <a href="{% url 'login' %}"><i class="far fa-user"></i> Profile</a>
-        </div>
-      </div>
-      {% endcomment %}
+   
     </div>
   </div>
 </div>

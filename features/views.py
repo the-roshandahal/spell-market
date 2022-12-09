@@ -380,20 +380,21 @@ from django.http import HttpResponseRedirect
 
 
 def download_count(request, id, di):
+    next = request.GET.get('next', '/')
     ddd = PurchasedTemplate.objects.get(id=id)
-    if ddd.download_count == 0:
+    print(ddd.download_count)
+    if ddd.download_count <=2:
         try:
             template = PurchasedTemplate.objects.get(id=id)
             # url = template.temlate_url
             template.download_count += 1
-            print(template.download_count)
             template.save()
         except:
             return
         return redirect("/media/{url}".format(url=template.template.template_file))
     else:
         messages.info(request, "already exceeded limit")
-        return redirect("purchase_details", di)
+        return HttpResponseRedirect(next)
 
 
 def page_not_found_view(request, exception):

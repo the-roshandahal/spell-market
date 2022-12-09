@@ -7,6 +7,7 @@
             <h4 class="card-title">Templates</h4>
             
             </p>
+            <div class="table-responsive">
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -34,24 +35,14 @@
                   {% else %}
                   <td>--</td>
                   {% endif %}
-
-
-
                   {% if template.child_category %}
                   <td>{{template.child_category}} </td>
                   {% else %}
                   <td>--</td>
                   {% endif %}
-
-                
-
-
-                  
                   <td>
                     Rs.{{template.template_price}}
                   </td>
-           
-
                   <td>
                     {% if template.is_featured == True %}
                     <label class="badge badge-gradient-success">Yes</label>
@@ -97,6 +88,7 @@
                 {% endfor %}
               </tbody>
             </table>
+          </div>
           </div>
         </div>
       </div>

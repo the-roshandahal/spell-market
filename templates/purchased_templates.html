@@ -19,12 +19,12 @@
               <td>{{template.download_count}}</td>
 
               <td>
-                {% comment %} {% if template.download_count >= 10 %}Not
+                {% if template.download_count >= 10 %}Not
                 available {% else %}
-                <a href="{% url 'download_count' id=template.id di=di  %}"
+                <a href="{% url 'download_count' id=template.id di=template.purchase_summary.id   %}?next={{request.path}}"
                   >Download</a
                 >
-                {% endif %} {% endcomment %}
+                {% endif %}
               </td>
             </tr>
 

@@ -36,14 +36,7 @@ class Cart(models.Model):
         return self.user.username
 
 
-class PurchasedTemplate(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    template = models.ForeignKey(Template, on_delete=models.CASCADE)
-    order_id = models.CharField(max_length=100)
-    download_count = models.IntegerField()
 
-    def __str__(self):
-        return self.user.username
 
 
 class PurchaseSummary(models.Model):
@@ -63,6 +56,16 @@ class PurchaseSummary(models.Model):
     def __str__(self):
         return self.user.username
 
+
+class PurchasedTemplate(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    template = models.ForeignKey(Template, on_delete=models.CASCADE)
+    order_id = models.CharField(max_length=100)
+    download_count = models.IntegerField()
+    purchase_summary = models.ForeignKey(PurchaseSummary,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username
 
 class Downloads(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
