@@ -7,152 +7,156 @@
     <section>
       <!--for demo wrap-->
       <h1>Verify your templates</h1>
-      <div class="tbl-header">
-        <table cellpadding="0" cellspacing="0">
+      <div class="tbl-header overflow-auto">
+        <table
+          cellpadding="0"
+          cellspacing="0"
+          class="table table-striped table-sm w-900"
+        >
           <thead>
             <tr>
-              <th>Template Code</th>
-              <th>Template Name</th>
-              <th>Template Category</th>
-              <th>Price</th>
+              <th scope="col">Template Code</th>
+              <th scope="col">Template Name</th>
+              <th scope="col">Is taxable</th>
+              <th scope="col">Template Category</th>
+              <th scope="col">Price</th>
             </tr>
           </thead>
-        </table>
-      </div>
-      <div class="tbl-content">
-        <table cellpadding="0" cellspacing="0">
+
           <tbody>
             {% for carts in carts %}
             <tr>
-              <td>{{carts.template.id}}</td>
+              <th scope="row">{{carts.template.id}}</th>
               <td>{{carts.template}}</td>
+              <td>{{carts.template.is_taxable}}</td>
               <td>{{carts.template.category}}</td>
               <td>{{carts.template.template_price}}</td>
             </tr>
-            <tr></tr>
+
             {% endfor %}
+
+            <form method="POST" action="">
+              {% csrf_token %}
+              <tr class="border-none">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Sub total :</td>
+                <td>{{sub_total}}</td>
+              </tr>
+              <tr class="border-none">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Tax amount:</td>
+                <td>{{tax_amt}}</td>
+              </tr>
+              <tr class="border-none">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Total:</td>
+                <td>{{total}}</td>
+              </tr>
+              <tr class="border-none">
+                <td id="form__promo" class="form-label">Promo Code</td>
+                <td class="row">
+                  <input
+                    type="text"
+                    id="form__promo"
+                    name="promo_code"
+                    value="{{promo_code.promo_code}}"
+                    class="form-control col"
+                  />
+                  <div class="col"></div>
+                </td>
+                <td>
+                  <button class="m-btn m-btn-2" type="submit">APPLY</button>
+                </td>
+                <td>Discount Amount:</td>
+                <td>{{discount_amt}}</td>
+              </tr>
+              <tr class="border-none">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Grand total:</td>
+                <td>{{grand_total}}</td>
+              </tr>
+            </form>
           </tbody>
         </table>
       </div>
-      <p>Sub total : {{sub_total}}</p>
-      
-      <p>Tax amount: {{tax_amt}}</p>
-      <p>Total:{{total}}</p>
-      <form method="POST" action="">
-        {% csrf_token %}
-        <label for="">Promo Code</label>
-        <input type="text" name="promo_code" value="{{promo_code.promo_code}}" />
-        <button type="submit">APPLY</button>
-      </form>
-      <p>Discount Amount:{{discount_amt}}</p>
-      
-      
-      <p>Grand total:{{grand_total}}</p>
-
-      <div class="col-xxl-12">
-        <div class="category__more mt-30 text-center">
-          <div class="m-btn m-btn-2">
-            <span id="payment-button"> Pay with khalti </span></a
-          >
+      <div class="d-flex w-auto">
+        <div class="x-4 my-3">
+          <span id="payment-button" class="m-btn m-btn-2">
+            Pay with khalti
+          </span>
         </div>
-        <div class="category__more mt-30 text-center">
-          <a href="{% url 'cart' %}" class="m-btn m-btn-2">
-            <span></span> Back to Cart</a
-          >
+        <div class="px-4 my-3">
+          <a href="{% url 'cart' %}" class="m-btn m-btn-2"> Back to Cart</a>
         </div>
-      </div>
-      <script>
-        var config = {
-          // replace the publicKey with yours
-          publicKey: "test_public_key_c3f2aeb09373408e8510688a7af3ae5e",
-          productIdentity: "order_{% for cart in carts %}{{cart.id}}{% endfor %}",
-          productName: "Tempelates",
-          productUrl: "http://gameofthrones.wikia.com/wiki/Dragons",
-          paymentPreference: [
-            "KHALTI",
-            "EBANKING",
-            "MOBILE_BANKING",
-            "CONNECT_IPS",
-            "SCT",
-          ],
-          eventHandler: {
-            onSuccess(payload) {
-              // hit merchant api for initiating verfication
-              console.log(payload)
+        <script>
+          var config = {
+            // replace the publicKey with yours
+            publicKey: "test_public_key_c3f2aeb09373408e8510688a7af3ae5e",
+            productIdentity: "order_{% for cart in carts %}{{cart.id}}{% endfor %}",
+            productName: "Tempelates",
+            productUrl: "http://gameofthrones.wikia.com/wiki/Dragons",
+            paymentPreference: [
+              "KHALTI",
+              "EBANKING",
+              "MOBILE_BANKING",
+              "CONNECT_IPS",
+              "SCT",
+            ],
+            eventHandler: {
+              onSuccess(payload) {
+                // hit merchant api for initiating verfication
+                console.log(payload)
 
-              axios.get("{% url 'khaltiverify' %}" , {params:{
-                  "token": payload.token,
-                  "amount": payload.amount,
-                  order_id:"{% for cart in carts %}{{cart.id}}{% endfor %}--{{request.user.id}}",
-                  discount:"{{discount_amt}}",
-                  user:"{{request.user.id}}"
-              }
-              }).then(function(resp){
-                if (resp.data.success == true){
-                    alert("Thanks. Payment Completed Successfully")
-                    location.href = "{% url 'purchase_summary' %}"
-                }else{
-                    alert("Payment not sucessfull")
-                    location.href = "{{request.build_absolute_uri}}"
+                axios.get("{% url 'khaltiverify' %}" , {params:{
+                    "token": payload.token,
+                    "amount": payload.amount,
+                    order_id:"{% for cart in carts %}{{cart.id}}{% endfor %}--{{request.user.id}}",
+                    discount:"{{discount_amt}}",
+                    user:"{{request.user.id}}"
                 }
-            })
+                }).then(function(resp){
+                  if (resp.data.success == true){
+                      alert("Thanks. Payment Completed Successfully")
+                      location.href = "{% url 'purchase_summary' %}"
+                  }else{
+                      alert("Payment not sucessfull")
+                      location.href = "{{request.build_absolute_uri}}"
+                  }
+              })
+              },
+              onError(error) {
+                console.log(error,"Error occured");
+              },
+              onClose() {
+                console.log("widget is closing");
+              },
             },
-            onError(error) {
-              console.log(error,"Error occured");
-            },
-            onClose() {
-              console.log("widget is closing");
-            },
-          },
-        };
+          };
 
-        var checkout = new KhaltiCheckout(config);
-        var btn = document.getElementById("payment-button");
-        btn.onclick = function () {
-          // minimum transaction amount must be 10, i.e 1000 in paisa.
-          checkout.show({ amount: {{grand_total}} *100 });
-        };
-      </script>
+          var checkout = new KhaltiCheckout(config);
+          var btn = document.getElementById("payment-button");
+          btn.onclick = function () {
+            checkout.show({ amount: {{grand_total}} *100 });
+          };
+        </script>
+      </div>
     </section>
     <style>
-      h1 {
-        font-size: 30px;
-        color: rgb(0, 0, 0);
-        text-transform: uppercase;
-        font-weight: 300;
-        text-align: center;
-        margin-bottom: 15px;
+      .border-none {
+        border: 0 solid white !important;
       }
-      table {
-        width: 100%;
-        table-layout: fixed;
-      }
-      .tbl-header {
-        background-color: rgba(255, 255, 255, 0.3);
-      }
-      .tbl-content {
-        overflow-x: auto;
-        margin-top: 0px;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-      }
-      th {
-        padding: 20px 15px;
-        text-align: left;
-        font-weight: 500;
-        font-size: 12px;
-        color: rgb(0, 0, 0);
-        text-transform: uppercase;
-      }
-      td {
-        padding: 15px;
-        text-align: left;
-        vertical-align: middle;
-        font-weight: 300;
-        font-size: 12px;
-        color: rgb(0, 0, 0);
-        border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+      .w-900 {
+        min-width: 900px;
       }
     </style>
+    {% include 'footer.html' %}
   </div>
 </section>
-{% include 'footer.html' %}

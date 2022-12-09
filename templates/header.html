@@ -13,7 +13,7 @@
     position: absolute;
     transform: translateX(-50%);
     z-index: 1000;
-    top:5%;
+    top: 5%;
     right: -3%;
     padding: 0.5rem;
     border-radius: 10px;
@@ -21,20 +21,19 @@
     color: rgb(255, 255, 255);
     background-color: rgb(228, 228, 228);
     box-shadow: 3px 4px 12px 0px rgba(0, 0, 0, 0.3);
-    
   }
-.popup-msg-text{
-  padding: 7px 5px 0px 5px;
-}
+  .popup-msg-text {
+    padding: 7px 5px 0px 5px;
+  }
 </style>
 
 <script>
   let popup = document.querySelector(".popup-msg");
-  if (popup){
-   setTimeout(() => {
-      popup.style.display="none"
-   }, 3000);
-}
+  if (popup) {
+    setTimeout(() => {
+      popup.style.display = "none";
+    }, 3000);
+  }
 </script>
 
 <header>
@@ -67,12 +66,15 @@
             </nav>
           </div>
         </div>
-        {% if user.is_authenticated %}
-        {% if user.is_staff %}
+        {% if user.is_authenticated %} {% if user.is_staff %}
         <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-8 col-6">
-          <div class="header__action d-flex align-items-center justify-content-end">
+          <div
+            class="header__action d-flex align-items-center justify-content-end"
+          >
             <div class="header__login d-none d-sm-block">
-              <a href="{% url 'logout' %}"><i class="far fa-unlock"></i> Logout</a>
+              <a href="{% url 'logout' %}"
+                ><i class="far fa-unlock"></i> Logout</a
+              >
             </div>
             <div class="header__cart d-none d-sm-block">
               <a href="{% url 'dashboard' %}" class="cart-toggle-btn">
@@ -90,14 +92,18 @@
         </div>
         {% else %}
         <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-8 col-6">
-          <div class="header__action d-flex align-items-center justify-content-end">
+          <div
+            class="header__action d-flex align-items-center justify-content-end"
+          >
             <div class="header__login d-none d-sm-block">
-              <a href="{% url 'logout' %}"><i class="far fa-sign-out"></i> Logout</a>
+              <a href="{% url 'logout' %}"
+                ><i class="far fa-sign-out"></i> Logout</a
+              >
             </div>
-          
+
             <div class="header__cart d-none d-sm-block">
               <a href="{% url 'cart' %}">
-                <i class="far fa-shopping-cart"></i>
+                <i class="far fa-user"></i>
                 {% if cart_num %}
                 <span>{{cart_num}}</span>
                 {% endif %}
@@ -112,12 +118,15 @@
             </div>
           </div>
         </div>
-        {% endif %}
-        {% else %}
+        {% endif %} {% else %}
         <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-8 col-6">
-          <div class="header__action d-flex align-items-center justify-content-end">
+          <div
+            class="header__action d-flex align-items-center justify-content-end"
+          >
             <div class="header__login d-none d-sm-block">
-              <a href="{% url 'login' %}"><i class="far fa-unlock"></i> Log In</a>
+              <a href="{% url 'login' %}"
+                ><i class="far fa-unlock"></i> Log In</a
+              >
             </div>
           </div>
         </div>
@@ -154,8 +163,6 @@
   </svg>
 </div>
 <!-- back to top end -->
-
-
 
 <!-- sidebar area start -->
 <div class="sidebar__area">
