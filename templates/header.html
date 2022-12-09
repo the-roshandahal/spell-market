@@ -62,6 +62,25 @@
                 <li><a href="{% url 'blog' %}">Blog</a></li>
 
                 <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li class="hidden d-lg-none">
+                  <a href="profile__url">View Profile</a>
+                </li>
+                <li class="hidden d-lg-none">
+                  <a href="{% url 'cart' %}">View cart</a>
+                </li>
+                <li class="hidden d-lg-none">
+                  <a href="{% url 'purchase_summary' %}"
+                    >View Purchase summary</a
+                  >
+                </li>
+                <li class="hidden d-lg-none">
+                  <a href="{% url 'purchased_templates' %}"
+                    >View purchased Templates</a
+                  >
+                </li>
+                <li class="hidden d-lg-none">
+                  <a href="{% url 'logout' %}">Logout</a>
+                </li>
               </ul>
             </nav>
           </div>
@@ -95,20 +114,12 @@
           <div
             class="header__action d-flex align-items-center justify-content-end"
           >
-            <div class="header__login d-none d-sm-block">
-              <a href="{% url 'logout' %}"
-                ><i class="far fa-sign-out"></i> Logout</a
-              >
-            </div>
-
-            <div class="header__cart d-none d-sm-block">
-              <a href="{% url 'cart' %}">
+            <div class="header__cart d-none d-lg-block">
+              <a href="javascript:void(0);" class="cart-toggle-btn">
                 <i class="far fa-user"></i>
-                {% if cart_num %}
-                <span>{{cart_num}}</span>
-                {% endif %}
               </a>
             </div>
+
             <div class="sidebar__menu d-lg-none">
               <div class="sidebar-toggle-btn" id="sidebar-toggle">
                 <span class="line"></span>
@@ -131,12 +142,6 @@
           </div>
         </div>
         {% endif %}
-        <div class="header__cart d-none d-sm-block">
-                           <a href="javascript:void(0);" class="cart-toggle-btn">
-                              <i class="far fa-shopping-cart"></i>
-                              <span>3</span>
-                           </a>
-                        </div>
       </div>
     </div>
   </div>
@@ -171,60 +176,55 @@
 <!-- back to top end -->
 
 <div class="cartmini__area">
-         <div class="cartmini__wrapper">
-            <div class="cartmini__title">
-               <h4>Profile</h4>
+  <div class="cartmini__wrapper">
+    <div class="cartmini__title">
+      <h4>Profile</h4>
+    </div>
+    <div class="cartmini__close">
+      <button type="button" class="cartmini__close-btn">
+        <i class="fal fa-times"></i>
+      </button>
+    </div>
+    <div class="cartmini__widget">
+      <div class="cartmini__inner">
+        <ul>
+          <li>
+            <div class="cartmini__content">
+              <h5><a href="profile__url">View Profile</a></h5>
             </div>
-            <div class="cartmini__close">
-               <button type="button" class="cartmini__close-btn"><i class="fal fa-times"></i></button>
+          </li>
+          <li>
+            <div class="cartmini__content">
+              <h5><a href="{% url 'cart' %}">View cart</a></h5>
             </div>
-            <div class="cartmini__widget">
-               <div class="cartmini__inner">
-                  <ul>
-                     <li>
-                        <div class="cartmini__content">
-                           <h5><a href="product-details.html">View Profile</a></h5>
-                        </div>
-                        
-                        
-                     </li>
-                     <li>
-                      <div class="cartmini__content">
-                         <h5><a href="product-details.html">View cart</a></h5>
-                      </div>
-                      
-                      
-                   </li>
-                   <li>
-                    <div class="cartmini__content">
-                       <h5><a href="product-details.html">View Purchase summary</a></h5>
-                    </div>
-                    
-                    
-                 </li>
-                 <li>
-                  <div class="cartmini__content">
-                     <h5><a href="product-details.html">View purchased Templates</a></h5>
-                  </div>
-                  
-                  
-               </li>
-               <li>
-                <div class="cartmini__content">
-                   <h5><a href="product-details.html">Logout</a></h5>
-                </div>
-                
-                
-             </li>
-                     
-                  </ul>
-               </div>
+          </li>
+          <li>
+            <div class="cartmini__content">
+              <h5>
+                <a href="{% url 'purchase_summary' %}">View Purchase summary</a>
+              </h5>
             </div>
-         </div>
+          </li>
+          <li>
+            <div class="cartmini__content">
+              <h5>
+                <a href="{% url 'purchased_templates' %}"
+                  >View purchased Templates</a
+                >
+              </h5>
+            </div>
+          </li>
+          <li>
+            <div class="cartmini__content">
+              <h5><a href="{% url 'logout' %}">Logout</a></h5>
+            </div>
+          </li>
+        </ul>
       </div>
-      <div class="body-overlay"></div>
-
-
+    </div>
+  </div>
+</div>
+<div class="body-overlay"></div>
 
 <!-- sidebar area start -->
 <div class="sidebar__area">
@@ -241,12 +241,19 @@
           <img src="{% static 'assets/img/logo/logo-white.png' %}" alt="logo" />
         </a>
       </div>
-      <div class="mobile-menu"></div>
+      <div class="mobile-menu">
+        <nav id="mobile-menu">
+          <ul></ul>
+        </nav>
+      </div>
+
+      {% comment %}
       <div class="sidebar__action mt-330">
         <div class="sidebar__login mt-15">
           <a href="{% url 'login' %}"><i class="far fa-user"></i> Profile</a>
         </div>
       </div>
+      {% endcomment %}
     </div>
   </div>
 </div>

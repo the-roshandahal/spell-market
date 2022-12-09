@@ -161,17 +161,21 @@ def logout(request):
 
 def theme(request):
     templateAll = Template.objects.all()
-    template=""
-    query = request.GET.get("query","")
+    template = ""
+    query = request.GET.get("query", "")
     catagory_selected = ""
-    if(query != ''):
-        template = templateAll.filter( Q(template_name__icontains=query)|Q(framework__icontains=query)|Q(template_details__icontains=query))
-    if (not template):
-        messages.error(request,"Tempelate not found.")
+    if query != "":
+        template = templateAll.filter(
+            Q(template_name__icontains=query)
+            | Q(framework__icontains=query)
+            | Q(template_details__icontains=query)
+        )
+    if not template:
+        messages.error(request, "Tempelate not found.")
     if request.method == "POST":
         catagory_selected = int(request.POST["catageory"])
         template = templateAll.filter(category=catagory_selected)
-    if (not template):
+    if not template:
         template = templateAll
     categorys = Category.objects.all().order_by("order")
     catagory = []
@@ -188,10 +192,9 @@ def theme(request):
     if request.user.is_authenticated:
 
         cart_num = Cart.objects.filter(user=request.user).count()
-    
 
     paginator = Paginator(template, 1)
-    page = request.GET.get('page')
+    page = request.GET.get("page")
     template = paginator.get_page(page)
     context = {
         "catagory_selected": catagory_selected,
@@ -200,8 +203,6 @@ def theme(request):
         "cart_num": cart_num,
     }
     return render(request, "theme.html", context)
-
-    
 
 
 def theme_details(request, id):
@@ -281,7 +282,7 @@ def remove_from_cart(request, id):
 
 def checkout(request):
     carts = Cart.objects.filter(user=request.user)
-    
+
     promo = None
     if request.method == "POST":
         code = request.POST["promo_code"]
@@ -294,16 +295,14 @@ def checkout(request):
             messages.info(request, "Invalid/Expired promo code")
 
     sub_total = 0
-    tax_amt=0
+    tax_amt = 0
     for cart in carts:
         template = Template.objects.get(template_name=cart.template)
-        if template.is_taxable=="yes":
-            tax_amt+=template.template_price*0.13
+        if template.is_taxable == "yes":
+            tax_amt += template.template_price * 0.13
         sub_total += template.template_price
 
-
-    sub_total+=tax_amt
-
+    sub_total += tax_amt
 
     discount_amt = 0
     if promo:
@@ -315,14 +314,12 @@ def checkout(request):
             else:
                 discount_amt = promo.discount
     total = sub_total - discount_amt
-    
-
 
     context = {
         "carts": carts,
-        "sub_total": sub_total-tax_amt,
+        "sub_total": sub_total - tax_amt,
         "tax_amt": tax_amt,
-        "grand_total": total ,
+        "grand_total": total,
         "total": total,
         "discount_amt": discount_amt,
         "promo_code": promo,
@@ -371,9 +368,11 @@ def purchase_details(request, id):
 
 def purchased_templates(request):
     purchased_templates = PurchasedTemplate.objects.filter(user=request.user)
-    if purchased_templates.download_count >= 10:
-        return
-    context = {"purchased_templates": purchased_templates}
+    showing_tempelates = []
+    for templete in purchased_templates:
+        if templete.download_count <= 10:
+            showing_tempelates.append(templete)
+    context = {"purchased_templates": showing_tempelates}
     return render(request, "purchased_templates.html", context)
 
 
