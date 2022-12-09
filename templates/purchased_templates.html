@@ -19,9 +19,9 @@
               <td>{{template.download_count}}</td>
 
               <td>
-                {% if template.download_count >= 10 %}Not
-                available {% else %}
-                <a href="{% url 'download_count' id=template.id di=template.purchase_summary.id   %}?next={{request.path}}"
+                {% if template.download_count >= 10 %}Not available {% else %}
+                <a
+                  href="{% url 'download_count' id=template.id di=template.purchase_summary.id   %}?next={{request.path}}"
                   >Download</a
                 >
                 {% endif %}
@@ -35,8 +35,4 @@
     </section>
   </div>
 </section>
-{% comment %}
-<h1>purchased templates</h1>
-{% for purchased_templates in purchased_templates %}
-<li>{{purchased_templates.template}}</li>
-{% endcomment %} {% include 'footer.html' %}
+{% include 'footer.html' %}

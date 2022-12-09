@@ -160,23 +160,27 @@ def logout(request):
 
 
 def theme(request):
-    templateAll = Template.objects.all()
-    template = ""
-    query = request.GET.get("query", "")
+    tempelates_do_not_change = Template.objects.all()
+    templateAll = tempelates_do_not_change
     catagory_selected = ""
+    query = request.GET.get("query", "")
     if query != "":
-        template = templateAll.filter(
+        templateAll = templateAll.filter(
             Q(template_name__icontains=query)
             | Q(framework__icontains=query)
             | Q(template_details__icontains=query)
         )
-    if not template:
+
+    if not templateAll:
         messages.error(request, "Tempelate not found.")
     if request.method == "POST":
-        catagory_selected = int(request.POST["catageory"])
+        catagory_selected = int(request.POST.get("catageory"))
         template = templateAll.filter(category=catagory_selected)
-    if not template:
+    else:
         template = templateAll
+
+    if not template:
+        template = tempelates_do_not_change
     categorys = Category.objects.all().order_by("order")
     catagory = []
     for categorySingle in categorys:
@@ -261,7 +265,7 @@ def add_to_cart(request, id):
         return redirect("cart")
 
 
-@login_required
+@login_required(login_url="login")
 def cart(request):
     carts = Cart.objects.filter(user=request.user)
     total = 0
@@ -273,6 +277,7 @@ def cart(request):
     return render(request, "cart.html", context)
 
 
+@login_required(login_url="login")
 def remove_from_cart(request, id):
     item = Cart.objects.get(template=id, user=request.user)
     item.delete()
@@ -280,6 +285,7 @@ def remove_from_cart(request, id):
     return redirect(cart)
 
 
+@login_required(login_url="login")
 def checkout(request):
     carts = Cart.objects.filter(user=request.user)
 
@@ -343,6 +349,7 @@ def blog_single(request, id):
     return render(request, "blog_single.html", context)
 
 
+@login_required(login_url="login")
 def purchase_summary(request):
     purchase_summary = PurchaseSummary.objects.filter(user=request.user)
     context = {
@@ -351,6 +358,7 @@ def purchase_summary(request):
     return render(request, "purchase_summary.html", context)
 
 
+@login_required(login_url="login")
 def purchase_details(request, id):
     purchase_summary = PurchaseSummary.objects.get(id=id)
 
@@ -366,6 +374,7 @@ def purchase_details(request, id):
     return render(request, "purchase_details.html", context)
 
 
+@login_required(login_url="login")
 def purchased_templates(request):
     purchased_templates = PurchasedTemplate.objects.filter(user=request.user)
     # showing_tempelates = []
@@ -379,11 +388,12 @@ def purchased_templates(request):
 from django.http import HttpResponseRedirect
 
 
+@login_required(login_url="login")
 def download_count(request, id, di):
-    next = request.GET.get('next', '/')
+    next = request.GET.get("next", "/")
     ddd = PurchasedTemplate.objects.get(id=id)
     print(ddd.download_count)
-    if ddd.download_count <=2:
+    if ddd.download_count <= 2:
         try:
             template = PurchasedTemplate.objects.get(id=id)
             # url = template.temlate_url
