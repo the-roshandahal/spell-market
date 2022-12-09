@@ -131,6 +131,12 @@
           </div>
         </div>
         {% endif %}
+        <div class="header__cart d-none d-sm-block">
+                           <a href="javascript:void(0);" class="cart-toggle-btn">
+                              <i class="far fa-shopping-cart"></i>
+                              <span>3</span>
+                           </a>
+                        </div>
       </div>
     </div>
   </div>
@@ -164,6 +170,62 @@
 </div>
 <!-- back to top end -->
 
+<div class="cartmini__area">
+         <div class="cartmini__wrapper">
+            <div class="cartmini__title">
+               <h4>Profile</h4>
+            </div>
+            <div class="cartmini__close">
+               <button type="button" class="cartmini__close-btn"><i class="fal fa-times"></i></button>
+            </div>
+            <div class="cartmini__widget">
+               <div class="cartmini__inner">
+                  <ul>
+                     <li>
+                        <div class="cartmini__content">
+                           <h5><a href="product-details.html">View Profile</a></h5>
+                        </div>
+                        
+                        
+                     </li>
+                     <li>
+                      <div class="cartmini__content">
+                         <h5><a href="product-details.html">View cart</a></h5>
+                      </div>
+                      
+                      
+                   </li>
+                   <li>
+                    <div class="cartmini__content">
+                       <h5><a href="product-details.html">View Purchase summary</a></h5>
+                    </div>
+                    
+                    
+                 </li>
+                 <li>
+                  <div class="cartmini__content">
+                     <h5><a href="product-details.html">View purchased Templates</a></h5>
+                  </div>
+                  
+                  
+               </li>
+               <li>
+                <div class="cartmini__content">
+                   <h5><a href="product-details.html">Logout</a></h5>
+                </div>
+                
+                
+             </li>
+                     
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="body-overlay"></div>
+
+
+
 <!-- sidebar area start -->
 <div class="sidebar__area">
   <div class="sidebar__wrapper">
@@ -182,7 +244,7 @@
       <div class="mobile-menu"></div>
       <div class="sidebar__action mt-330">
         <div class="sidebar__login mt-15">
-          <a href="{% url 'login' %}"><i class="far fa-unlock"></i> Log In</a>
+          <a href="{% url 'login' %}"><i class="far fa-user"></i> Profile</a>
         </div>
       </div>
     </div>
