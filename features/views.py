@@ -368,11 +368,11 @@ def purchase_details(request, id):
 
 def purchased_templates(request):
     purchased_templates = PurchasedTemplate.objects.filter(user=request.user)
-    showing_tempelates = []
-    for templete in purchased_templates:
-        if templete.download_count <= 10:
-            showing_tempelates.append(templete)
-    context = {"purchased_templates": showing_tempelates}
+    # showing_tempelates = []
+    # for templete in purchased_templates:
+    #     if templete.download_count <= 10:
+    #         showing_tempelates.append(templete)
+    context = {"purchased_templates": purchased_templates}
     return render(request, "purchased_templates.html", context)
 
 

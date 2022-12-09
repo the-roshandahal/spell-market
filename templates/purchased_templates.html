@@ -1,5 +1,42 @@
 {% include 'header.html' %}
+<section class="category__area pt-105 pb-135">
+  <div class="container">
+    <section class="mt-3">
+      <h1>Your Templates</h1>
+      <div class="tbl-header overflow-auto">
+        <table cellpadding="0" class="table w-900" cellspacing="0">
+          <thead>
+            <tr>
+              <th>Template Name</th>
+              <th>Total Downloads</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%for template in purchased_templates%}
+            <tr>
+              <td>{{template.template}}</td>
+              <td>{{template.download_count}}</td>
+
+              <td>
+                {% comment %} {% if template.download_count >= 10 %}Not
+                available {% else %}
+                <a href="{% url 'download_count' id=template.id di=di  %}"
+                  >Download</a
+                >
+                {% endif %} {% endcomment %}
+              </td>
+            </tr>
+
+            {%endfor%}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</section>
+{% comment %}
 <h1>purchased templates</h1>
 {% for purchased_templates in purchased_templates %}
 <li>{{purchased_templates.template}}</li>
-{%endfor%} {% include 'footer.html' %}
+{% endcomment %} {% include 'footer.html' %}
