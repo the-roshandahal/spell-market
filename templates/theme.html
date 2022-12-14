@@ -45,7 +45,6 @@
                             {% else %}
                             <input
                               checked
-
                               class="m-check-input"
                               type="radio"
                               name="catageory"
@@ -59,17 +58,25 @@
                               >{{category.name}}
                             </label>
                           </div>
-                           <span>{{category.count}}</span> 
+                          <span>{{category.count}}</span>
                         </li>
                         {% endfor %}
                       </ul>
                     </div>
                   </div>
+                  <button
+                    type="submit"
+                    class="sidebar__clear-btn py-3 d-flex align-items-center px-4"
+                  >
+                    Apply Filter
+                  </button>
+                  {% comment %}
                   <input
                     type="submit"
                     value="Apply Filter"
                     class="sidebar__clear-btn"
                   />
+                  {% endcomment %}
                 </form>
               </div>
             </div>
@@ -131,10 +138,6 @@
             {%endif%}
           </div>
 
-
-    
-
-
           <div class="row">
             <div class="col-xxl-12">
               <div
@@ -148,11 +151,7 @@
                       <i class="arrow_left"></i>
                     </a>
                   </li>
-                  {% endif %}
-
-
-
-                  {% for num in template.paginator.page_range %}
+                  {% endif %} {% for num in template.paginator.page_range %}
                   {%if template.number == num %}
                   <li class="active">
                     <a href="?page={{ num }}">
@@ -160,20 +159,11 @@
                     </a>
                   </li>
 
-
                   {% elif num > template.number|add:'-5' and num < template.number|add:'5' %}
                   <li>
-                    <a href="?page={{ num }}">
-                      {{num}}
-                    </a>
+                    <a href="?page={{ num }}"> {{num}} </a>
                   </li>
-                  {% endif %}
-
-                  {% endfor %}
-
-
-                    
-                  {% if template.has_next %}
+                  {% endif %} {% endfor %} {% if template.has_next %}
                   <li>
                     <a href="?page={{ template.next_page_number }}">
                       <i class="arrow_right"></i>
@@ -184,9 +174,6 @@
               </div>
             </div>
           </div>
-
-
-
         </div>
       </div>
     </div>
