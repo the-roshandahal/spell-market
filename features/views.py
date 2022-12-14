@@ -1,4 +1,3 @@
-from django.db.models import Count
 from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
@@ -193,7 +192,7 @@ def theme(request):
 
         cart_num = Cart.objects.filter(user=request.user).count()
 
-    paginator = Paginator(template, 1)
+    paginator = Paginator(template, 4)
     page = request.GET.get("page")
     template = paginator.get_page(page)
     context = {
