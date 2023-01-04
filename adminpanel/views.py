@@ -267,10 +267,12 @@ def add_template(request):
         template_details = request.POST.get("template_details")
         template_features = request.POST.get("template_features")
         template_layout = request.POST.get("template_layout")
+        is_taxable = request.POST.get("is_taxable")
         template_price = request.POST.get("template_price")
         version = request.POST.get("version")
         framework = request.POST.get("framework")
         template_image = request.FILES["template_image"]
+        template_file = request.FILES["template_file"]
         template_url = request.POST.get("template_url")
         is_featured = request.POST.get("is_featured")
 
@@ -290,8 +292,10 @@ def add_template(request):
             template_layout=template_layout,
             template_price=template_price,
             version=version,
+            is_taxable=is_taxable,
             framework=framework,
             template_image=template_image,
+            template_file=template_file,
             template_url=template_url,
             is_featured=is_featured,
         )
@@ -323,12 +327,21 @@ def edit_template(request, id):
         template_features = request.POST.get("template_features")
         template_layout = request.POST.get("template_layout")
         template_price = request.POST.get("template_price")
+        is_taxable = request.POST.get("is_taxable")
         version = request.POST.get("version")
         framework = request.POST.get("framework")
         if request.FILES and request.FILES["template_image"]:
             template_image = request.FILES["template_image"]
         else:
             template_image = None
+
+
+        if request.FILES and request.FILES["template_file"]:
+            template_file = request.FILES["template_file"]
+        else:
+            template_file = None
+
+
         template_url = request.POST.get("template_url")
 
         category = Category.objects.get(id=cat_id)
@@ -347,11 +360,14 @@ def edit_template(request, id):
         template_data.template_features = template_features
         template_data.template_layout = template_layout
         template_data.template_price = template_price
+        template_data.is_taxable = is_taxable
         template_data.version = version
         template_data.framework = framework
         template_data.template_url = template_url
         if template_image:
             template_data.template_image = template_image
+        if template_file:
+            template_data.template_file = template_file
 
         template_data.save()
         messages.info(request, "Template edited successfully.")

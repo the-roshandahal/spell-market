@@ -13,8 +13,8 @@ from django.utils import timezone
 from django.views.generic import View
 
 from django.http import JsonResponse
-import requests
 import json
+import requests
 from django.db.models import Q
 
 # Create your views here.
@@ -299,14 +299,18 @@ def checkout(request):
             messages.info(request, "Invalid/Expired promo code")
 
     sub_total = 0
+    for cart in carts:
+        template = Template.objects.get(template_name=cart.template)
+        sub_total += template.template_price
+
+    
     tax_amt = 0
     for cart in carts:
         template = Template.objects.get(template_name=cart.template)
         if template.is_taxable == "yes":
             tax_amt += template.template_price * 0.13
-        sub_total += template.template_price
-
-    sub_total += tax_amt
+    
+    total = sub_total + tax_amt    
 
     discount_amt = 0
     if promo:
@@ -317,13 +321,14 @@ def checkout(request):
                 discount_amt = sub_total
             else:
                 discount_amt = promo.discount
-    total = sub_total - discount_amt
+                
+    grand_total = int(total - discount_amt)
 
     context = {
         "carts": carts,
-        "sub_total": sub_total - tax_amt,
+        "sub_total": sub_total,
         "tax_amt": tax_amt,
-        "grand_total": total,
+        "grand_total": grand_total,
         "total": total,
         "discount_amt": discount_amt,
         "promo_code": promo,
@@ -417,15 +422,14 @@ class KhaltiVerifyView(View):
         order = request.GET.get("order_id")
         cart = Cart.objects.filter(user=request.user)
         url = "https://khalti.com/api/v2/payment/verify/"
-
         headers = {
-            "Authorization": "Key test_secret_key_a21980b8b60e4c37b018fdcbfa66e171",
+            "Authorization": "Key test_secret_key_6d6f74d032be452bac74ef4bf7c393a1",
             "Content-Type": "application/json",
         }
         payload = json.dumps(
             {
                 "token": token,
-                "amount": amount,
+                "amount": amount*100,
             }
         )
         try:

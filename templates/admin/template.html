@@ -19,7 +19,7 @@
                   <th> Price </th>
                   <th> Featured</th>
                   <th>Template Link</th>
-                  <th>Date Added</th>
+                  <th>Is Taxable</th>
                   <th>Action</th>
                   
                 </tr>
@@ -60,7 +60,13 @@
                   {% endif %}
 
 
-                  <td> {{template.created.date}}</td>
+                  <td>
+                    {% if template.is_taxable == 'yes' %}
+                    <label class="badge badge-gradient-success">Yes</label>
+                    {% else %}
+                    <label class="badge badge-gradient-danger">No</label>
+                    {% endif %}
+                  </td>
                   <td>
 
 

@@ -2,7 +2,7 @@
 <div class="main-panel">
   <div class="content-wrapper">
     <div class="row">
-      <div class="col-md-6 grid-margin stretch-card">
+      <div class="grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
             <h4 class="card-title">Add Templates</h4>
@@ -135,39 +135,7 @@
                 <textarea class="summernote" name="template_layout" ></textarea>
               </div>
               
-              <!-- <div class="form-group">
-                <label for="exampleInputPassword1">Template Details</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Template Details"
-                  required
-                  name="template_details"
-                />
-              </div>
-              <div class="form-group">
-                <label for="exampleInputConfirmPassword1"
-                  >Template Features</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="exampleInputConfirmPassword1"
-                  placeholder="Template Features"
-                  required
-                  name="template_features"
-                />
-              </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1">Template Layout</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Template Layout"
-                  required
-                  name="template_layout"
-                />
-              </div> -->
+              
               <div class="form-group">
                 <label for="exampleInputPassword1">Template Price</label>
                 <input
@@ -178,6 +146,21 @@
                   name="template_price"
                 />
               </div>
+
+            
+
+
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Is is_taxable</label>
+                <div class="col-sm-9">
+                  <select class="form-control" name="is_taxable" id ="id_child_category">
+                    <option value="yes">yes</option>
+                    <option value="no">no</option>
+                  </select>
+                </div>
+              </div>
+
+
 
               <div class="form-group">
                 <label for="exampleInputPassword1">Template Version</label>
@@ -222,6 +205,23 @@
                   />
                 </div>
               </div>
+
+
+              <div class="form-group">
+                <label>Template File</label>
+                <div class="input-group col-xs-12">
+                  <input
+                    type="file"
+                    class="form-control file-upload-info"
+                    placeholder="Upload Image"
+                    required
+                    name="template_file"
+                    required
+                  />
+                </div>
+              </div>
+
+
               <div class="form-group">
                 <div class="form-check">
                   <label class="form-check-label">
