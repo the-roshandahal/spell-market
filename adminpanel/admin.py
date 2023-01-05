@@ -21,11 +21,31 @@ class BlogFields(Description, admin.ModelAdmin):
         "template_name",
         "released_date",
     )
+class CatFields(admin.ModelAdmin):
+    list_display = (
+        "category",
+        "order",
+        "status",
+    )
+class SubCatFields(admin.ModelAdmin):
+    list_display = (
+        "sub_category",
+        "category",
+        "order",
+        "status",
+    )
 
+class ChildCatFields(admin.ModelAdmin):
+    list_display = (
+        "child_category",
+        "sub_category",
+        "order",
+        "status",
+    )
 
-admin.site.register(Category)
-admin.site.register(SubCategory)
-admin.site.register(ChildCategory)
+admin.site.register(Category,CatFields)
+admin.site.register(SubCategory,SubCatFields)
+admin.site.register(ChildCategory,ChildCatFields)
 admin.site.register(Template, Description)
 admin.site.register(PromoCode)
 admin.site.register(CompanySetup)

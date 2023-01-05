@@ -12,7 +12,8 @@ class Category(models.Model):
 
     def __str__(self):
         return self.category
-
+    class Meta:
+        verbose_name_plural = "1. Category"
 
 class SubCategory(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
@@ -24,7 +25,8 @@ class SubCategory(models.Model):
 
     def __str__(self):
         return self.sub_category
-
+    class Meta:
+        verbose_name_plural = "2. Sub Category"
 
 class ChildCategory(models.Model):
     sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
@@ -36,7 +38,8 @@ class ChildCategory(models.Model):
 
     def __str__(self):
         return self.child_category
-
+    class Meta:
+        verbose_name_plural = "3. Child Category"
 
 class Tag(models.Model):
     tag = models.CharField(max_length=100)
