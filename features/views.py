@@ -346,7 +346,7 @@ def checkout(request):
             else:
                 discount_amt = promo.discount
                 
-    grand_total = int(total - discount_amt)
+    grand_total = total - discount_amt
 
     context = {
         "carts": carts,
@@ -448,7 +448,7 @@ class KhaltiVerifyView(View):
         payload = json.dumps(
             {
                 "token": token,
-                "amount": amount*100,
+                "amount": int(amount),
             }
         )
         try:
