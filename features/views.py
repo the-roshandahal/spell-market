@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.utils import timezone
 from django.views.generic import View
-
+from django.http import HttpResponseRedirect
 from django.http import JsonResponse
 import json
 import requests
@@ -208,14 +208,43 @@ def theme(request):
 
 
 def theme_details(request, id):
+    comments= Comments.objects.filter(template_id=id)
+    print(comments)
     theme_data = Template.objects.get(id=id)
     cart_num = 0
     if request.user.is_authenticated:
 
         cart_num = Cart.objects.filter(user=request.user).count()
-    context = {"theme_data": theme_data, "cart_num": cart_num}
+    context = {"theme_data": theme_data, "cart_num": cart_num, "comments": comments}
     return render(request, "theme_details.html", context)
 
+def comment(request,id):
+    if request.user.is_authenticated:
+        user = User.objects.get(username=request.user)
+        template = Template.objects.get(id=id)
+        template_id = template.id
+        
+
+        if Comments.objects.filter(user_id=user,template_id=template_id).exists():
+            messages.info(request, "You have already posted a review")
+            return redirect('theme_details',id)
+
+        if PurchasedTemplate.objects.filter(user_id=user,template_id=template_id).exists():
+            if request.method =="POST":
+                comment = request.POST["comment"]
+                user = User.objects.get(username=request.user)
+                template = Template.objects.get(id=id)
+                template_id = template.id
+                
+                Comments.objects.create(comment=comment, user=user, template_id=template_id)
+                messages.info(request, "Thank you for your review.")
+                return redirect('theme_details',template_id)
+        else:
+            messages.info(request, "Please purchase the template to review.")
+            return redirect('theme_details',template_id)
+    else:
+        messages.info(request, "Please Login to Comment.")
+        return redirect('theme_details',id)
 
 def contact(request):
     if request.method == "POST":
@@ -232,11 +261,6 @@ def contact(request):
         return redirect("home")
     else:
         return render(request, "contact.html")
-
-
-def about(request):
-
-    return render(request, "about.html")
 
 
 def categories(request):
@@ -388,18 +412,13 @@ def purchased_templates(request):
     return render(request, "purchased_templates.html", context)
 
 
-from django.http import HttpResponseRedirect
-
-
 @login_required(login_url="login")
 def download_count(request, id, di):
     next = request.GET.get("next", "/")
     ddd = PurchasedTemplate.objects.get(id=id)
-    print(ddd.download_count)
-    if ddd.download_count <= 2:
+    if ddd.download_count <= 1:
         try:
             template = PurchasedTemplate.objects.get(id=id)
-            # url = template.temlate_url
             template.download_count += 1
             template.save()
         except:
@@ -470,3 +489,14 @@ class KhaltiVerifyView(View):
 
         data = {"success": success}
         return JsonResponse(data)
+
+
+
+def about(request):
+    testimonial = Testimonial.objects.all()
+    partner = Partner.objects.all()
+    context={
+        'testimonial':testimonial,
+        'partner':partner
+    }
+    return render(request, "about.html",context)

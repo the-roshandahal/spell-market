@@ -71,49 +71,49 @@
                             <div class="tab-pane fade" id="support" role="tabpanel" aria-labelledby="support-tab">
                                <div class="product__support">
                                   <div class="latest-comments mb-55">
+                                    
                                      <ul>
+                                       {% if comments %}
+                                       {% for comments in comments %}
                                         <li>
                                            <div class="comments-box grey-bg-2">
                                               <div class="comments-info d-flex">
                                                     <div class="comments-avatar mr-15">
-                                                          <img src="{% static 'assets/img/product/support/sup-1.jpg' %}" alt="">
+                                                          <img src="{% static 'user.png' %}" alt="">
                                                     </div>
                                                     <div class="avatar-name">
-                                                       <h5>Jason Response</h5>
-                                                       <span class="post-meta">Author</span>
+                                                       <h5>{{comments.user.username}}</h5>
+                                                       {% comment %} <span class="post-meta">Author</span> {% endcomment %}
                                                     </div>
                                               </div>
                                               <div class="comments-text ml-65">
-                                                    <p>Harry codswalp boot porkies up the duff morish cor blimey guvnor fa about blower twit Why it's your round matie.</p>
-                                                 </div>
+                                                    <p>{{comments.comment}}</p>
+                                             </div>
                                            </div>
                                         </li>
-                                        <li class="children">
-                                           <div class="comments-box grey-bg-2">
-                                              <div class="comments-info d-flex">
-                                                    <div class="comments-avatar mr-15">
-                                                          <img src="{% static 'assets/img/product/support/sup-2.jpg' %}" alt="">
-                                                    </div>
-                                                    <div class="avatar-name">
-                                                       <h5>Hilary Ouse</h5>
-                                                       <span class="post-meta">Admin</span>
-                                                    </div>
-                                              </div>
-                                              <div class="comments-text ml-65">
-                                                 <p>I don't want no agro dropped a clanger do one wind.!</p>
-                                              </div>
-                                           </div>
-                                        </li>
+                                        {% endfor %}
+                                        {% else %}
+                                        <li>
+                                          <div class="comments-box grey-bg-2">
+                                             
+                                             <div class="comments-text">
+                                                   <p>No Reviews Yet</p>
+                                            </div>
+                                          </div>
+                                       </li>
+                                     {% endif %}
                                      </ul>
+                                     
                                   </div>
                                   <div class="post-comment-form wow fadeInUp" data-wow-delay=".2s">
                                         <h4 class="post-comment-title mb-25">Add a comment</h4>
-                                        <form action="#">
+                                        <form action="{% url 'comment' id=theme_data.id %}" method = "POST">
+                                          {% csrf_token %}
                                            <div class="post-comment-inner">
                                               <div class="row">
                                                   <div class="col-xl-12">
                                                       <div class="post-input d-sm-flex align-items-center mb-10">
-                                                          <textarea placeholder="Comment for the author..."></textarea>
+                                                          <textarea placeholder="Comment for the author..." name="comment"></textarea>
                                                           <button type="submit" class="m-btn m-btn-4"> <span></span> Post Comment</button>
                                                       </div>
                                                   </div>

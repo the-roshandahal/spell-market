@@ -37,6 +37,9 @@ urlpatterns = [
     path(
         "download_count/<int:id>/<int:di>", views.download_count, name="download_count"
     ),
+
+    path("comment/<int:id>", views.comment, name="comment"),
+
     re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
     re_path(r"^static/(?P<path>.*)$", serve, {"document_root": settings.STATIC_ROOT}),
 ]
