@@ -38,13 +38,12 @@
       <div class="row">
         <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-8 col-sm-8">
           <div class="hero__content">
-            <h2 class="hero__title">
-              <span>The world’s largest</span>
-              WordPress Themes Collection.
-            </h2>
+            <h1 class="hero__title">
+              <span>Explore our</span>
+                Collection of Templates!
+            </h1>
             <p>
-              The bee's knees pardon you plastered it's all gone to pot cheeky
-              bugger wind up down.
+              We have a wide variety of templates available to suit any of your needs.
             </p>
             <div class="hero__search">
               <form action="{% url 'theme' %}" method="GET">
@@ -190,17 +189,16 @@
             <div class="trending__content">
               <h3 class="trending__title">
                 <a href="{% url 'theme_details' id=fet_temp.id %}"
-                  >Zibber WP Theme</a
+                  >{{fet_temp.template_name}}</a
                 >
               </h3>
-              <p>Knees up arse blimey say happy days.</p>
               <div class="trending__meta d-flex justify-content-between">
                 <div class="trending__tag">
                   <a href="#">{{fet_temp.category.category}}</a>
                 </div>
-                <div class="trending__price">
-                  <span>${{fet_temp.template_price}}</span>
-                </div>
+                <!--<div class="trending__price">-->
+                <!--  <span>Rs.{{fet_temp.template_price}}</span>-->
+                <!--</div>-->
               </div>
             </div>
           </div>
@@ -263,7 +261,7 @@
                   <span></span> subscribe
                 </button>
               </form>
-              <p>Join 20,000+ other creators in our Markit community.</p>
+              <p>Join 20,000+ other creators in our Spell Market community.</p>
             </div>
           </div>
         </div>
@@ -284,7 +282,7 @@
               Grow Your Revenue <span>Today</span>
             </h2>
             <p class="wow fadeInUp" data-wow-delay=".5s">
-              Thousands of Markit Brands have made the swich.Text marketing with
+              Thousands of Brands have made the swich.Text marketing with
               the customer in mind!
             </p>
           </div>
@@ -312,63 +310,60 @@
   </section>
   <!-- cta area end -->
 
-  <!-- brand area start -->
-  <div class="brand__area pb-15">
-    <div class="container">
-      <div class="row">
-        <div class="col-xxl-12">
-          <div
-            class="brand__slider owl-carousel wow fadeInUp"
-            data-wow-delay=".5s"
-          >
-            {% for partner in partner %}
-            <div class="brand__thumb">
-              <img src="{{partner.logo.url}}" alt="" height="60" />
-            </div>
-            {% endfor %}
+      <!-- brand area start -->
+    <div class="brand__area pb-65 pt-80">
+       <div class="container">
+          <div class="row">
+             <div class="col-xxl-12">
+                <div class="brand__slider owl-carousel wow fadeInUp" data-wow-delay=".5s">
+                  {% for partner in partner %}
+                   <div class="brand__thumb">
+                      <a href=""><img src="{{partner.logo.url}}" alt="{{partner.name}}"></a>
+                   </div>
+                   {% endfor %}
+                </div>
+             </div>
           </div>
-        </div>
-      </div>
+       </div>
     </div>
-  </div>
-  <!-- brand area end -->
+    <!-- brand area end -->
 
   <!-- testimonial area start -->
-  <div class="testimonial__area pt-50 pb-115 fix">
-    <div class="container">
-      <div class="testimonial__inner p-relative pb-110">
-        <div class="testimonial__bg p-absolute">
-          <img src="{% static 'assets/img/bg/testimonial-bg.png' %}" alt="" />
-        </div>
-        <div class="row">
-          <div class="col-xxl-12">
-            <div
-              class="testimonial__slider owl-carousel wow fadeInUp"
-              data-wow-delay=".5s"
-            >
-              {% for testimonial in testimonial %}
-              <div class="testimonial__item white-bg">
-                <div class="testimonial__person d-flex mb-20">
-                  <div class="testimonial__avater">
-                    <img src="{{testimonial.image.url}}" alt="" />
-                  </div>
-                  <div class="testimonial__info ml-15">
-                    <h5>{{testimonial.name}}</h5>
-                    <span>{{testimonial.company_name}}</span>
-                  </div>
-                </div>
-                <div class="testimonial__text">
-                  <p>{{testimonial.testimonial}}</p>
-                </div>
-              </div>
-              {% endfor %}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- testimonial area end -->
+<div class="testimonial__area pt-50 pb-115 fix">
+   <div class="container">
+     <div class="testimonial__inner p-relative pb-110">
+       <div class="testimonial__bg p-absolute">
+         <img src="{% static 'assets/img/bg/testimonial-bg.png' %}" alt="" />
+       </div>
+       <div class="row">
+         <div class="col-xxl-12">
+           <div
+             class="testimonial__slider owl-carousel wow fadeInUp"
+             data-wow-delay=".5s"
+           >
+             {% for testimonial in testimonial %}
+             <div class="testimonial__item white-bg">
+               <div class="testimonial__person d-flex mb-20">
+                 <div class="testimonial__avater">
+                   <img src="{{testimonial.image.url}}" alt="" />
+                 </div>
+                 <div class="testimonial__info ml-15">
+                   <h5>{{testimonial.name}}</h5>
+                   <span>{{testimonial.company_name}}</span>
+                 </div>
+               </div>
+               <div class="testimonial__text">
+                 <p>{{testimonial.testimonial}}</p>
+               </div>
+             </div>
+             {% endfor %}
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+ <!-- testimonial area end -->
 
   <!-- banner area start -->
   <section class="banner__area pb-90">
