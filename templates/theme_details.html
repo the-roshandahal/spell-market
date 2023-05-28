@@ -2,10 +2,10 @@
 {% load static %}
 
 <main>
-   
+
     <!-- bg shape area start -->
     <div class="bg-shape">
-       <img src="{% static 'assets/img/shape/shape-1.png' %}" alt="">
+       <img src="{% static 'assets/img/shape/shape-1.png' %}" alt="spellsoft">
     </div>
     <!-- bg shape area end -->
 
@@ -28,7 +28,7 @@
        <div class="container">
           <div class="row">
              <div class="col-xxl-8 col-xl-8 col-lg-8">
-               <span class="about__sub-title">{{theme_data.category}}</span>
+                  <span class="about__sub-title">{{theme_data.category}}</span>
                    <h3 class="about__title">{{theme_data.template_name}}</h3>
                 <div class="product__wrapper">
                    <div class="product__details-thumb w-img mb-30">
@@ -49,7 +49,7 @@
                          <div class="tab-content" id="proTabContent">
                             <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
                                <div class="product__overview">
-                                  <h3 class="product__overview-title">Template Details</h3>
+                                  <h3 class="product__ofverview-title">Template Details</h3>
                                   <p>{{theme_data.template_details|safe}}</p>
                                   <div class="product__features mt-40">
                                      <h3 class="product__overview-title">Template Features:</h3>
@@ -81,7 +81,7 @@
                                            <div class="comments-box grey-bg-2">
                                               <div class="comments-info d-flex">
                                                     <div class="comments-avatar mr-15">
-                                                          <img src="{% static 'user.png' %}" alt="">
+                                                          <img src="{% static 'user.png' %}" alt="spellsoft">
                                                     </div>
                                                     <div class="avatar-name">
                                                        <h5>{{comments.user.username}}</h5>
@@ -165,10 +165,10 @@
                             </li>
                          </ul>
                          <a href="{% url 'add_to_cart' id=theme_data.id %}" class="m-btn m-btn-2 w-100 mb-20"> <span></span> Add to cart</a>
-                         <a href="https://themeforest.net/item/zibber-business-consulting-wordpress-theme/30120392" target="_blank" class="m-btn m-btn-border w-100"> <span></span> Preview Project</a>
+                         <a href="{{theme_data.template_url}}" target="_blank" class="m-btn m-btn-border w-100"> <span></span> Preview Project</a>
                       </div>
                    </div>
-                   <div class="sidebar__banner" data-background="{% static 'assets/img/banner/sidebar-banner.jpg' %}">
+                   <div class="sidebar__banner" data-background="{% static 'assets/img/about/about.jpg' %}">
                       <h4 class="sidebar__banner-title">Check Out <br>Our free Templates</h4>
                       <a href="product.html" class="m-btn m-btn-white"> <span></span> free template</a>
                    </div>
@@ -183,11 +183,11 @@
     <!-- subscribe area start -->
     <section class="subscribe__area p-relative pt-100 pb-110" data-background="{% static 'assets/img/bg/subscribe-bg.jpg' %}">
        <div class="subscribe__icon">
-          <img class="ps" src="{% static 'assets/img/icon/subscribe/ps.png' %}" alt="">
-          <img class="wp" src="{% static 'assets/img/icon/subscribe/wp.png' %}" alt="">
-          <img class="html" src="{% static 'assets/img/icon/subscribe/html.png' %}" alt="">
-          <img class="f" src="{% static 'assets/img/icon/subscribe/f.png' %}" alt="">
-          <img class="man" src="{% static 'assets/img/icon/subscribe/man.png' %}" alt="">
+          <img class="ps" src="{% static 'assets/img/icon/subscribe/ps.png' %}" alt="spellsoft">
+          <img class="wp" src="{% static 'assets/img/icon/subscribe/wp.png' %}" alt="spellsoft">
+          <img class="html" src="{% static 'assets/img/icon/subscribe/html.png' %}" alt="spellsoft">
+          <img class="f" src="{% static 'assets/img/icon/subscribe/f.png' %}" alt="spellsoft">
+          <img class="man" src="{% static 'assets/img/icon/subscribe/man.png' %}" alt="spellsoft">
        </div>
        <div class="container">
           <div class="row">

@@ -44,7 +44,7 @@
               <td>{{template.template}}</td>
               <td>{{template.download_count}}</td>
               <td>
-                {% if template.download_count >= 10 %}Not available {% else %}
+                {% if template.download_count >= 1 %}Not available {% else %}
                 <a href="{% url 'download_count' id=template.id di=di  %}?next={{request.path}}"
                   >Download</a
                 >

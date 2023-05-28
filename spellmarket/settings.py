@@ -25,8 +25,9 @@ SECRET_KEY = "django-insecure-*ueius+sb@3!0&%uymjg14c%&!r*ccz4k)0)@p58gjh(8d70i6
 # SECURITY WARNING: don't run with debug turned on in production!
 
 
-DEBUG = False
-ALLOWED_HOSTS = ["*"]
+# DEBUG = False
+DEBUG = True
+ALLOWED_HOSTS = ["spellsoft.com.np","www.spellsoft.com.np"]
 
 # DEBUG = True
 # ALLOWED_HOSTS = []
@@ -78,24 +79,24 @@ WSGI_APPLICATION = "spellmarket.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        # 'NAME': str(os.path.join(BASE_DIR, "db.sqlite3"))
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
-
 # DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'spellmarket',
-#         'USER': 'root',
-#         'PASSWORD': 'Dell@321',
-#         'HOST': '127.0.0.1',
-#         'PORT': '3306',
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         # 'NAME': str(os.path.join(BASE_DIR, "db.sqlite3"))
+#         "NAME": BASE_DIR / "db.sqlite3",
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'spellsof_spellmarket',
+        'USER': 'spellsof_spellmarket',
+        'PASSWORD': '[u{nQs[FTcmS',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
 
 
 # Password validation

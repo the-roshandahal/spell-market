@@ -73,9 +73,9 @@
     &__tag{
         & a{
             display: inline-block;
-            height: 22px;
+            height: inherit;
             line-height: 18px;
-            padding: 0 7px;
+            padding: 2 7px;
             font-size: 13px;
             background: $grey-5;
             font-weight: 600;

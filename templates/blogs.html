@@ -2,7 +2,7 @@
 <main>
   <!-- bg shape area start -->
   <div class="bg-shape">
-    <img src="{% static 'assets/img/shape/shape-1.png' %}" alt="" />
+    <img src="{% static 'assets/img/shape/shape-1.png' %}" alt="spellsoft" />
   </div>
   <!-- bg shape area end -->
 
@@ -40,8 +40,8 @@
               data-wow-delay=".2s"
             >
               <div class="postbox__thumb">
-                <a href="{% url 'blog_single' id=blog_data.id %}" class="w-img">
-                  <img src="{{blog_data.image.url}}" alt="" />
+                <a href="{% url 'blogdetails' id=blog_data.id %}" class="w-img">
+                  <img src="{{blog_data.image.url}}" alt="spellsoft" />
                 </a>
               </div>
               <div class="postbox__content">
@@ -52,17 +52,17 @@
                   </div>
                 </div>
                 <h3 class="postbox__title mb-15">
-                 <a href="{% url 'blog_single' id=blog_data.id %}"
+                 <a href="{% url 'blogdetails' id=blog_data.id %}"
                     >{{blog_data.title}}</a
                   > 
                 </h3>
-                <div class="postbox__text mb-20">
-                  <p>
-                    {{blog_data.blog|truncatechars:250|safe}}
-                  </p>
-                </div>
+                <!--<div class="postbox__text mb-20">-->
+                 
+                <!--    {{blog_data.blog|truncatechars:250|safe}}-->
+                
+                <!--</div>-->
                 <div class="postbox__author d-flex align-items-center">
-                  <h5>Post by <a href="#">Justin Case</a></h5>
+                  <h5>Post by <a href="#">Spell Innovation</a></h5>
                 </div>
               </div>
             </article>
@@ -83,7 +83,7 @@
                         <a href=""
                           ><img
                             src="{% static 'assets/img/blog/sm/blog-sm-1.jpg' %}"
-                            alt=""
+                            alt="spellsoft"
                         /></a> 
                       </div>
                       <div class="rc__content">

@@ -43,7 +43,7 @@
         <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-4 col-6">
           <div class="logo">
             <a href="{% url 'home' %}">
-              <img src="{% static 'assets/img/logo/logo.png'%}" alt="logo" />
+              <img src="{% static 'assets/img/logo/logo.png' %}" alt="logo" />
             </a>
           </div>
         </div>
@@ -71,19 +71,19 @@
                   <a href="{% url 'logout' %}">Logout</a>
                 </li>
                 {% else %}
-                <li class="hidden d-lg-none">
-                  <a href="profile__url">View Profile</a>
-                </li>
+                <!--<li class="hidden d-lg-none">-->
+                <!--  <a href="profile__url">View Profile</a>-->
+                <!--</li>-->
                 <li class="hidden d-lg-none">
                   <a href="{% url 'cart' %}">View cart</a>
                 </li>
                 <li class="hidden d-lg-none">
-                  <a href="{% url 'purchase_summary' %}"
+                  <a href="{% url 'purchasesummary' %}"
                     >View Purchase summary</a
                   >
                 </li>
                 <li class="hidden d-lg-none">
-                  <a href="{% url 'purchased_templates' %}"
+                  <a href="{% url 'purchasedtemplates' %}"
                     >View purchased Templates</a
                   >
                 </li>
@@ -207,11 +207,11 @@
     <div class="cartmini__widget">
       <div class="cartmini__inner">
         <ul>
-          <li>
-            <div class="cartmini__content">
-              <h5><a href="profile__url">View Profile</a></h5>
-            </div>
-          </li>
+          <!--<li>-->
+          <!--  <div class="cartmini__content">-->
+          <!--    <h5><a href="profile__url">View Profile</a></h5>-->
+          <!--  </div>-->
+          <!--</li>-->
           <li>
             <div class="cartmini__content">
               <h5><a href="{% url 'cart' %}">View cart</a></h5>
@@ -220,14 +220,14 @@
           <li>
             <div class="cartmini__content">
               <h5>
-                <a href="{% url 'purchase_summary' %}">View Purchase summary</a>
+                <a href="{% url 'purchasesummary' %}">View Purchase summary</a>
               </h5>
             </div>
           </li>
           <li>
             <div class="cartmini__content">
               <h5>
-                <a href="{% url 'purchased_templates' %}"
+                <a href="{% url 'purchasedtemplates' %}"
                   >View purchased Templates</a
                 >
               </h5>

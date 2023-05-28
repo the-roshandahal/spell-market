@@ -2,7 +2,7 @@
 <main>
   <!-- bg shape area start -->
   <div class="bg-shape">
-    <img src="{% static 'assets/img/shape/shape-1.png' %}" alt="" />
+    <img src="{% static 'assets/img/shape/shape-1.png' %}" alt="spellsoft" />
   </div>
   <!-- bg shape area end -->
 
@@ -93,13 +93,13 @@
               >
                 <div class="product__thumb">
                   <div class="product__thumb-inner fix w-img">
-                    <a href="{% url 'theme_details' id=template.id %}">
-                      <img src="{{template.template_image.url}}" alt="" />
+                    <a href="{% url 'themedetails' id=template.id %}">
+                      <img src="{{template.template_image.url}}" alt="spellsoft" />
                     </a>
                   </div>
                   <div class="product__thumb-btn transition-3">
                     <a
-                      href="{% url 'theme_details' id=template.id %}"
+                      href="{% url 'themedetails' id=template.id %}"
                       class="m-btn m-btn-6 mb-15"
                     >
                       Learn More
@@ -125,7 +125,7 @@
                     </div>
                   </div>
                   <h3 class="product__title">
-                    <a href="product-details.html"
+                    <a href="{% url 'themedetails' id=template.id %}"
                       >{{template.template_name}}</a
                     >
                   </h3>
@@ -181,48 +181,48 @@
   <!-- product area end -->
 
   <!-- banner area start -->
-  <section class="banner__area pb-90">
-    <div class="container">
-      <div class="row">
-        <div class="col-xxl-6 col-xl-6 col-md-6">
-          <div
-            class="banner__item mb-30 wow fadeInUp"
-            data-wow-delay=".3s"
-            data-background="{% static 'assets/img/banner/banner-1.jpg' %}"
-          >
-            <h3 class="banner__title">
-              Designers who changed the web with Markit
-            </h3>
-            <p>
-              He lost his bottle that zonked spend a penny young delinquent
-              bugger.
-            </p>
-            <a href="about.html" class="m-btn m-btn-white banner__more">
-              <span></span> Learn More</a
-            >
-          </div>
-        </div>
-        <div class="col-xxl-6 col-xl-6 col-md-6">
-          <div
-            class="banner__item mb-30 wow fadeInUp"
-            data-wow-delay=".7s"
-            data-background="{% static 'assets/img/banner/banner-2.jpg' %}"
-          >
-            <h3 class="banner__title">
-              Professional Websites are made by Markit
-            </h3>
-            <p>
-              He lost his bottle that zonked spend a penny young delinquent
-              bugger.
-            </p>
-            <a href="about.html" class="m-btn m-btn-white banner__more">
-              <span></span> Learn More</a
-            >
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!--<section class="banner__area pb-90">-->
+  <!--  <div class="container">-->
+  <!--    <div class="row">-->
+  <!--      <div class="col-xxl-6 col-xl-6 col-md-6">-->
+  <!--        <div-->
+  <!--          class="banner__item mb-30 wow fadeInUp"-->
+  <!--          data-wow-delay=".3s"-->
+  <!--          data-background="{% static 'assets/img/banner/banner-1.jpg' %}"-->
+  <!--        >-->
+  <!--          <h3 class="banner__title">-->
+  <!--            Designers who changed the web with Markit-->
+  <!--          </h3>-->
+  <!--          <p>-->
+  <!--            He lost his bottle that zonked spend a penny young delinquent-->
+  <!--            bugger.-->
+  <!--          </p>-->
+  <!--          <a href="about.html" class="m-btn m-btn-white banner__more">-->
+  <!--            <span></span> Learn More</a-->
+  <!--          >-->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--      <div class="col-xxl-6 col-xl-6 col-md-6">-->
+  <!--        <div-->
+  <!--          class="banner__item mb-30 wow fadeInUp"-->
+  <!--          data-wow-delay=".7s"-->
+  <!--          data-background="{% static 'assets/img/banner/banner-2.jpg' %}"-->
+  <!--        >-->
+  <!--          <h3 class="banner__title">-->
+  <!--            Professional Websites are made by Markit-->
+  <!--          </h3>-->
+  <!--          <p>-->
+  <!--            He lost his bottle that zonked spend a penny young delinquent-->
+  <!--            bugger.-->
+  <!--          </p>-->
+  <!--          <a href="about.html" class="m-btn m-btn-white banner__more">-->
+  <!--            <span></span> Learn More</a-->
+  <!--          >-->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <!--</section>-->
   <!-- banner area end -->
 
   <!-- subscribe area start -->
@@ -234,27 +234,27 @@
       <img
         class="ps"
         src="{% static 'assets/img/icon/subscribe/ps.png' %}"
-        alt=""
+        alt="spellsoft"
       />
       <img
         class="wp"
         src="{% static 'assets/img/icon/subscribe/wp.png' %}"
-        alt=""
+        alt="spellsoft"
       />
       <img
         class="html"
         src="{% static 'assets/img/icon/subscribe/html.png' %}"
-        alt=""
+        alt="spellsoft"
       />
       <img
         class="f"
         src="{% static 'assets/img/icon/subscribe/f.png' %}"
-        alt=""
+        alt="spellsoft"
       />
       <img
         class="man"
         src="{% static 'assets/img/icon/subscribe/man.png' %}"
-        alt=""
+        alt="spellsoft"
       />
     </div>
     <div class="container">

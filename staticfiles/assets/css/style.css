@@ -2257,9 +2257,9 @@ p {
 }
 .trending__tag a {
   display: inline-block;
-  height: 22px;
+  height: inherit;
   line-height: 18px;
-  padding: 0 7px;
+  padding: 5 7px;
   font-size: 13px;
   background: #f2f1f3;
   font-weight: 600;
