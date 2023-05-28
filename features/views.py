@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.utils import timezone
 from django.views.generic import View
-from django.http import HttpResponseRedirect
+
 from django.http import JsonResponse
 import json
 import requests
@@ -38,7 +38,7 @@ def home(request):
             "blogs": blogs,
             "cart_num": cart_num,
         }
-        return render(request, "index.html", context)
+        return render(request, "home.html", context)
     else:
         context = {
             "category": category,
@@ -47,7 +47,7 @@ def home(request):
             "testimonial": testimonial,
             "blogs": blogs,
         }
-        return render(request, "index.html", context)
+        return render(request, "home.html", context)
 
 
 def register(request):
@@ -83,7 +83,7 @@ def register(request):
         profile_obj.save()
 
         subject = "Welcome to Spell Market. Please verify your account"
-        message = f"Hi {user.username}, thank you for becoming a member. Please click the link below to verify yourself http://127.0.0.1:8000/success/{auth_token}"
+        message = f"Hi {user.username}, thank you for becoming a member. Please click the link below to verify yourself http://spellsoft.com.np/success/{auth_token}"
         email_from = settings.EMAIL_HOST_USER
         recipient_list = [
             user.email,
@@ -207,9 +207,8 @@ def theme(request):
     return render(request, "theme.html", context)
 
 
-def theme_details(request, id):
+def themedetails(request, id):
     comments= Comments.objects.filter(template_id=id)
-    print(comments)
     theme_data = Template.objects.get(id=id)
     cart_num = 0
     if request.user.is_authenticated:
@@ -245,7 +244,8 @@ def comment(request,id):
     else:
         messages.info(request, "Please Login to Comment.")
         return redirect('theme_details',id)
-
+        
+        
 def contact(request):
     if request.method == "POST":
         name = request.POST["name"]
@@ -261,6 +261,16 @@ def contact(request):
         return redirect("home")
     else:
         return render(request, "contact.html")
+
+
+def about(request):
+    testimonial = Testimonial.objects.all()
+    partner = Partner.objects.all()
+    context={
+        'testimonial':testimonial,
+        'partner':partner
+    }
+    return render(request, "about.html",context)
 
 
 def categories(request):
@@ -346,7 +356,7 @@ def checkout(request):
             else:
                 discount_amt = promo.discount
                 
-    grand_total = total - discount_amt
+    grand_total = int(total - discount_amt)
 
     context = {
         "carts": carts,
@@ -369,7 +379,7 @@ def blog(request):
     return render(request, "blogs.html", context)
 
 
-def blog_single(request, id):
+def blogdetails(request, id):
     blogs = Blog.objects.all()
     blog_data = Blog.objects.get(id=id)
     context = {"blogs": blogs, "blog_data": blog_data}
@@ -377,7 +387,7 @@ def blog_single(request, id):
 
 
 @login_required(login_url="login")
-def purchase_summary(request):
+def purchasesummary(request):
     purchase_summary = PurchaseSummary.objects.filter(user=request.user)
     context = {
         "purchase_summary": purchase_summary,
@@ -402,7 +412,7 @@ def purchase_details(request, id):
 
 
 @login_required(login_url="login")
-def purchased_templates(request):
+def purchasedtemplates(request):
     purchased_templates = PurchasedTemplate.objects.filter(user=request.user)
     # showing_tempelates = []
     # for templete in purchased_templates:
@@ -412,13 +422,18 @@ def purchased_templates(request):
     return render(request, "purchased_templates.html", context)
 
 
+from django.http import HttpResponseRedirect
+
+
 @login_required(login_url="login")
 def download_count(request, id, di):
     next = request.GET.get("next", "/")
     ddd = PurchasedTemplate.objects.get(id=id)
+    print(ddd.download_count)
     if ddd.download_count <= 1:
         try:
             template = PurchasedTemplate.objects.get(id=id)
+            # url = template.temlate_url
             template.download_count += 1
             template.save()
         except:
@@ -448,7 +463,7 @@ class KhaltiVerifyView(View):
         payload = json.dumps(
             {
                 "token": token,
-                "amount": int(amount),
+                "amount": amount*100,
             }
         )
         try:
@@ -489,14 +504,3 @@ class KhaltiVerifyView(View):
 
         data = {"success": success}
         return JsonResponse(data)
-
-
-
-def about(request):
-    testimonial = Testimonial.objects.all()
-    partner = Partner.objects.all()
-    context={
-        'testimonial':testimonial,
-        'partner':partner
-    }
-    return render(request, "about.html",context)

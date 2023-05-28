@@ -73,7 +73,7 @@ class Downloads(models.Model):
 
     def __str__(self):
         return self.user.username
-
+        
 class Comments(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     template = models.ForeignKey(Template, on_delete=models.CASCADE)

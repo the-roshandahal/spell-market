@@ -14,7 +14,7 @@ urlpatterns = [
     path("logout/", views.logout, name="logout"),
     path("theme/", views.theme, name="theme"),
     path("contact/", views.contact, name="contact"),
-    path("theme_details/<int:id>", views.theme_details, name="theme_details"),
+    path("themedetails/<int:id>", views.themedetails, name="themedetails"),
     path("categories/", views.categories, name="categories"),
     path("add_to_cart/<int:id>", views.add_to_cart, name="add_to_cart"),
     path("cart/", views.cart, name="cart"),
@@ -22,24 +22,27 @@ urlpatterns = [
     # path("khalti-request/", views.KhaltiRequestView, name="khaltirequest"),
     path("khalti-verify/", views.KhaltiVerifyView.as_view(), name="khaltiverify"),
     path("blog/", views.blog, name="blog"),
-    path("blog_single/<int:id>", views.blog_single, name="blog_single"),
+    path("blogdetails/<int:id>", views.blogdetails, name="blogdetails"),
     path("about/", views.about, name="about"),
     path("checkout/", views.checkout, name="checkout"),
 
     # path("search/", views.search, name="search"),
-    path("purchase_summary/", views.purchase_summary, name="purchase_summary"),
+    path("purchasesummary/", views.purchasesummary, name="purchasesummary"),
     path(
         "purchase_details/<int:id>",
         views.purchase_details,
         name="purchase_details",
     ),
-    path("purchased_templates/", views.purchased_templates, name="purchased_templates"),
+    path("purchasedtemplates/", views.purchasedtemplates, name="purchasedtemplates"),
     path(
         "download_count/<int:id>/<int:di>", views.download_count, name="download_count"
     ),
-
     path("comment/<int:id>", views.comment, name="comment"),
-
+    
+    
+    
+    
+    
     re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
     re_path(r"^static/(?P<path>.*)$", serve, {"document_root": settings.STATIC_ROOT}),
 ]
