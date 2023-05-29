@@ -5,6 +5,7 @@ from django.conf import settings
 from django.views.static import serve
 from django.conf.urls.static import static
 from .views import generate_sitemap
+from django.views.generic import TemplateView
 
 
 
@@ -41,6 +42,7 @@ urlpatterns = [
     ),
     path("comment/<int:id>", views.comment, name="comment"),
     path('sitemap.xml', generate_sitemap, name='generate_sitemap'),
+    path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
 
 
     re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
@@ -48,3 +50,6 @@ urlpatterns = [
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
