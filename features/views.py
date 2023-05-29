@@ -512,7 +512,6 @@ class KhaltiVerifyView(View):
 
 
 def generate_sitemap(request):
-    return HttpResponse("Hello, world!")
     sitemap_entries = SitemapEntry.objects.all()
 
     # Generate the sitemap XML dynamically
