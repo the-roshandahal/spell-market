@@ -1,1 +1,3 @@
 db.sqlite3
+features/__pycache__/*
+adminpanel/__pycache__/*
