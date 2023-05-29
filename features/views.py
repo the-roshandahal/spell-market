@@ -33,7 +33,10 @@ def home(request):
     page = request.GET.get("page")
     blogs = paginator.get_page(page)
     if request.user.is_authenticated:
-        cart_num = Cart.objects.filter(user=request.user).count()
+        if request.user.is_superuser:
+            cart_num=0
+        else:
+            cart_num = Cart.objects.filter(user=request.user).count()
         context = {
             "category": category,
             "fet_temp": fet_temp,
