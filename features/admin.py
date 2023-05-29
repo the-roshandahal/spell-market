@@ -16,3 +16,20 @@ admin.site.register(Comments)
 
 
 admin.site.register(SitemapEntry)
+
+
+from django.contrib import admin
+
+class DataSetAdmin(admin.ModelAdmin):
+    def has_delete_permission(self, request, obj=None):
+        # Prevent deletion of the existing data
+        return False
+
+    def save_model(self, request, obj, form, change):
+        # Limit the creation of only one data set
+        if not obj.pk and Snippet.objects.exists():
+            # Data set already exists, don't save the new one
+            return
+        super().save_model(request, obj, form, change)
+
+admin.site.register(Snippet, DataSetAdmin)

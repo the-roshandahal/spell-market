@@ -1,3 +1,4 @@
+from django.urls import reverse
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.contrib.auth.models import User
@@ -85,7 +86,6 @@ class Comments(models.Model):
 
 
 
-from django.urls import reverse
 
 class SitemapEntry(models.Model):
     url = models.CharField(max_length=200)
@@ -96,3 +96,30 @@ class SitemapEntry(models.Model):
 
     def get_absolute_url(self):
         return reverse('sitemap-entry-detail', args=[str(self.pk)])
+
+
+class Snippet(models.Model):
+    data_set = models.CharField(max_length=100)
+
+    home_meta_title = models.CharField(max_length=255)    
+    home_meta_description = models.TextField()    
+    home_meta_keywords = models.TextField()    
+    
+    about_meta_title = models.CharField(max_length=255)    
+    about_meta_description = models.TextField()    
+    about_meta_keywords = models.TextField()    
+    
+    contact_meta_title = models.CharField(max_length=255)    
+    contact_meta_description = models.TextField()    
+    contact_meta_keywords = models.TextField()    
+    
+    blogs_meta_title = models.CharField(max_length=255)    
+    blogs_meta_description = models.TextField()    
+    blogs_meta_keywords = models.TextField()    
+    
+    themes_meta_title = models.CharField(max_length=255)    
+    themes_meta_description = models.TextField()    
+    themes_meta_keywords = models.TextField()    
+
+    def __str__(self):
+        return self.data_set
