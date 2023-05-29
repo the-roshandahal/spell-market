@@ -1,4 +1,8 @@
-{% include 'header.html' %} {{carts.template.template_name}}
+{% load static %}
+{% include 'nav.html' %}
+{% include 'meta/themes_meta.html' %}
+{% include 'header.html' %}
+{{carts.template.template_name}}
 
 <div class="container">
   {% if carts %}
