@@ -81,3 +81,18 @@ class Comments(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+
+
+from django.urls import reverse
+
+class SitemapEntry(models.Model):
+    url = models.CharField(max_length=200)
+    priority = models.DecimalField(max_digits=3, decimal_places=2)
+
+    def __str__(self):
+        return self.url
+
+    def get_absolute_url(self):
+        return reverse('sitemap-entry-detail', args=[str(self.pk)])

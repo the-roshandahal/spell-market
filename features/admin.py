@@ -13,3 +13,6 @@ admin.site.register(Contact)
 admin.site.register(PurchasedTemplate)
 admin.site.register(PurchaseSummary)
 admin.site.register(Comments)
+
+
+admin.site.register(SitemapEntry)

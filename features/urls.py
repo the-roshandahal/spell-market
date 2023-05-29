@@ -4,6 +4,8 @@ from django.urls import re_path
 from django.conf import settings
 from django.views.static import serve
 from django.conf.urls.static import static
+from .views import generate_sitemap
+
 
 
 urlpatterns = [
@@ -38,14 +40,11 @@ urlpatterns = [
         "download_count/<int:id>/<int:di>", views.download_count, name="download_count"
     ),
     path("comment/<int:id>", views.comment, name="comment"),
-    
-    
-    
-    
-    
+    path('sitemap.xml', generate_sitemap, name='generate_sitemap'),
+
+
     re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
     re_path(r"^static/(?P<path>.*)$", serve, {"document_root": settings.STATIC_ROOT}),
+
 ]
-
-
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,3 +1,4 @@
+from django.contrib.sitemaps import Sitemap
 from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
@@ -16,6 +17,9 @@ from django.http import JsonResponse
 import json
 import requests
 from django.db.models import Q
+
+from django.http import HttpResponse
+from django.urls import reverse
 
 # Create your views here.
 def home(request):
@@ -504,3 +508,24 @@ class KhaltiVerifyView(View):
 
         data = {"success": success}
         return JsonResponse(data)
+
+
+
+def generate_sitemap(request):
+    sitemap_entries = SitemapEntry.objects.all()
+
+    # Generate the sitemap XML dynamically
+    xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
+    xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+
+    for entry in sitemap_entries:
+        url = request.build_absolute_uri(entry.url)
+        priority = entry.priority
+
+        xml += f'\t<url>\n\t\t<loc>{url}</loc>\n\t\t<priority>{priority}</priority>\n\t</url>\n'
+
+    xml += '</urlset>'
+
+    return HttpResponse(xml, content_type='application/xml')
+
+
