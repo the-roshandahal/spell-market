@@ -200,7 +200,11 @@ def theme(request):
 
     if request.user.is_authenticated:
 
-        cart_num = Cart.objects.filter(user=request.user).count()
+        if request.user.is_superuser:
+            cart_num=0
+        else:
+            cart_num = Cart.objects.filter(user=request.user).count()
+            
 
     paginator = Paginator(template, 4)
     page = request.GET.get("page")
@@ -220,7 +224,11 @@ def themedetails(request, id):
     cart_num = 0
     if request.user.is_authenticated:
 
-        cart_num = Cart.objects.filter(user=request.user).count()
+        if request.user.is_superuser:
+            cart_num=0
+        else:
+            cart_num = Cart.objects.filter(user=request.user).count()
+            
     context = {"theme_data": theme_data, "cart_num": cart_num, "comments": comments}
     return render(request, "theme_details.html", context)
 
