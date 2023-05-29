@@ -1,6 +1,9 @@
 from .models import Snippet
 def header_snippets(request):
-    snippet = Snippet.objects.all()[0]
+    if Snippet.objects.exists():
+        snippet = Snippet.objects.all()[0]
+    else:
+        snippet = None
     context = {
         'snippet': snippet,
     }
