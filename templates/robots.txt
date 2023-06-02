@@ -1,4 +1,9 @@
 User-agent: *
 Disallow: /admin/
+Disallow: /cart/
+Disallow: /login/
+Disallow: /logout/
+Disallow: /purchasedtemplates/
+Disallow: /purchasesummary/
 Allow: /
 Sitemap: https://www.spellsoft.com.np/sitemap.xml
