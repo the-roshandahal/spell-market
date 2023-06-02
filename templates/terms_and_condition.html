@@ -1,0 +1,31 @@
+{% load static %}
+{% include 'nav.html' %}
+{% include 'meta/home_meta.html' %}
+{% include 'header.html' %}
+<main>
+  <!-- bg shape area start -->
+  <div class="bg-shape">
+    <img src="{% static 'assets/img/shape/shape-1.png' %}" alt="spellsoft" />
+  </div>
+  <!-- bg shape area end -->
+
+  <!-- product area start -->
+  <section class="product__area po-rel-z1 pt-100 pb-115 grey-bg">
+    <div class="container">
+      <section class="page__title-area pt-85">
+        <div class="container">
+          <div class="row">
+            <div class="col-xxl-12">
+                <div class="page__title-wrapper mb-55">
+                    <h1 class="about__title">Terms and Conditions</h1>
+                    <p>{{terms_and_condition.terms_and_condition|safe}}</p>
+                </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+</main>
+
+{% include 'footer.html' %}

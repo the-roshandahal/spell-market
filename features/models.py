@@ -83,10 +83,6 @@ class Comments(models.Model):
     def __str__(self):
         return self.user.username
 
-
-
-
-
 class SitemapEntry(models.Model):
     url = models.CharField(max_length=200)
     priority = models.DecimalField(max_digits=3, decimal_places=2)
@@ -121,5 +117,15 @@ class Snippet(models.Model):
     themes_meta_description = models.TextField()    
     themes_meta_keywords = models.TextField()    
 
+    def __str__(self):
+        return self.data_set
+
+
+
+
+class PrivacyAndTerms(models.Model):
+    data_set = models.CharField(max_length=100)
+    privacy_policy = models.TextField()
+    terms_and_condition = models.TextField()
     def __str__(self):
         return self.data_set

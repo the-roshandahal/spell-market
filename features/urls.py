@@ -44,6 +44,8 @@ urlpatterns = [
     path('sitemap.xml', generate_sitemap, name='generate_sitemap'),
     path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
 
+    path('privacy_policy/', views.privacy_policy, name='privacy_policy'),
+    path('terms_and_condition/', views.terms_and_condition, name='terms_and_condition'),
 
     re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
     re_path(r"^static/(?P<path>.*)$", serve, {"document_root": settings.STATIC_ROOT}),

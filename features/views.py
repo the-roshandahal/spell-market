@@ -540,3 +540,23 @@ def generate_sitemap(request):
     return HttpResponse(xml, content_type='application/xml')
 
 
+
+
+
+def privacy_policy(request):
+    privacy_policies = PrivacyAndTerms.objects.all()
+    privacy_policy = privacy_policies[0] if privacy_policies else None
+    context = {
+        'privacy_policy': privacy_policy
+    }
+    return render(request, 'privacy_policy.html', context)
+
+
+
+def terms_and_condition(request):
+    terms_and_conditions = PrivacyAndTerms.objects.all()
+    terms_and_condition = terms_and_conditions[0] if terms_and_conditions else None
+    context = {
+        'terms_and_condition': terms_and_condition
+    }
+    return render(request, 'terms_and_condition.html', context)

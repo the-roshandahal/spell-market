@@ -1,10 +1,14 @@
 from django.contrib import admin
 from .models import *
+from django_summernote.admin import SummernoteModelAdmin
+
 
 admin.site.site_header = "Spell Market Admin panel"
 # Register your models here.
 
 # admin.site.unregister(Users)
+class PrivacyFields(SummernoteModelAdmin):
+    summernote_fields = ("privacy_policy","terms_and_condition")
 
 admin.site.register(Cart)
 admin.site.register(Downloads)
@@ -13,6 +17,7 @@ admin.site.register(Contact)
 admin.site.register(PurchasedTemplate)
 admin.site.register(PurchaseSummary)
 admin.site.register(Comments)
+admin.site.register(PrivacyAndTerms,PrivacyFields)
 
 
 admin.site.register(SitemapEntry)
