@@ -21,6 +21,7 @@ admin.site.register(PrivacyAndTerms,PrivacyFields)
 
 
 admin.site.register(SitemapEntry)
+admin.site.register(Faq)
 
 
 from django.contrib import admin

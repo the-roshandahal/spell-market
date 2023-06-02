@@ -281,9 +281,11 @@ def contact(request):
 def about(request):
     testimonial = Testimonial.objects.all()
     partner = Partner.objects.all()
+    faq = Faq.objects.all()
     context={
         'testimonial':testimonial,
-        'partner':partner
+        'partner':partner,
+        'faq':faq
     }
     return render(request, "about.html",context)
 

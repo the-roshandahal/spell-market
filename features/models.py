@@ -129,3 +129,12 @@ class PrivacyAndTerms(models.Model):
     terms_and_condition = models.TextField()
     def __str__(self):
         return self.data_set
+    
+
+
+
+class Faq(models.Model):
+    question = models.TextField()
+    answer = models.TextField()
+    def __str__(self):
+        return self.question

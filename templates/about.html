@@ -54,15 +54,64 @@
     </section>
     <!-- about area end -->
 
+    <section class="faq__area grey-bg-2 pt-105 pb-125">
+      <div class="container">
+         <div class="row">
+            <div class="col-xxl-6 offset-xxl-3 col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
+               <div class="section__title-wrapper text-center mb-65">
+                  <h2 class="section__title">Frequently Asked Questions</h2>
+                  <p>A load of old tosh the full monty sloshed pukka squiffy.</p>
+               </div>
+            </div>
+         </div>
+
+         <div class="row">
+            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-9">
+               <div class="faq__tab-content wow fadeInRight" data-wow-delay=".7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInRight;">
+                  <div class="tab-content" id="faqTabContent">
+                     <div class="tab-pane fade active show" id="sale" role="tabpanel" aria-labelledby="sale-tab">
+                        <div class="accordion" id="sale-accordion">
+                           <div class="accordion-item">
+                              <h2 class="accordion-header" id="headingOne">
+                                 {% for faq in faq %}
+                                 <button class="accordion-button {% if forloop.first %} {% else %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{faq.id}}" aria-expanded="true" aria-controls="collapseOne{{faq.id}}">
+                                    {{faq.question}}
+                                 </button>
+                                 <div id="collapseOne{{faq.id}}" class="accordion-collapse collapse {% if forloop.first %} show{% endif %}" aria-labelledby="headingOne" data-bs-parent="#sale-accordion">
+                                    
+                                    <div class="accordion-body">
+                                       <p>{{faq.answer}}</p>
+                                    </div>
+                           
+                                 </div>
+                                 {% endfor %}
+                              </h2>
+                              
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
     <!-- brand area start -->
+
+    <div class="brand__area pb-65 pt-80">
+      <div class="container">
+         
+
+
     <div class="brand__area pb-65 pt-80">
        <div class="container">
           <div class="row">
              <div class="col-xxl-12">
-                <div class="brand__slider owl-carousel wow fadeInUp" data-wow-delay=".5s">
+                <div class="brand__slider owl-carousel">
                   {% for partner in partner %}
                    <div class="brand__thumb">
-                      <a href=""><img src="{{partner.logo.url}}" alt="{{partner.name}}"></a>
+                      <a href=""><img src="{{partner.logo.url}}" alt="{{partner.name}}" style="height:50px; width:110px;"></a>
                    </div>
                    {% endfor %}
                 </div>
