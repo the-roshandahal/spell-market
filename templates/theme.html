@@ -11,24 +11,25 @@
 
   <!-- product area start -->
   <section class="product__area po-rel-z1 pt-100 pb-115 grey-bg">
+
     <div class="container">
-      <section class="page__title-area pt-85">
-        <div class="container">
-          <div class="row">
-            <div class="col-xxl-12">
-                <div class="page__title-wrapper mb-55">
-                    <h1 class="about__title">Browse our Popular Themes and Templates.</h1>
-                    <p>Welcome to our vibrant marketplace, where you can discover an extensive collection of top-notch themes and 
-                      templates. Whether you're a blogger, business owner, or developer, we have a wide range of options to suit your needs. 
-                      
-                       Explore our diverse selection, 
-                      featuring stunning website templates, captivating e-commerce themes, sleek design frameworks, and much more. With our curated marketplace, you'll find
-                       the perfect design solution for your website or project. Stay ahead of the curve and unlock endless possibilities with our popular themes and templates.</p>
-                </div>
-            </div>
+      <div class="row">
+        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="hero__content">
+            <h1 class="hero__title">
+              <span>Browse our<br></span>
+              Popular Themes and Templates.
+            </h1>
+            <h2 class="about__sub-title">Explore our Diverse Selection</h2>
+            <p>
+              Welcome to our vibrant marketplace, where you can discover an extensive collection of top-notch themes and templates. Whether you're a blogger, business owner, or developer, we have a wide range of options to suit your needs. Explore our diverse selection, featuring stunning website templates, captivating e-commerce themes, sleek design frameworks, and much more.
+            </p>
+                
+            </p>
           </div>
         </div>
-      </section>
+      </div>
+      
       <div class="row">
         <div class="col-xxl-4 col-xl-4 col-lg-4 order-lg-first order-last">
           <div class="product__sidebar mr-30">
@@ -90,13 +91,7 @@
                   >
                     Apply Filter
                   </button>
-                  {% comment %}
-                  <input
-                    type="submit"
-                    value="Apply Filter"
-                    class="sidebar__clear-btn"
-                  />
-                  {% endcomment %}
+          
                 </form>
               </div>
             </div>
@@ -106,7 +101,7 @@
         <div class="col-xxl-8 col-xl-8 col-lg-8">
           <div class="row" id="tempelate">
             {% if template %} {% for template in template %}
-            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
+            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4">
               <div
                 class="product__item white-bg mb-30 wow fadeInUp"
                 data-wow-delay=".3s"
