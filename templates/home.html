@@ -184,13 +184,22 @@
           >
             <div class="trending__thumb mr-25">
               <div class="trending__thumb-inner fix">
-                <a href="{% url 'themedetails' id=fet_temp.id %}">
-                  <img
-                    src="{{fet_temp.template_image.url}}"
-                    alt="spellsoft"
-                    height="100"
-                  />
-                </a>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-12">
+                      <a href="{% url 'themedetails' id=fet_temp.id %}">
+                        <img src="{{fet_temp.template_image.url}}" alt="spellsoft" class="img-fluid img-height" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <style>
+                  .img-height {
+                    height: 100px;
+                    object-fit: cover;
+                  }
+                  
+                </style>                
               </div>
             </div>
             <div class="trending__content">
