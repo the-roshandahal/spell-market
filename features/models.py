@@ -27,14 +27,13 @@ class Contact(models.Model):
 
 
 PAYMENT_CHOICES = (("khalti", "khalti"), ("other", "other"))
-
-
 class Cart(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    template = models.ForeignKey(Template, on_delete=models.CASCADE)
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # template = models.ForeignKey(Template, on_delete=models.CASCADE)
+    created = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return self.user.username
+        return self.created
 
 
 
