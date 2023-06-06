@@ -23,7 +23,7 @@ class Contact(models.Model):
     message = models.CharField(max_length=1000)
 
     def __str__(self):
-        return self.user.name
+        return self.name
 
 
 PAYMENT_CHOICES = (("khalti", "khalti"), ("other", "other"))
